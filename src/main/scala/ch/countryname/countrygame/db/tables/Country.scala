@@ -87,7 +87,7 @@ extends TableImpl[CountryRecord](
   override def getSchema : Schema = CountryGame.COUNTRY_GAME
 
   override def getIndexes : List[ Index ] = {
-    return Arrays.asList[ Index ](Indexes.COUNTRY_PRIMARY)
+    return Arrays.asList[ Index ](Indexes.COUNTRY_COUNTRYNAME_UNIQUE, Indexes.COUNTRY_PRIMARY)
   }
 
   override def getPrimaryKey : UniqueKey[CountryRecord] = {
@@ -95,7 +95,7 @@ extends TableImpl[CountryRecord](
   }
 
   override def getKeys : List[ UniqueKey[CountryRecord] ] = {
-    return Arrays.asList[ UniqueKey[CountryRecord] ](Keys.KEY_COUNTRY_PRIMARY)
+    return Arrays.asList[ UniqueKey[CountryRecord] ](Keys.KEY_COUNTRY_PRIMARY, Keys.KEY_COUNTRY_COUNTRYNAME_UNIQUE)
   }
 
   override def as(alias : String) : Country = {
