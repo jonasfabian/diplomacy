@@ -1,1 +1,2 @@
-# countrygame
+# Countrygame
+A game about diplomacy
