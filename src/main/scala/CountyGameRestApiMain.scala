@@ -15,7 +15,7 @@ import javax.ws.rs.Path
 import scala.util.Random
 import scala.io.StdIn
 
-object WebServer extends App with CorsSupport with SwaggerSite {
+object WebServer extends App with CorsSupport with SwaggerSite with ErrorAccumulatingCirceSupport {
 
   override def main(args: Array[String]) {
 
@@ -56,6 +56,7 @@ object WebServer extends App with CorsSupport with SwaggerSite {
 
 class CountryGameRestApi extends Directives with ErrorAccumulatingCirceSupport {
 
+  val country = new Country("Switzerland", "A small country in western europe")
   val route = pathPrefix("api") {
     pathPrefix("country") {
       getCountry
@@ -63,11 +64,11 @@ class CountryGameRestApi extends Directives with ErrorAccumulatingCirceSupport {
   }
 
   @ApiOperation(value = "getCountry", httpMethod = "GET", notes = "returns a country")
-  @ApiResponses(Array(new ApiResponse(code = 200, response = classOf[String], message = "OK")))
+  @ApiResponses(Array(new ApiResponse(code = 200, response = classOf[Country], message = "OK")))
   @Path("country")
   def getCountry = path("getCountry") {
     get {
-      complete("Hello")
+      complete(country)
     }
   }
 }
