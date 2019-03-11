@@ -14,8 +14,17 @@ libraryDependencies ++= Seq (
   "com.typesafe.akka" % "akka-http_2.12" % "2.5.18",
   "org.typelevel" % "cats-core_2.12" % "1.4.0",
   /*"com.monovore" % "decline_2.12", "0.6.0",*/
+
   "io.circe" % "circe-core_2.12" % "0.10.1",
   "io.circe" % "circe-generic_2.12" % "0.10.1",
   "io.circe" % "circe-parser_2.12" % "0.10.1",
-  "io.circe" % "circe-java8_2.12" % "0.10.1"
+  "io.circe" % "circe-java8_2.12" % "0.10.1",
+
+  "org.flywaydb" % "flyway-core" % "5.1.4",
+
+  "org.jooq" % "jooq" % "3.11.7",
+  "org.jooq" % "jooq-codegen" % "3.11.7",
+  "org.jooq" % "jooq-scala_2.12" % "3.11.7",
+
+  "org.mariadb.jdbc" % "mariadb-java-client" % "2.3.0"
 )

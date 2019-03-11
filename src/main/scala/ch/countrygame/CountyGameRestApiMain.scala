@@ -1,19 +1,19 @@
 package ch.countrygame
 
 import akka.actor.ActorSystem
-import akka.stream.scaladsl._
-import akka.util.ByteString
 import akka.http.scaladsl.Http
 import akka.http.scaladsl.model.{ContentTypes, HttpEntity}
 import akka.http.scaladsl.server.Directives
 import akka.http.scaladsl.server.Directives._
 import akka.stream.ActorMaterializer
+import akka.stream.scaladsl._
+import akka.util.ByteString
 import de.heikoseeberger.akkahttpcirce.ErrorAccumulatingCirceSupport
 import io.swagger.annotations.{ApiOperation, ApiResponse, ApiResponses}
 import javax.ws.rs.Path
 
-import scala.util.Random
 import scala.io.StdIn
+import scala.util.Random
 
 object WebServer extends App with CorsSupport with SwaggerSite with ErrorAccumulatingCirceSupport {
 
