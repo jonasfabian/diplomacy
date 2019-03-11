@@ -4,13 +4,18 @@ import akka.actor.ActorSystem
 import akka.stream.scaladsl._
 import akka.util.ByteString
 import akka.http.scaladsl.Http
-import akka.http.scaladsl.model.{HttpEntity, ContentTypes}
+import akka.http.scaladsl.model.{ContentTypes, HttpEntity}
+import akka.http.scaladsl.server.Directives
 import akka.http.scaladsl.server.Directives._
 import akka.stream.ActorMaterializer
+import de.heikoseeberger.akkahttpcirce.ErrorAccumulatingCirceSupport
+import io.swagger.annotations.{ApiOperation, ApiResponse, ApiResponses}
+import javax.ws.rs.Path
+
 import scala.util.Random
 import scala.io.StdIn
 
-object WebServer extends App with SwaggerSite {
+object WebServer extends App with CorsSupport with SwaggerSite {
 
   override def main(args: Array[String]) {
 
@@ -37,12 +42,32 @@ object WebServer extends App with SwaggerSite {
           )
         }
       }
+    val countryGameRestApi = new CountryGameRestApi
+    val routes = corsHandler(countryGameRestApi.route) ~ swaggerDoc.routes ~ swaggerSiteRoute
 
-    val bindingFuture = Http().bindAndHandle(route ~ swaggerDoc.routes ~ swaggerSiteRoute , "localhost", 8080)
+    val bindingFuture = Http().bindAndHandle(routes ~ swaggerDoc.routes ~ swaggerSiteRoute, "localhost", 8080)
     println(s"Server online at http://localhost:8080/\nPress RETURN to stop...")
     StdIn.readLine() // let it run until user presses return
     bindingFuture
       .flatMap(_.unbind()) // trigger unbinding from the port
       .onComplete(_ => system.terminate()) // and shutdown when done
+  }
+}
+
+class CountryGameRestApi extends Directives with ErrorAccumulatingCirceSupport {
+
+  val route = pathPrefix("api") {
+    pathPrefix("country") {
+      getCountry
+    }
+  }
+
+  @ApiOperation(value = "getCountry", httpMethod = "GET", notes = "returns a country")
+  @ApiResponses(Array(new ApiResponse(code = 200, response = classOf[String], message = "OK")))
+  @Path("country")
+  def getCountry = path("getCountry") {
+    get {
+      complete("Hello")
+    }
   }
 }
