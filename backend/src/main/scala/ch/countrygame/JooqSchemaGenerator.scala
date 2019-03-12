@@ -18,7 +18,7 @@ object JooqSchemaGenerator extends App {
 
   def migrate(): Unit = {
     val flyway = new Flyway()
-    flyway.setDataSource("jdbc:mysql://localhost", "root", "")
+    flyway.setDataSource("jdbc:mysql://localhost", "root", "root")
     flyway.setSchemas("country_game")
     flyway.setLocations("migrations/country_game")
     flyway.clean()
@@ -35,7 +35,7 @@ object JooqSchemaGenerator extends App {
         .withDriver("org.mariadb.jdbc.Driver")
         .withUrl(s"jdbc:mysql://localhost/$schema")
         .withUser("root")
-        .withPassword(""))
+        .withPassword("root"))
       .withGenerator(new Generator()
         .withName("org.jooq.codegen.ScalaGenerator")
         .withGenerate(new Generate()

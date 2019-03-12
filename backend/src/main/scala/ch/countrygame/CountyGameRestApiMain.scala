@@ -54,7 +54,8 @@ class CountryGameRestApi(service: CountryService) extends Directives with ErrorA
   @Path("country")
   def getCountry = path("getCountry") {
     get {
-      complete(service.countries)
+      /*complete(service.countries)*/
+      complete(0, "Test", "Testing")
     }
   }
 }
