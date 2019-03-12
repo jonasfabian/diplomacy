@@ -13,7 +13,7 @@ export class CountryInfoComponent implements OnInit {
   ) {
   }
 
-  country = new Country(0, 'hello', 'there');
+  country = new Country(0, '', '');
 
   ngOnInit() {
     this.apiService.getCountries().subscribe(value => {
