@@ -1,7 +1,6 @@
 import {Injectable} from '@angular/core';
 import {Observable, Subscription} from 'rxjs';
 import {HttpClient} from '@angular/common/http';
-import {environment} from '../environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -36,10 +35,12 @@ export class Country {
   id: number;
   name: string;
   details: string;
+  countryCode: string;
 
-  constructor(id: number, name: string, description: string) {
+  constructor(id: number, name: string, details: string, countryCode: string) {
     this.id = id;
     this.name = name;
-    this.details = description;
+    this.details = details;
+    this.countryCode = countryCode;
   }
 }

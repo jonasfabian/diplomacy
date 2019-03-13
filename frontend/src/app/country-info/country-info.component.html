@@ -5,7 +5,9 @@
         <h5>All Countries</h5>
       </div>
       <div class="col-md-6">
-        <button class="btn btn-primary" (click)="createCountry()" style="float: right; padding: 2px;">Create new Country</button>
+        <button class="btn btn-primary" (click)="createCountry()" style="float: right; padding: 2px;">Create new
+          Country
+        </button>
       </div>
     </div>
     <table>
@@ -14,6 +16,7 @@
         <th><span>Id</span></th>
         <th><span>Name</span></th>
         <th><span>Details</span></th>
+        <th><span>Flag</span></th>
         <th></th>
         <th></th>
       </tr>
@@ -21,6 +24,7 @@
         <td><span>{{country.id}}</span></td>
         <td><span>{{country.name}}</span></td>
         <td><span>{{country.details}}</span></td>
+        <td><span class="flag-icon {{countryService.getFlag(country.countryCode)}}"></span></td>
         <td>
           <button class="btn btn-secondary" (click)="editCountryDetails(country)" style="width: 100%; padding: 0;">
             Edit
@@ -35,8 +39,14 @@
     </table>
   </div>
   <div class="col-md-4">
-    <app-country-details *ngIf="countryService.currentView === viewEnum.COUNTRYDETAIL"></app-country-details>
-    <app-country-details-edit [country]="countryService.country" *ngIf="countryService.currentView === viewEnum.COUNTRYEDIT"></app-country-details-edit>
+    <div *ngIf="countryService.country.id !== -1">
+      <app-country-details *ngIf="countryService.currentView === viewEnum.COUNTRYDETAIL"></app-country-details>
+    </div>
+    <div *ngIf="countryService.country.id == -1">
+      <h5>No Country selected</h5>
+    </div>
+    <app-country-details-edit [country]="countryService.country"
+                              *ngIf="countryService.currentView === viewEnum.COUNTRYEDIT"></app-country-details-edit>
     <app-country-create *ngIf="countryService.currentView === viewEnum.COUNTRYCREATE"></app-country-create>
   </div>
   <div class="col-md-4">

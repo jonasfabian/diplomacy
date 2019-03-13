@@ -1,6 +1,9 @@
 /* You can add global styles to this file, and also import other style files */
 @import '~bootstrap/dist/css/bootstrap.min.css';
 
+$flag-icon-css-path: '~flag-icon-css/flags' !default;
+@import '~flag-icon-css/sass/flag-icon';
+
 .panel {
   background-color: whitesmoke;
   border: 1px solid #dddddd;

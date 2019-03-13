@@ -11,12 +11,12 @@ import java.lang.String
 
 import org.jooq.Field
 import org.jooq.Record1
-import org.jooq.Record3
-import org.jooq.Row3
+import org.jooq.Record4
+import org.jooq.Row4
 import org.jooq.impl.UpdatableRecordImpl
 
 
-class CountryRecord extends UpdatableRecordImpl[CountryRecord](Country.COUNTRY) with Record3[Integer, String, String] {
+class CountryRecord extends UpdatableRecordImpl[CountryRecord](Country.COUNTRY) with Record4[Integer, String, String, String] {
 
   def setCountryid(value : Integer) : Unit = {
     set(0, value)
@@ -45,6 +45,15 @@ class CountryRecord extends UpdatableRecordImpl[CountryRecord](Country.COUNTRY) 
     if (r == null) null else r.asInstanceOf[String]
   }
 
+  def setCountrycode(value : String) : Unit = {
+    set(3, value)
+  }
+
+  def getCountrycode : String = {
+    val r = get(3)
+    if (r == null) null else r.asInstanceOf[String]
+  }
+
   // -------------------------------------------------------------------------
   // Primary key information
   // -------------------------------------------------------------------------
@@ -53,25 +62,28 @@ class CountryRecord extends UpdatableRecordImpl[CountryRecord](Country.COUNTRY) 
   }
 
   // -------------------------------------------------------------------------
-  // Record3 type implementation
+  // Record4 type implementation
   // -------------------------------------------------------------------------
 
-  override def fieldsRow : Row3[Integer, String, String] = {
-    super.fieldsRow.asInstanceOf[ Row3[Integer, String, String] ]
+  override def fieldsRow : Row4[Integer, String, String, String] = {
+    super.fieldsRow.asInstanceOf[ Row4[Integer, String, String, String] ]
   }
 
-  override def valuesRow : Row3[Integer, String, String] = {
-    super.valuesRow.asInstanceOf[ Row3[Integer, String, String] ]
+  override def valuesRow : Row4[Integer, String, String, String] = {
+    super.valuesRow.asInstanceOf[ Row4[Integer, String, String, String] ]
   }
   override def field1 : Field[Integer] = Country.COUNTRY.COUNTRYID
   override def field2 : Field[String] = Country.COUNTRY.COUNTRYNAME
   override def field3 : Field[String] = Country.COUNTRY.COUNTRYDETAILS
+  override def field4 : Field[String] = Country.COUNTRY.COUNTRYCODE
   override def component1 : Integer = getCountryid
   override def component2 : String = getCountryname
   override def component3 : String = getCountrydetails
+  override def component4 : String = getCountrycode
   override def value1 : Integer = getCountryid
   override def value2 : String = getCountryname
   override def value3 : String = getCountrydetails
+  override def value4 : String = getCountrycode
 
   override def value1(value : Integer) : CountryRecord = {
     setCountryid(value)
@@ -88,18 +100,25 @@ class CountryRecord extends UpdatableRecordImpl[CountryRecord](Country.COUNTRY) 
     this
   }
 
-  override def values(value1 : Integer, value2 : String, value3 : String) : CountryRecord = {
-    this.value1(value1)
-    this.value2(value2)
-    this.value3(value3)
+  override def value4(value : String) : CountryRecord = {
+    setCountrycode(value)
     this
   }
 
-  def this(countryid : Integer, countryname : String, countrydetails : String) = {
+  override def values(value1 : Integer, value2 : String, value3 : String, value4 : String) : CountryRecord = {
+    this.value1(value1)
+    this.value2(value2)
+    this.value3(value3)
+    this.value4(value4)
+    this
+  }
+
+  def this(countryid : Integer, countryname : String, countrydetails : String, countrycode : String) = {
     this()
 
     set(0, countryid)
     set(1, countryname)
     set(2, countrydetails)
+    set(3, countrycode)
   }
 }

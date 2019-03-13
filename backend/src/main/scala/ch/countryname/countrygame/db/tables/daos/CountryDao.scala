@@ -40,4 +40,8 @@ class CountryDao(configuration : Configuration) extends DAOImpl[CountryRecord, c
   def fetchByCountrydetails(values : String*) : List[ch.countryname.countrygame.db.tables.pojos.Country] = {
     fetch(Country.COUNTRY.COUNTRYDETAILS, values:_*)
   }
+
+  def fetchByCountrycode(values : String*) : List[ch.countryname.countrygame.db.tables.pojos.Country] = {
+    fetch(Country.COUNTRY.COUNTRYCODE, values:_*)
+  }
 }

@@ -29,7 +29,7 @@ class CountryService(config: Config) {
   }
 
   def countries: Array[Country] = withDslContext(dslContext => {
-    dslContext.selectFrom(COUNTRY).fetchArray().map(r => Country(r.getCountryid, r.getCountryname, r.getCountrydetails))
+    dslContext.selectFrom(COUNTRY).fetchArray().map(r => Country(r.getCountryid, r.getCountryname, r.getCountrydetails, r.getCountrycode))
   })
 
   def newCountry(country: Country): Unit = withDslContext(dslContext => {
@@ -42,6 +42,7 @@ class CountryService(config: Config) {
     dslContext.update(COUNTRY)
       .set(COUNTRY.COUNTRYNAME, country.name)
       .set(COUNTRY.COUNTRYDETAILS, country.details)
+      .set(COUNTRY.COUNTRYCODE, country.countryCode)
       .where(COUNTRY.COUNTRYID.eq(country.id))
       .execute()
     ()
@@ -51,6 +52,7 @@ class CountryService(config: Config) {
     val rec = new CountryRecord()
     rec.setCountryname(country.name)
     rec.setCountrydetails(country.details)
+    rec.setCountrycode(country.countryCode)
     rec
   }
 }

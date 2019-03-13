@@ -8,6 +8,7 @@ CREATE TABLE IF NOT EXISTS `country`
   `countryId`      INT         NOT NULL AUTO_INCREMENT,
   `countryName`    VARCHAR(45) NOT NULL,
   `countryDetails` VARCHAR(45) NULL,
+  `countryCode` VARCHAR(2) NOT NULL,
   PRIMARY KEY (`countryId`)
   /*UNIQUE INDEX `countryName_UNIQUE` (`countryName` ASC)*/
 )

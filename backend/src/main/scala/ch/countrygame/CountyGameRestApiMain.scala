@@ -45,7 +45,7 @@ class CountryGameRestApi(service: CountryService) extends Directives with ErrorA
 
   val route = pathPrefix("api") {
     pathPrefix("country") {
-      getCountry ~ createCountry ~ updateCountry
+      getCountry ~ createCountry ~ updateCountry ~ uploadFlag
     }
   }
 
@@ -68,6 +68,16 @@ class CountryGameRestApi(service: CountryService) extends Directives with ErrorA
         service.newCountry(country)
         complete(StatusCodes.OK)
       }
+    }
+  }
+
+  @ApiOperation(value = "uploadFlag", httpMethod = "POST")
+  @ApiImplicitParams(Array(new ApiImplicitParam(name = "body", required = true, dataTypeClass = classOf[Country], value = "the created country", paramType = "body")))
+  @ApiResponses(Array(new ApiResponse(code = 200, message = "OK")))
+  @Path("country")
+  def uploadFlag: Route = path("uploadFlag") {
+    post {
+      complete(StatusCodes.OK)
     }
   }
 

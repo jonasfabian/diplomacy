@@ -10,7 +10,7 @@ export class CountryService {
     private apiService: ApiService
   ) { }
 
-  country: Country = new Country(-1, 'No Country Name yet', 'No details yet');
+  country: Country = new Country(-1, 'No Country Name yet', 'No details yet', 'None');
   currentView: any = CurrentViewEnum.COUNTRYDETAIL;
   countryArray: Array<Country> = [];
 
@@ -18,6 +18,10 @@ export class CountryService {
     this.apiService.getCountries().subscribe(value => {
       this.countryArray = value;
     });
+  }
+
+  getFlag(s: String): String {
+    return (s) ? 'flag-icon-' + s.toLowerCase() : '';
   }
 }
 

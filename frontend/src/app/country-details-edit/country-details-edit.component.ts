@@ -24,7 +24,8 @@ export class CountryDetailsEditComponent implements OnInit {
   ngOnInit() {
     this.editCountryForm = this.fb.group({
       'name': [this.country.name, [Validators.required]],
-      'details': [this.country.details, [Validators.required]]
+      'details': [this.country.details, [Validators.required]],
+      'countryCode': [this.country.countryCode, [Validators.required, Validators.minLength(2)]]
     });
   }
 
@@ -32,7 +33,8 @@ export class CountryDetailsEditComponent implements OnInit {
     if (this.editCountryForm.valid) {
       this.country.name = this.editCountryForm.controls.name.value;
       this.country.details = this.editCountryForm.controls.details.value;
-      this.apiService.updateCountry(new Country(this.country.id, this.country.name, this.country.details));
+      this.country.countryCode = this.editCountryForm.controls.countryCode.value;
+      this.apiService.updateCountry(new Country(this.country.id, this.country.name, this.country.details, this.country.countryCode));
       this.countryService.currentView = this.viewEnum.COUNTRYDETAIL;
       this.countryService.getCountries();
     }
