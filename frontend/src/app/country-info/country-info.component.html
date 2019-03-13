@@ -1,6 +1,27 @@
 <div class="panel">
   <h1>Country Game</h1>
 </div>
-<div class="panel">
-  <span>{{country}}</span>
+<div class="panel row">
+  <div class="col-md-4">
+    <table>
+      <tbody>
+      <tr>
+        <th><span>Id</span></th>
+        <th><span>Name</span></th>
+        <th><span>Description</span></th>
+      </tr>
+      <tr *ngFor="let country of countryArray">
+        <td><span>{{country.id}}</span></td>
+        <td><span>{{country.name}}</span></td>
+        <td><span>{{country.details}}</span></td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="col-md-4">
+    <app-country-details></app-country-details>
+  </div>
+  <div class="col-md-4">
+    <app-relation-info></app-relation-info>
+  </div>
 </div>

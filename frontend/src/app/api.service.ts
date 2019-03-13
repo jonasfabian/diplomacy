@@ -14,19 +14,19 @@ export class ApiService {
 
   private api = 'http://localhost:8080/api/country/getCountry';
 
-  getCountries(): Observable<Country> {
-    return this.http.get<Country>(this.api);
+  getCountries(): Observable<Array<Country>> {
+    return this.http.get<Array<Country>>(this.api);
   }
 }
 
 export class Country {
   id: number;
   name: string;
-  description: string;
+  details: string;
 
   constructor(id: number, name: string, description: string) {
     this.id = id;
     this.name = name;
-    this.description = description;
+    this.details = description;
   }
 }
