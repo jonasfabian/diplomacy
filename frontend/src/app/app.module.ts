@@ -7,18 +7,22 @@ import { CountryInfoComponent } from './country-info/country-info.component';
 import {HttpClientModule} from '@angular/common/http';
 import { CountryDetailsComponent } from './country-details/country-details.component';
 import { RelationInfoComponent } from './relation-info/relation-info.component';
+import { CountryDetailsEditComponent } from './country-details-edit/country-details-edit.component';
+import {ReactiveFormsModule} from '@angular/forms';
 
 @NgModule({
   declarations: [
     AppComponent,
     CountryInfoComponent,
     CountryDetailsComponent,
-    RelationInfoComponent
+    RelationInfoComponent,
+    CountryDetailsEditComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    HttpClientModule
+    HttpClientModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -27,12 +27,13 @@ export class CountryInfoComponent implements OnInit {
     this.apiService.createCountry(new Country(-1, 'Austria', 'Kaiser'));
   }
 
-  updateCountry(): void {
-    this.apiService.updateCountry(new Country(1, 'Germany', 'Currywurst'));
-  }
-
-  giveCountry(country: Country): void {
+  showCountryDetails(country: Country): void {
     this.countryService.country = country;
   }
 
+  editCountryDetails(country: Country): void {
+    this.countryService.edit = false;
+    this.countryService.country = country;
+    this.countryService.edit = true;
+  }
 }

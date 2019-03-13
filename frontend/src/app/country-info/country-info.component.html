@@ -17,11 +17,12 @@
         <td><span>{{country.name}}</span></td>
         <td><span>{{country.details}}</span></td>
         <td>
-          <button class="btn btn-secondary" (click)="updateCountry()" style="width: 100%; padding: 0;">Update me
+          <button class="btn btn-secondary" (click)="editCountryDetails(country)" style="width: 100%; padding: 0;">
+            Update me
           </button>
         </td>
         <td>
-          <button class="btn btn-primary" (click)="giveCountry(country)" style="width: 100%; padding: 0;">Details
+          <button class="btn btn-primary" (click)="showCountryDetails(country)" style="width: 100%; padding: 0;">Details
           </button>
         </td>
       </tr>
@@ -29,7 +30,8 @@
     </table>
   </div>
   <div class="col-md-4">
-    <app-country-details></app-country-details>
+    <app-country-details *ngIf="!countryService.edit"></app-country-details>
+    <app-country-details-edit [country]="countryService.country" *ngIf="countryService.edit"></app-country-details-edit>
   </div>
   <div class="col-md-4">
     <app-relation-info></app-relation-info>

@@ -9,4 +9,5 @@ export class CountryService {
   constructor() { }
 
   country: Country = new Country(-1, 'No Country Name yet', 'No details yet');
+  edit = false;
 }

@@ -1,0 +1,19 @@
+<div>
+  <h5>Edit Country: {{country.name}}</h5>
+</div>
+<form [formGroup]="editCountryForm" (ngSubmit)="save()">
+  <div>
+    <fieldset class="form-group required">
+      <span>Country name: </span>
+      <!-- Need to init value of input fields here, just for display, because OnInit CountryDetailsEdit only executes once -->
+      <input type="text" class="form-control" formControlName="name" [value]="country.name">
+    </fieldset>
+    <fieldset class="form-group required">
+      <span>Country details: </span>
+      <input type="text" class="form-control" formControlName="details" [value]="country.details">
+    </fieldset>
+    <button type="submit" class="btn btn-primary">Save</button>
+    <button type="button" class="btn btn btn-secondary" (click)="countryService.edit = false">Cancel</button>
+  </div>
+</form>
+
