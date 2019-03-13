@@ -1,7 +1,12 @@
 <div class="panel row">
   <div class="col-md-4">
-    <div>
-      <h5>All Countries</h5>
+    <div class="row">
+      <div class="col-md-6">
+        <h5>All Countries</h5>
+      </div>
+      <div class="col-md-6">
+        <button class="btn btn-primary" (click)="createCountry()" style="float: right; padding: 2px;">Create new Country</button>
+      </div>
     </div>
     <table>
       <tbody>
@@ -12,13 +17,13 @@
         <th></th>
         <th></th>
       </tr>
-      <tr *ngFor="let country of countryArray">
+      <tr *ngFor="let country of countryService.countryArray">
         <td><span>{{country.id}}</span></td>
         <td><span>{{country.name}}</span></td>
         <td><span>{{country.details}}</span></td>
         <td>
           <button class="btn btn-secondary" (click)="editCountryDetails(country)" style="width: 100%; padding: 0;">
-            Update me
+            Edit
           </button>
         </td>
         <td>
@@ -30,13 +35,11 @@
     </table>
   </div>
   <div class="col-md-4">
-    <app-country-details *ngIf="!countryService.edit"></app-country-details>
-    <app-country-details-edit [country]="countryService.country" *ngIf="countryService.edit"></app-country-details-edit>
+    <app-country-details *ngIf="countryService.currentView === viewEnum.COUNTRYDETAIL"></app-country-details>
+    <app-country-details-edit [country]="countryService.country" *ngIf="countryService.currentView === viewEnum.COUNTRYEDIT"></app-country-details-edit>
+    <app-country-create *ngIf="countryService.currentView === viewEnum.COUNTRYCREATE"></app-country-create>
   </div>
   <div class="col-md-4">
     <app-relation-info></app-relation-info>
-  </div>
-  <div style="margin-left: 15px; margin-top: 5px;">
-    <button class="btn btn-primary" (click)="createCountry()">Create me</button>
   </div>
 </div>

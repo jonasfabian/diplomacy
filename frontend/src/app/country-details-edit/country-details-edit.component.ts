@@ -1,7 +1,7 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {ApiService, Country} from '../api.service';
-import {CountryService} from '../country.service';
+import {CountryService, CurrentViewEnum} from '../country.service';
 
 @Component({
   selector: 'app-country-details-edit',
@@ -18,12 +18,13 @@ export class CountryDetailsEditComponent implements OnInit {
   }
 
   editCountryForm: FormGroup;
+  viewEnum: any = CurrentViewEnum;
   @Input() country: Country;
 
   ngOnInit() {
     this.editCountryForm = this.fb.group({
       'name': [this.country.name, [Validators.required]],
-      'details': [this.country.details, Validators.required]
+      'details': [this.country.details, [Validators.required]]
     });
   }
 
@@ -32,8 +33,8 @@ export class CountryDetailsEditComponent implements OnInit {
       this.country.name = this.editCountryForm.controls.name.value;
       this.country.details = this.editCountryForm.controls.details.value;
       this.apiService.updateCountry(new Country(this.country.id, this.country.name, this.country.details));
-      this.countryService.edit = false;
+      this.countryService.currentView = this.viewEnum.COUNTRYDETAIL;
+      this.countryService.getCountries();
     }
   }
-
 }

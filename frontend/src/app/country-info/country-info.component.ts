@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {ApiService, Country} from '../api.service';
-import {CountryService} from '../country.service';
+import {CountryService, CurrentViewEnum} from '../country.service';
 
 @Component({
   selector: 'app-country-info',
@@ -15,25 +15,23 @@ export class CountryInfoComponent implements OnInit {
   ) {
   }
 
-  countryArray: Array<Country> = [];
+  viewEnum: any = CurrentViewEnum;
 
   ngOnInit(): void {
-    this.apiService.getCountries().subscribe(value => {
-      this.countryArray = value;
-    });
+    this.countryService.getCountries();
   }
 
   createCountry(): void {
-    this.apiService.createCountry(new Country(-1, 'Austria', 'Kaiser'));
+    this.countryService.currentView = this.viewEnum.COUNTRYCREATE;
   }
 
   showCountryDetails(country: Country): void {
     this.countryService.country = country;
+    this.countryService.currentView = this.viewEnum.COUNTRYDETAIL;
   }
 
   editCountryDetails(country: Country): void {
-    this.countryService.edit = false;
     this.countryService.country = country;
-    this.countryService.edit = true;
+    this.countryService.currentView = this.viewEnum.COUNTRYEDIT;
   }
 }
