@@ -17,6 +17,14 @@
         <span>Country code: </span>
         <input type="text" class="form-control" formControlName="countryCode">
       </fieldset>
+      <div class="dropdown">
+        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Countries
+        </button>
+        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton" *ngFor="let country of ">
+          <a class="dropdown-item"></a>
+        </div>
+      </div>
       <button type="submit" class="btn btn-primary">Save</button>
       <button type="button" class="btn btn btn-secondary" (click)="countryService.currentView = viewEnum.COUNTRYDETAIL">
         Cancel

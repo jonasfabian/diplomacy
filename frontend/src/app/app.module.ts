@@ -26,6 +26,9 @@ import { CountryCreateComponent } from './country-create/country-create.componen
     HttpClientModule,
     ReactiveFormsModule
   ],
+  exports: [
+
+  ],
   providers: [],
   bootstrap: [AppComponent]
 })

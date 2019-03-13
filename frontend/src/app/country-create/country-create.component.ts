@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {CountryService, CurrentViewEnum} from '../country.service';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
-import {ApiService, Country} from '../api.service';
+import {Country} from '../api.service';
 
 @Component({
   selector: 'app-country-create',
@@ -13,7 +13,6 @@ export class CountryCreateComponent implements OnInit {
   constructor(
     private countryService: CountryService,
     private fb: FormBuilder,
-    private apiService: ApiService
   ) {
   }
 
