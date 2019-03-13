@@ -5,11 +5,11 @@ SET @OLD_SQL_MODE = @@SQL_MODE, SQL_MODE =
 
 CREATE TABLE IF NOT EXISTS `country`
 (
-  `countryId`      INT         NOT NULL,
+  `countryId`      INT         NOT NULL AUTO_INCREMENT,
   `countryName`    VARCHAR(45) NOT NULL,
   `countryDetails` VARCHAR(45) NULL,
-  PRIMARY KEY (`countryId`),
-  UNIQUE INDEX `countryName_UNIQUE` (`countryName` ASC)
+  PRIMARY KEY (`countryId`)
+  /*UNIQUE INDEX `countryName_UNIQUE` (`countryName` ASC)*/
 )
   ENGINE = InnoDB;
 

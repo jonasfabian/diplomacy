@@ -2,15 +2,15 @@ package ch.countrygame
 
 import akka.actor.ActorSystem
 import akka.http.scaladsl.Http
-import akka.http.scaladsl.model.{ContentTypes, HttpEntity}
-import akka.http.scaladsl.server.Directives
+import akka.http.scaladsl.model.{ContentTypes, HttpEntity, StatusCodes}
+import akka.http.scaladsl.server.{Directives, Route}
 import akka.http.scaladsl.server.Directives._
 import akka.stream.ActorMaterializer
 import akka.stream.scaladsl._
 import akka.util.ByteString
 import com.typesafe.config.{ConfigFactory, ConfigValueFactory}
 import de.heikoseeberger.akkahttpcirce.ErrorAccumulatingCirceSupport
-import io.swagger.annotations.{ApiOperation, ApiResponse, ApiResponses}
+import io.swagger.annotations._
 import javax.ws.rs.Path
 
 import scala.io.StdIn
@@ -45,7 +45,7 @@ class CountryGameRestApi(service: CountryService) extends Directives with ErrorA
 
   val route = pathPrefix("api") {
     pathPrefix("country") {
-      getCountry
+      getCountry ~ createCountry ~ updateCountry
     }
   }
 
@@ -54,8 +54,33 @@ class CountryGameRestApi(service: CountryService) extends Directives with ErrorA
   @Path("country")
   def getCountry = path("getCountry") {
     get {
-      /*complete(service.countries)*/
-      complete(0, "Test", "Testing")
+      complete(service.countries)
+    }
+  }
+
+  @ApiOperation(value = "createCountry", httpMethod = "POST")
+  @ApiImplicitParams(Array(new ApiImplicitParam(name = "body", required = true, dataTypeClass = classOf[Country], value = "the created country", paramType = "body")))
+  @ApiResponses(Array(new ApiResponse(code = 200, message = "OK")))
+  @Path("country")
+  def createCountry: Route = path("createCountry") {
+    post {
+      entity(as[Country]) { country =>
+        service.newCountry(country)
+        complete(StatusCodes.OK)
+      }
+    }
+  }
+
+  @ApiOperation(value = "updateCountry", httpMethod = "POST")
+  @ApiImplicitParams(Array(new ApiImplicitParam(name = "body", required = true, dataTypeClass = classOf[Country], value = "the updated country", paramType = "body")))
+  @ApiResponses(Array(new ApiResponse(code = 200, message = "OK")))
+  @Path("country")
+  def updateCountry: Route = path("updateCountry") {
+    post {
+      entity(as[Country]) { country =>
+        service.updateCountry(country)
+        complete(StatusCodes.OK)
+      }
     }
   }
 }

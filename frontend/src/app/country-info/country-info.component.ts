@@ -22,4 +22,12 @@ export class CountryInfoComponent implements OnInit {
     });
   }
 
+  createCountry() {
+    this.apiService.createCountry(new Country(-1, 'Austria', 'Kaiser'));
+  }
+
+  updateCountry() {
+    this.apiService.updateCountry(new Country(1, 'Germany', 'Currywurst'));
+  }
+
 }

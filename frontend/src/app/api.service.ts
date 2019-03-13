@@ -1,6 +1,7 @@
 import {Injectable} from '@angular/core';
 import {Observable} from 'rxjs';
 import {HttpClient} from '@angular/common/http';
+import {environment} from '../environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -16,6 +17,18 @@ export class ApiService {
 
   getCountries(): Observable<Array<Country>> {
     return this.http.get<Array<Country>>(this.api);
+  }
+
+  createCountry(country: Country) {
+    return this.http.post('http://localhost:8080/api/country/createCountry', country).subscribe(() => {
+    }, () => {
+    });
+  }
+
+  updateCountry(country: Country) {
+    return this.http.post('http://localhost:8080/api/country/updateCountry', country).subscribe(() => {
+    }, () => {
+    });
   }
 }
 

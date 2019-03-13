@@ -20,7 +20,6 @@ object Indexes {
   // INDEX definitions
   // -------------------------------------------------------------------------
 
-  val COUNTRY_COUNTRYNAME_UNIQUE = Indexes0.COUNTRY_COUNTRYNAME_UNIQUE
   val COUNTRY_PRIMARY = Indexes0.COUNTRY_PRIMARY
   val FLYWAY_SCHEMA_HISTORY_FLYWAY_SCHEMA_HISTORY_S_IDX = Indexes0.FLYWAY_SCHEMA_HISTORY_FLYWAY_SCHEMA_HISTORY_S_IDX
   val FLYWAY_SCHEMA_HISTORY_PRIMARY = Indexes0.FLYWAY_SCHEMA_HISTORY_PRIMARY
@@ -34,7 +33,6 @@ object Indexes {
   // -------------------------------------------------------------------------
 
   private object Indexes0 {
-    val COUNTRY_COUNTRYNAME_UNIQUE : Index = Internal.createIndex("countryName_UNIQUE", Country.COUNTRY, Array[OrderField [_] ](Country.COUNTRY.COUNTRYNAME), true)
     val COUNTRY_PRIMARY : Index = Internal.createIndex("PRIMARY", Country.COUNTRY, Array[OrderField [_] ](Country.COUNTRY.COUNTRYID), true)
     val FLYWAY_SCHEMA_HISTORY_FLYWAY_SCHEMA_HISTORY_S_IDX : Index = Internal.createIndex("flyway_schema_history_s_idx", FlywaySchemaHistory.FLYWAY_SCHEMA_HISTORY, Array[OrderField [_] ](FlywaySchemaHistory.FLYWAY_SCHEMA_HISTORY.SUCCESS), false)
     val FLYWAY_SCHEMA_HISTORY_PRIMARY : Index = Internal.createIndex("PRIMARY", FlywaySchemaHistory.FLYWAY_SCHEMA_HISTORY, Array[OrderField [_] ](FlywaySchemaHistory.FLYWAY_SCHEMA_HISTORY.INSTALLED_RANK), true)

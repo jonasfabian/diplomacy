@@ -13,7 +13,10 @@ import ch.countryname.countrygame.db.tables.records.FlywaySchemaHistoryRecord
 import ch.countryname.countrygame.db.tables.records.RelationsRecord
 import ch.countryname.countrygame.db.tables.records.RelationtypesRecord
 
+import java.lang.Integer
+
 import org.jooq.ForeignKey
+import org.jooq.Identity
 import org.jooq.UniqueKey
 import org.jooq.impl.Internal
 
@@ -24,13 +27,13 @@ object Keys {
   // IDENTITY definitions
   // -------------------------------------------------------------------------
 
+  val IDENTITY_COUNTRY = Identities0.IDENTITY_COUNTRY
 
   // -------------------------------------------------------------------------
   // UNIQUE and PRIMARY KEY definitions
   // -------------------------------------------------------------------------
 
   val KEY_COUNTRY_PRIMARY = UniqueKeys0.KEY_COUNTRY_PRIMARY
-  val KEY_COUNTRY_COUNTRYNAME_UNIQUE = UniqueKeys0.KEY_COUNTRY_COUNTRYNAME_UNIQUE
   val KEY_FLYWAY_SCHEMA_HISTORY_PRIMARY = UniqueKeys0.KEY_FLYWAY_SCHEMA_HISTORY_PRIMARY
   val KEY_RELATIONS_PRIMARY = UniqueKeys0.KEY_RELATIONS_PRIMARY
   val KEY_RELATIONS_COUNTRY1_UNIQUE = UniqueKeys0.KEY_RELATIONS_COUNTRY1_UNIQUE
@@ -47,9 +50,12 @@ object Keys {
   // [#1459] distribute members to avoid static initialisers > 64kb
   // -------------------------------------------------------------------------
 
+  private object Identities0 {
+    val IDENTITY_COUNTRY : Identity[CountryRecord, Integer] = Internal.createIdentity(Country.COUNTRY, Country.COUNTRY.COUNTRYID)
+  }
+
   private object UniqueKeys0 {
     val KEY_COUNTRY_PRIMARY : UniqueKey[CountryRecord] = Internal.createUniqueKey(Country.COUNTRY, "KEY_country_PRIMARY", Country.COUNTRY.COUNTRYID)
-    val KEY_COUNTRY_COUNTRYNAME_UNIQUE : UniqueKey[CountryRecord] = Internal.createUniqueKey(Country.COUNTRY, "KEY_country_countryName_UNIQUE", Country.COUNTRY.COUNTRYNAME)
     val KEY_FLYWAY_SCHEMA_HISTORY_PRIMARY : UniqueKey[FlywaySchemaHistoryRecord] = Internal.createUniqueKey(FlywaySchemaHistory.FLYWAY_SCHEMA_HISTORY, "KEY_flyway_schema_history_PRIMARY", FlywaySchemaHistory.FLYWAY_SCHEMA_HISTORY.INSTALLED_RANK)
     val KEY_RELATIONS_PRIMARY : UniqueKey[RelationsRecord] = Internal.createUniqueKey(Relations.RELATIONS, "KEY_relations_PRIMARY", Relations.RELATIONS.RELATIONID)
     val KEY_RELATIONS_COUNTRY1_UNIQUE : UniqueKey[RelationsRecord] = Internal.createUniqueKey(Relations.RELATIONS, "KEY_relations_country1_UNIQUE", Relations.RELATIONS.COUNTRYID1)

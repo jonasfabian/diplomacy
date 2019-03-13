@@ -17,6 +17,7 @@ import java.util.List
 
 import org.jooq.Field
 import org.jooq.ForeignKey
+import org.jooq.Identity
 import org.jooq.Index
 import org.jooq.Name
 import org.jooq.Record
@@ -58,7 +59,7 @@ extends TableImpl[CountryRecord](
     classOf[CountryRecord]
   }
 
-  val COUNTRYID : TableField[CountryRecord, Integer] = createField("countryId", org.jooq.impl.SQLDataType.INTEGER.nullable(false), "")
+  val COUNTRYID : TableField[CountryRecord, Integer] = createField("countryId", org.jooq.impl.SQLDataType.INTEGER.nullable(false).identity(true), "")
 
   val COUNTRYNAME : TableField[CountryRecord, String] = createField("countryName", org.jooq.impl.SQLDataType.VARCHAR(45).nullable(false), "")
 
@@ -87,7 +88,11 @@ extends TableImpl[CountryRecord](
   override def getSchema : Schema = CountryGame.COUNTRY_GAME
 
   override def getIndexes : List[ Index ] = {
-    return Arrays.asList[ Index ](Indexes.COUNTRY_COUNTRYNAME_UNIQUE, Indexes.COUNTRY_PRIMARY)
+    return Arrays.asList[ Index ](Indexes.COUNTRY_PRIMARY)
+  }
+
+  override def getIdentity : Identity[CountryRecord, Integer] = {
+    Keys.IDENTITY_COUNTRY
   }
 
   override def getPrimaryKey : UniqueKey[CountryRecord] = {
@@ -95,7 +100,7 @@ extends TableImpl[CountryRecord](
   }
 
   override def getKeys : List[ UniqueKey[CountryRecord] ] = {
-    return Arrays.asList[ UniqueKey[CountryRecord] ](Keys.KEY_COUNTRY_PRIMARY, Keys.KEY_COUNTRY_COUNTRYNAME_UNIQUE)
+    return Arrays.asList[ UniqueKey[CountryRecord] ](Keys.KEY_COUNTRY_PRIMARY)
   }
 
   override def as(alias : String) : Country = {

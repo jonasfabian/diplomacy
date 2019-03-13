@@ -9,11 +9,15 @@
         <th><span>Id</span></th>
         <th><span>Name</span></th>
         <th><span>Description</span></th>
+        <th></th>
+        <th></th>
       </tr>
       <tr *ngFor="let country of countryArray">
         <td><span>{{country.id}}</span></td>
         <td><span>{{country.name}}</span></td>
         <td><span>{{country.details}}</span></td>
+        <td><button (click)="updateCountry()">Update me</button></td>
+        <td><button (click)="createCountry()">Create me</button></td>
       </tr>
       </tbody>
     </table>
@@ -24,4 +28,5 @@
   <div class="col-md-4">
     <app-relation-info></app-relation-info>
   </div>
+  <button (click)="createCountry()">Create me</button>
 </div>
