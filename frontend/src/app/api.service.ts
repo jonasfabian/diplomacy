@@ -18,16 +18,12 @@ export class ApiService {
     return this.http.get<Array<Country>>(this.api);
   }
 
-  createCountry(country: Country): Subscription {
-    return this.http.post('http://localhost:8080/api/country/createCountry', country).subscribe(() => {
-    }, () => {
-    });
+  createCountry(country: Country): Observable<any> {
+    return this.http.post('http://localhost:8080/api/country/createCountry', country);
   }
 
-  updateCountry(country: Country): Subscription {
-    return this.http.post('http://localhost:8080/api/country/updateCountry', country).subscribe(() => {
-    }, () => {
-    });
+  updateCountry(country: Country): Observable<any> {
+    return this.http.post('http://localhost:8080/api/country/updateCountry', country);
   }
 }
 

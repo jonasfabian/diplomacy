@@ -1,5 +1,6 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {ApiService, Country} from './api.service';
+import {Observable, Subscription} from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -8,7 +9,8 @@ export class CountryService {
 
   constructor(
     private apiService: ApiService
-  ) { }
+  ) {
+  }
 
   country: Country = new Country(-1, 'No Country Name yet', 'No details yet', 'None');
   currentView: any = CurrentViewEnum.COUNTRYDETAIL;
@@ -17,6 +19,18 @@ export class CountryService {
   getCountries(): void {
     this.apiService.getCountries().subscribe(value => {
       this.countryArray = value;
+    });
+  }
+
+  createCountry(country: Country): void {
+    this.apiService.createCountry(country).subscribe(val => {
+      this.getCountries();
+    });
+  }
+
+  updateCountry(country: Country): void {
+    this.apiService.updateCountry(country).subscribe(val => {
+      this.getCountries();
     });
   }
 

@@ -35,9 +35,8 @@ export class CountryCreateComponent implements OnInit {
       this.country.name = this.createCountryForm.controls.name.value;
       this.country.details = this.createCountryForm.controls.details.value;
       this.country.countryCode = this.createCountryForm.controls.countryCode.value;
-      this.apiService.createCountry(new Country(this.country.id, this.country.name, this.country.details, this.country.countryCode));
+      this.countryService.createCountry(new Country(this.country.id, this.country.name, this.country.details, this.country.countryCode));
       this.countryService.currentView = this.viewEnum.COUNTRYDETAIL;
-      this.countryService.getCountries();
     }
   }
 }
