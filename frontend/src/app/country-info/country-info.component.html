@@ -1,14 +1,14 @@
-<div class="panel">
-  <h1>Country Game</h1>
-</div>
 <div class="panel row">
   <div class="col-md-4">
+    <div>
+      <h5>All Countries</h5>
+    </div>
     <table>
       <tbody>
       <tr>
         <th><span>Id</span></th>
         <th><span>Name</span></th>
-        <th><span>Description</span></th>
+        <th><span>Details</span></th>
         <th></th>
         <th></th>
       </tr>
@@ -16,8 +16,14 @@
         <td><span>{{country.id}}</span></td>
         <td><span>{{country.name}}</span></td>
         <td><span>{{country.details}}</span></td>
-        <td><button (click)="updateCountry()">Update me</button></td>
-        <td><button (click)="createCountry()">Create me</button></td>
+        <td>
+          <button class="btn btn-secondary" (click)="updateCountry()" style="width: 100%; padding: 0;">Update me
+          </button>
+        </td>
+        <td>
+          <button class="btn btn-primary" (click)="giveCountry(country)" style="width: 100%; padding: 0;">Details
+          </button>
+        </td>
       </tr>
       </tbody>
     </table>
@@ -28,5 +34,7 @@
   <div class="col-md-4">
     <app-relation-info></app-relation-info>
   </div>
-  <button (click)="createCountry()">Create me</button>
+  <div style="margin-left: 15px; margin-top: 5px;">
+    <button class="btn btn-primary" (click)="createCountry()">Create me</button>
+  </div>
 </div>

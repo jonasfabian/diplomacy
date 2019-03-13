@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {Observable} from 'rxjs';
+import {Observable, Subscription} from 'rxjs';
 import {HttpClient} from '@angular/common/http';
 import {environment} from '../environments/environment';
 
@@ -19,13 +19,13 @@ export class ApiService {
     return this.http.get<Array<Country>>(this.api);
   }
 
-  createCountry(country: Country) {
+  createCountry(country: Country): Subscription {
     return this.http.post('http://localhost:8080/api/country/createCountry', country).subscribe(() => {
     }, () => {
     });
   }
 
-  updateCountry(country: Country) {
+  updateCountry(country: Country): Subscription {
     return this.http.post('http://localhost:8080/api/country/updateCountry', country).subscribe(() => {
     }, () => {
     });
