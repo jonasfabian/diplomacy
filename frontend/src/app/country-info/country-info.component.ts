@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
-import {ApiService, Country} from '../api.service';
-import {CountryService, CurrentViewEnum} from '../country.service';
+import {ApiService, Country} from '../services/api.service';
+import {CountryService, CurrentViewEnum} from '../services/country.service';
+import {RelationService} from '../services/relation.service';
 
 @Component({
   selector: 'app-country-info',
@@ -11,7 +12,8 @@ export class CountryInfoComponent implements OnInit {
 
   constructor(
     private apiService: ApiService,
-    private countryService: CountryService
+    private countryService: CountryService,
+    private relationService: RelationService
   ) {
   }
 
@@ -26,6 +28,7 @@ export class CountryInfoComponent implements OnInit {
   }
 
   showCountryDetails(country: Country): void {
+    this.relationService.displayCountryName(country.id);
     this.countryService.country = country;
     this.countryService.currentView = this.viewEnum.COUNTRYDETAIL;
   }

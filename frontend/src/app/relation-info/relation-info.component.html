@@ -1,3 +1,19 @@
-<p>
-  relation-info works!
-</p>
+<h5>All Relations of {{countryService.country.name}}</h5>
+<div>
+  <table>
+    <tbody>
+    <tr>
+      <th>Id</th>
+      <th>Country 1</th>
+      <th>Country 2</th>
+      <th>Relation Type</th>
+    </tr>
+    <tr>
+      <td>{{relationService.relation.id}}</td>
+      <td>{{relationService.countryName}}</td>
+      <td>{{relationService.relation.countryId2}}</td>
+      <td>{{relationService.relation.relationType}}</td>
+    </tr>
+    </tbody>
+  </table>
+</div>
