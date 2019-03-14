@@ -18,13 +18,13 @@ import { CountryCreateComponent } from './country-create/country-create.componen
     CountryDetailsComponent,
     RelationInfoComponent,
     CountryDetailsEditComponent,
-    CountryCreateComponent
+    CountryCreateComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
   ],
   exports: [
 

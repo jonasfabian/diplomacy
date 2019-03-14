@@ -23,6 +23,7 @@ export class CountryCreateComponent implements OnInit {
   viewEnum: any = CurrentViewEnum;
   countryCodes = new countryCodes.CountryCodes();
   selectedCountryCode = '';
+  filteredCountries = [];
 
   ngOnInit() {
     this.createCountryForm = this.fb.group({
@@ -42,7 +43,17 @@ export class CountryCreateComponent implements OnInit {
     }
   }
 
-  logThis(country: any): void {
+  selectCountry(country: any): void {
     this.selectedCountryCode = country.Code;
+  }
+
+  filterCountries(filteringText: string) {
+    if (filteringText !== '') {
+      this.filteredCountries = this.countryCodes.countries.filter(
+        item => item.Name.toLowerCase().indexOf(filteringText.toLowerCase()) > -1
+      );
+    } else {
+      this.filteredCountries = [];
+    }
   }
 }
