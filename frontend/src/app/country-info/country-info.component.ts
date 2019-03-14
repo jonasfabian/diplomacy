@@ -28,7 +28,7 @@ export class CountryInfoComponent implements OnInit {
   }
 
   showCountryDetails(country: Country): void {
-    this.relationService.displayCountryName(country.id);
+    this.relationService.displayCountryName(country);
     this.countryService.country = country;
     this.countryService.currentView = this.viewEnum.COUNTRYDETAIL;
   }

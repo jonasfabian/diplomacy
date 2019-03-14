@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
-import {ApiService} from './api.service';
+import {ApiService, Country} from './api.service';
 import {CountryService} from './country.service';
 
 @Injectable({
@@ -15,23 +15,34 @@ export class RelationService {
   ) {
   }
 
-  alliance = 1;
-  war = 2;
-  nonAggressionPact = 3;
-  Trade = 4;
+  relationType = '';
   countryName = '';
   relation: Relation = new Relation(-1, 0, 0, 0);
+  relationArray: Array<Relation> = [];
 
-  createRelation(relation: Relation): void {
-    this.http.post('http://localhost:8080/api/country/createRelation', relation).subscribe(val => {
+  getRelations(): void {
+    this.apiService.getRelations().subscribe(value => {
+      this.relationArray = value;
     });
   }
 
-  displayCountryName(countryId: number) {
+  displayCountryName(country: Country) {
     const c = this.countryService.countryArray.find(val => {
-      return val.id === countryId;
+      return val.id === country.id;
     });
     this.countryName = c.name;
+  }
+
+  displayRelationType(relation: Relation) {
+    if (relation.relationType === 1) {
+      this.relationType = 'Alliance';
+    } else if (relation.relationType === 2) {
+      this.relationType = 'War';
+    } else if (relation.relationType === 3) {
+      this.relationType = 'Non-Aggression-Pact';
+    } else if (relation.relationType === 4) {
+      this.relationType = 'Trading';
+    }
   }
 }
 

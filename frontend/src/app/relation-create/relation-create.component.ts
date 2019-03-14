@@ -20,9 +20,4 @@ export class RelationCreateComponent implements OnInit {
 
   ngOnInit() {
   }
-
-  save() {
-    this.relationService.createRelation(this.relation);
-  }
-
 }

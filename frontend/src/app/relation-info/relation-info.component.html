@@ -8,11 +8,11 @@
       <th>Country 2</th>
       <th>Relation Type</th>
     </tr>
-    <tr>
-      <td>{{relationService.relation.id}}</td>
-      <td>{{relationService.countryName}}</td>
-      <td>{{relationService.relation.countryId2}}</td>
-      <td>{{relationService.relation.relationType}}</td>
+    <tr *ngFor="let rel of relationService.relationArray">
+      <td>{{rel.id}}</td>
+      <td>{{rel.countryId1}}</td>
+      <td>{{rel.countryId2}}</td>
+      <td>{{rel.relationType}}</td>
     </tr>
     </tbody>
   </table>
