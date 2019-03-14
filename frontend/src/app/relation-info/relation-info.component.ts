@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {ApiService, Country} from '../services/api.service';
 import {CountryService} from '../services/country.service';
-import {Relation, RelationService} from '../services/relation.service';
+import {RelationService} from '../services/relation.service';
 
 @Component({
   selector: 'app-relation-info',
@@ -14,11 +14,10 @@ export class RelationInfoComponent implements OnInit {
     private apiService: ApiService,
     private countryService: CountryService,
     private relationService: RelationService
-  ) { }
+  ) {
+  }
 
-  relation: Relation = new Relation(-1, 0, 0, 0);
   country: Country = new Country(0, '', '', '');
-  relationArray: Array<Relation> = [];
 
   ngOnInit() {
     this.relationService.getRelations();
