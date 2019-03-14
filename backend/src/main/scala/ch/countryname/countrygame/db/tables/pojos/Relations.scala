@@ -12,6 +12,7 @@ import java.lang.StringBuilder
 case class Relations(
     relationid : Integer
   , countryid1 : Integer
+  , countryid2 : Integer
   , relationtype : Integer
 ) extends Serializable {
 
@@ -19,6 +20,7 @@ case class Relations(
     this(
         value.relationid
       , value.countryid1
+      , value.countryid2
       , value.relationtype
     )
   }
@@ -31,6 +33,10 @@ case class Relations(
     this.countryid1
   }
 
+  def getCountryid2 : Integer = {
+    this.countryid2
+  }
+
   def getRelationtype : Integer = {
     this.relationtype
   }
@@ -40,6 +46,7 @@ case class Relations(
 
     sb.append(relationid)
     sb.append(", ").append(countryid1)
+    sb.append(", ").append(countryid2)
     sb.append(", ").append(relationtype)
 
     sb.append(")")

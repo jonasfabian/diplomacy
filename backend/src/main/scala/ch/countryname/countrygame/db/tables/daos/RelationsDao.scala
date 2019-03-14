@@ -40,6 +40,10 @@ class RelationsDao(configuration : Configuration) extends DAOImpl[RelationsRecor
     fetchOne(Relations.RELATIONS.COUNTRYID1, value)
   }
 
+  def fetchByCountryid2(values : Integer*) : List[ch.countryname.countrygame.db.tables.pojos.Relations] = {
+    fetch(Relations.RELATIONS.COUNTRYID2, values:_*)
+  }
+
   def fetchByRelationtype(values : Integer*) : List[ch.countryname.countrygame.db.tables.pojos.Relations] = {
     fetch(Relations.RELATIONS.RELATIONTYPE, values:_*)
   }

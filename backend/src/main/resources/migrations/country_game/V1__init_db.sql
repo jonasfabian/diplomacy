@@ -27,6 +27,7 @@ CREATE TABLE IF NOT EXISTS `relations`
 (
   `relationId`   INT NOT NULL,
   `countryId1`   INT NOT NULL,
+  `countryId2`   INT NOT NULL,
   `relationType` INT NOT NULL,
   PRIMARY KEY (`relationId`),
   UNIQUE INDEX `country1_UNIQUE` (`countryId1` ASC),

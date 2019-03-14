@@ -25,3 +25,9 @@ td {
   width: 200px;
   border: 1px solid black;
 }
+
+.scrollable-menu {
+  height: auto;
+  max-height: 200px;
+  overflow-x: hidden;
+}

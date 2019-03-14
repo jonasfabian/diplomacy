@@ -17,14 +17,28 @@
         <span>Country code: </span>
         <input type="text" class="form-control" formControlName="countryCode">
       </fieldset>
-      <div class="dropdown">
-        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          Countries
-        </button>
-        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton" *ngFor="let country of ">
-          <a class="dropdown-item"></a>
+      <fieldset class="form-group required">
+        <div class="row">
+          <div class="dropdown col-md-2">
+            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton"
+                    data-toggle="dropdown"
+                    aria-haspopup="true" aria-expanded="false">
+              Select a country
+            </button>
+            <ul class="dropdown-menu scrollable-menu" aria-labelledby="dropdownMenuButton">
+              <li *ngFor="let c of countryCodes.countries">
+                <a class="dropdown-item row" (click)="logThis(c)">
+                  <span class="flag-icon {{countryService.getFlag(c.Code)}} col-md-4"></span>
+                  <span class="col-md-8">{{c.Name}}</span>
+                </a>
+              </li>
+            </ul>
+          </div>
+          <div class="col-md-10">
+            <span style="font-size: 100px; float: right; margin-right: -15px;" class="flag-icon {{countryService.getFlag(selectedCountryCode)}}"></span>
+          </div>
         </div>
-      </div>
+      </fieldset>
       <button type="submit" class="btn btn-primary">Save</button>
       <button type="button" class="btn btn btn-secondary" (click)="countryService.currentView = viewEnum.COUNTRYDETAIL">
         Cancel

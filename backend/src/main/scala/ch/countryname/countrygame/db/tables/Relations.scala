@@ -62,6 +62,8 @@ extends TableImpl[RelationsRecord](
 
   val COUNTRYID1 : TableField[RelationsRecord, Integer] = createField("countryId1", org.jooq.impl.SQLDataType.INTEGER.nullable(false), "")
 
+  val COUNTRYID2 : TableField[RelationsRecord, Integer] = createField("countryId2", org.jooq.impl.SQLDataType.INTEGER.nullable(false), "")
+
   val RELATIONTYPE : TableField[RelationsRecord, Integer] = createField("relationType", org.jooq.impl.SQLDataType.INTEGER.nullable(false), "")
 
   def this() = {
