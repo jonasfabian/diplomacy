@@ -27,12 +27,8 @@ export class RelationService {
     });
   }
 
-  displayCountryName(country: Country): void {
-    this.countryRelationsArray1 = [];
-    this.countryRelationsArray2 = [];
-    const c = this.countryService.countryArray.find(val => {
-      return val.id === country.id;
-    });
+  displayCountryName(countryId: number): String {
+    return this.countryService.countryArray.find(c => c.id === countryId).name;
   }
 
   displayRelationType(relation: Relation): String {

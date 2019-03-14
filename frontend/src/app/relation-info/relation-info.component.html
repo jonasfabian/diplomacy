@@ -10,8 +10,8 @@
     </tr>
     <tr *ngFor="let rel of relationService.countryRelationsArray">
       <td>{{rel.id}}</td>
-      <td>{{rel.countryId1}}</td>
-      <td>{{rel.countryId2}}</td>
+      <td>{{relationService.displayCountryName(rel.countryId1)}}</td>
+      <td>{{relationService.displayCountryName(rel.countryId2)}}</td>
       <td>{{relationService.displayRelationType(rel)}}</td>
     </tr>
     </tbody>
