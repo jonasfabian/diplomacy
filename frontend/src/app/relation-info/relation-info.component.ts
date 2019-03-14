@@ -18,6 +18,7 @@ export class RelationInfoComponent implements OnInit {
 
   relation: Relation = new Relation(-1, 0, 0, 0);
   country: Country = new Country(0, '', '', '');
+  relationArray: Array<Relation> = [];
 
   ngOnInit() {
     this.relationService.getRelations();

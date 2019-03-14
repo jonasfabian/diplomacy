@@ -16,9 +16,12 @@ export class RelationService {
   }
 
   relationType = '';
-  countryName = '';
+  country1Name = '';
   relation: Relation = new Relation(-1, 0, 0, 0);
   relationArray: Array<Relation> = [];
+  countryRelationsArray: Array<Relation> = [];
+  countryRelationsArray1: Array<Relation> = [];
+  countryRelationsArray2: Array<Relation> = [];
 
   getRelations(): void {
     this.apiService.getRelations().subscribe(value => {
@@ -27,10 +30,15 @@ export class RelationService {
   }
 
   displayCountryName(country: Country) {
+    this.countryRelationsArray1 = [];
+    this.countryRelationsArray2 = [];
     const c = this.countryService.countryArray.find(val => {
       return val.id === country.id;
     });
-    this.countryName = c.name;
+    this.country1Name = c.name;
+    this.countryRelationsArray1 = this.relationArray.filter(val => val.countryId1 === c.id);
+    this.countryRelationsArray2 = this.relationArray.filter(val => val.countryId2 === c.id);
+    this.countryRelationsArray = this.countryRelationsArray1.concat(this.countryRelationsArray2);
   }
 
   displayRelationType(relation: Relation) {
