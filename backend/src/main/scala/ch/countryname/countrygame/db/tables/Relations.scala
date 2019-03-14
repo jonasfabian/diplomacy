@@ -17,6 +17,7 @@ import java.util.List
 
 import org.jooq.Field
 import org.jooq.ForeignKey
+import org.jooq.Identity
 import org.jooq.Index
 import org.jooq.Name
 import org.jooq.Record
@@ -58,7 +59,7 @@ extends TableImpl[RelationsRecord](
     classOf[RelationsRecord]
   }
 
-  val RELATIONID : TableField[RelationsRecord, Integer] = createField("relationId", org.jooq.impl.SQLDataType.INTEGER.nullable(false), "")
+  val RELATIONID : TableField[RelationsRecord, Integer] = createField("relationId", org.jooq.impl.SQLDataType.INTEGER.nullable(false).identity(true), "")
 
   val COUNTRYID1 : TableField[RelationsRecord, Integer] = createField("countryId1", org.jooq.impl.SQLDataType.INTEGER.nullable(false), "")
 
@@ -89,7 +90,11 @@ extends TableImpl[RelationsRecord](
   override def getSchema : Schema = CountryGame.COUNTRY_GAME
 
   override def getIndexes : List[ Index ] = {
-    return Arrays.asList[ Index ](Indexes.RELATIONS_COUNTRY1_UNIQUE, Indexes.RELATIONS_PRIMARY, Indexes.RELATIONS_RELATIONTYPEID_IDX)
+    return Arrays.asList[ Index ](Indexes.RELATIONS_COUNTRY1_UNIQUE, Indexes.RELATIONS_COUNTRYID2, Indexes.RELATIONS_PRIMARY, Indexes.RELATIONS_RELATIONTYPEID_IDX)
+  }
+
+  override def getIdentity : Identity[RelationsRecord, Integer] = {
+    Keys.IDENTITY_RELATIONS
   }
 
   override def getPrimaryKey : UniqueKey[RelationsRecord] = {
@@ -97,19 +102,19 @@ extends TableImpl[RelationsRecord](
   }
 
   override def getKeys : List[ UniqueKey[RelationsRecord] ] = {
-    return Arrays.asList[ UniqueKey[RelationsRecord] ](Keys.KEY_RELATIONS_PRIMARY, Keys.KEY_RELATIONS_COUNTRY1_UNIQUE)
+    return Arrays.asList[ UniqueKey[RelationsRecord] ](Keys.KEY_RELATIONS_PRIMARY)
   }
 
   override def getReferences : List[ ForeignKey[RelationsRecord, _] ] = {
-    return Arrays.asList[ ForeignKey[RelationsRecord, _] ](Keys.COUNTRYID, Keys.RELATIONTYPEID)
+    return Arrays.asList[ ForeignKey[RelationsRecord, _] ](Keys.COUNTRYID1, Keys.COUNTRYID2)
   }
 
-  def country : Country = {
-    return new Country(this, Keys.COUNTRYID)
+  def countryid1 : Country = {
+    return new Country(this, Keys.COUNTRYID1)
   }
 
-  def relationtypes : Relationtypes = {
-    return new Relationtypes(this, Keys.RELATIONTYPEID)
+  def countryid2 : Country = {
+    return new Country(this, Keys.COUNTRYID2)
   }
 
   override def as(alias : String) : Relations = {

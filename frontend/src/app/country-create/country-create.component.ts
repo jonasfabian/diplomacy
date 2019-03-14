@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {CountryService, CurrentViewEnum} from '../country.service';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
-import {Country} from '../api.service';
+import {ApiService, Country, Relation} from '../api.service';
 import * as countryCodes from '../country-codes';
 
 @Component({
@@ -13,6 +13,7 @@ export class CountryCreateComponent implements OnInit {
 
   constructor(
     private countryService: CountryService,
+    private apiService: ApiService,
     private fb: FormBuilder,
   ) {
   }
@@ -25,6 +26,7 @@ export class CountryCreateComponent implements OnInit {
   selectedCountryCode = '';
   filteredCountries = [];
 
+  testRelation: Relation = new Relation(-1, 1, 2, 3);
   ngOnInit() {
     this.createCountryForm = this.fb.group({
       'name': ['', [Validators.required]],
@@ -41,6 +43,10 @@ export class CountryCreateComponent implements OnInit {
       this.countryService.createCountry(new Country(this.country.id, this.country.name, this.country.details, this.country.countryCode));
       this.countryService.currentView = this.viewEnum.COUNTRYDETAIL;
     }
+  }
+
+  saveRelation() {
+    this.apiService.createRelation(this.testRelation);
   }
 
   selectCountry(country: any): void {

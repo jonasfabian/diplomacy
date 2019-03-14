@@ -36,10 +36,6 @@ class RelationsDao(configuration : Configuration) extends DAOImpl[RelationsRecor
     fetch(Relations.RELATIONS.COUNTRYID1, values:_*)
   }
 
-  def fetchOneByCountryid1(value : Integer) : ch.countryname.countrygame.db.tables.pojos.Relations = {
-    fetchOne(Relations.RELATIONS.COUNTRYID1, value)
-  }
-
   def fetchByCountryid2(values : Integer*) : List[ch.countryname.countrygame.db.tables.pojos.Relations] = {
     fetch(Relations.RELATIONS.COUNTRYID2, values:_*)
   }

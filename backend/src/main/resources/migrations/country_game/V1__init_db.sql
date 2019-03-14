@@ -25,21 +25,21 @@ CREATE TABLE IF NOT EXISTS `relationTypes`
 
 CREATE TABLE IF NOT EXISTS `relations`
 (
-  `relationId`   INT NOT NULL,
+  `relationId`   INT NOT NULL AUTO_INCREMENT,
   `countryId1`   INT NOT NULL,
   `countryId2`   INT NOT NULL,
   `relationType` INT NOT NULL,
   PRIMARY KEY (`relationId`),
-  UNIQUE INDEX `country1_UNIQUE` (`countryId1` ASC),
+  INDEX `country1_UNIQUE` (`countryId1` ASC),
   INDEX `relationTypeId_idx` (`relationType` ASC),
-  CONSTRAINT `countryId`
+  CONSTRAINT `countryId1`
     FOREIGN KEY (`countryId1`)
       REFERENCES `country` (`countryId`)
       ON DELETE NO ACTION
       ON UPDATE NO ACTION,
-  CONSTRAINT `relationTypeId`
-    FOREIGN KEY (`relationType`)
-      REFERENCES `relationTypes` (`relationTypeId`)
+  CONSTRAINT `countryId2`
+    FOREIGN KEY (`countryId2`)
+      REFERENCES `country` (`countryId`)
       ON DELETE NO ACTION
       ON UPDATE NO ACTION
 )
