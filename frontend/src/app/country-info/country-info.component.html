@@ -40,16 +40,23 @@
   </div>
   <div class="col-md-4">
     <div *ngIf="countryService.country.id !== -1">
-      <app-country-details *ngIf="countryService.currentView === viewEnum.COUNTRYDETAIL"></app-country-details>
+      <app-country-details *ngIf="countryService.currentView === viewCountryEnum.COUNTRYDETAIL"></app-country-details>
     </div>
-    <div *ngIf="countryService.country.id == -1">
+    <div *ngIf="countryService.country.id === -1">
       <h5>No Country selected</h5>
     </div>
     <app-country-details-edit [country]="countryService.country"
-                              *ngIf="countryService.currentView === viewEnum.COUNTRYEDIT"></app-country-details-edit>
-    <app-country-create *ngIf="countryService.currentView === viewEnum.COUNTRYCREATE"></app-country-create>
+                              *ngIf="countryService.currentView === viewCountryEnum.COUNTRYEDIT"></app-country-details-edit>
+    <app-country-create *ngIf="countryService.currentView === viewCountryEnum.COUNTRYCREATE"></app-country-create>
   </div>
   <div class="col-md-4">
-    <app-relation-info></app-relation-info>
+    <div *ngIf="countryService.country.id !== -1">
+      <app-relation-info *ngIf="relationService.currentView === viewRelationEnum.RELATIONDETAIL"></app-relation-info>
+      <app-relation-create
+        *ngIf="relationService.currentView === viewRelationEnum.RELATIONCREATE"></app-relation-create>
+    </div>
+    <div *ngIf="countryService.country.id === -1">
+      <h5>No Relations to display</h5>
+    </div>
   </div>
 </div>

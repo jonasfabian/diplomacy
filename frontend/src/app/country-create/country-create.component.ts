@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {CountryService, CurrentViewEnum} from '../services/country.service';
+import {CountryService, CurrentCountryViewEnum} from '../services/country.service';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {ApiService, Country} from '../services/api.service';
 import * as countryCodes from '../country-codes';
@@ -18,10 +18,10 @@ export class CountryCreateComponent implements OnInit {
   ) {
   }
 
-  currentView: CurrentViewEnum;
+  currentView: CurrentCountryViewEnum;
   createCountryForm: FormGroup;
   country: Country = new Country(-1, '', '', '');
-  viewEnum: any = CurrentViewEnum;
+  viewEnum: any = CurrentCountryViewEnum;
   countryCodes = new countryCodes.CountryCodes();
   selectedCountryCode = '';
   filteredCountries = [];

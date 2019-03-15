@@ -1,3 +1,21 @@
-<p>
-  relation-create works!
-</p>
+<div>
+  <div>
+    <h5>Selected Country</h5>
+  </div>
+  <form [formGroup]="createRelationForm" (ngSubmit)="save()">
+    <fieldset class="form-group">
+      <span>Country 1</span>
+      <input formControlName="country1" type="text" class="form-control">
+    </fieldset>
+    <fieldset class="form-group">
+      <span>Country 2</span>
+      <input formControlName="country2" type="text" class="form-control">
+    </fieldset>
+    <fieldset class="form-group">
+      <span>Relation Type</span>
+      <input formControlName="relationType" type="text" class="form-control">
+    </fieldset>
+    <button type="submit" class="btn btn-primary">Save</button>
+    <button type="button" class="btn btn-secondary" (click)="relationService.currentView = viewEnum.RELATIONDETAIL">Cancel</button>
+  </form>
+</div>

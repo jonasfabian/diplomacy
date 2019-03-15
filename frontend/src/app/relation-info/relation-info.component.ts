@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {ApiService, Country} from '../services/api.service';
-import {CountryService} from '../services/country.service';
-import {RelationService} from '../services/relation.service';
+import {CountryService, CurrentCountryViewEnum} from '../services/country.service';
+import {CurrentReleationViewEnum, RelationService} from '../services/relation.service';
 
 @Component({
   selector: 'app-relation-info',
@@ -18,9 +18,13 @@ export class RelationInfoComponent implements OnInit {
   }
 
   country: Country = new Country(0, '', '', '');
+  viewEnum: any = CurrentReleationViewEnum;
 
   ngOnInit() {
     this.relationService.getRelations();
   }
 
+  createRealtion(): void {
+    this.relationService.currentView = this.viewEnum.RELATIONCREATE;
+  }
 }

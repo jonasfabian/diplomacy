@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {ApiService, Country} from './api.service';
-import {CountryService} from './country.service';
+import {CountryService, CurrentCountryViewEnum} from './country.service';
 
 @Injectable({
   providedIn: 'root'
@@ -20,6 +20,8 @@ export class RelationService {
   countryRelationsArray: Array<Relation> = [];
   countryRelationsArray1: Array<Relation> = [];
   countryRelationsArray2: Array<Relation> = [];
+
+  currentView: any = CurrentReleationViewEnum.RELATIONDETAIL;
 
   getRelations(): void {
     this.apiService.getRelations().subscribe(value => {
@@ -66,4 +68,9 @@ export class Relation {
     this.countryId2 = countryId2;
     this.relationType = relationType;
   }
+}
+
+export enum CurrentReleationViewEnum {
+  RELATIONDETAIL,
+  RELATIONCREATE
 }

@@ -1,7 +1,7 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {ApiService, Country} from '../services/api.service';
-import {CountryService, CurrentViewEnum} from '../services/country.service';
+import {CountryService, CurrentCountryViewEnum} from '../services/country.service';
 
 @Component({
   selector: 'app-country-details-edit',
@@ -18,7 +18,7 @@ export class CountryDetailsEditComponent implements OnInit {
   }
 
   editCountryForm: FormGroup;
-  viewEnum: any = CurrentViewEnum;
+  viewEnum: any = CurrentCountryViewEnum;
   @Input() country: Country;
 
   ngOnInit() {

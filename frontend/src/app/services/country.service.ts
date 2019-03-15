@@ -12,7 +12,7 @@ export class CountryService {
   }
 
   country: Country = new Country(-1, 'No Country Name yet', 'No details yet', 'None');
-  currentView: any = CurrentViewEnum.COUNTRYDETAIL;
+  currentView: any = CurrentCountryViewEnum.COUNTRYDETAIL;
   countryArray: Array<Country> = [];
 
   getCountries(): void {
@@ -38,7 +38,7 @@ export class CountryService {
   }
 }
 
-export enum CurrentViewEnum {
+export enum CurrentCountryViewEnum {
   COUNTRYDETAIL,
   COUNTRYEDIT,
   COUNTRYCREATE
