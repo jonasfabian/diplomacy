@@ -54,6 +54,12 @@ export class RelationService {
     this.countryRelationsArray2 = this.relationArray.filter(val => val.countryId2 === c.id);
     this.countryRelationsArray = this.countryRelationsArray1.concat(this.countryRelationsArray2);
   }
+
+  createRelation(relation: Relation): void {
+    this.apiService.createRelation(relation).subscribe(val => {
+      this.getRelations();
+    });
+  }
 }
 
 export class Relation {

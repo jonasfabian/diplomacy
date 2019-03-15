@@ -32,7 +32,12 @@ export class RelationCreateComponent implements OnInit {
 
   save(): void {
     if (this.createRelationForm.valid) {
-      this.relationService.currentView = this.viewEnum.RELATIONCREATE;
+      this.relation.countryId1 = this.createRelationForm.controls.country1.value;
+      this.relation.countryId2 = this.createRelationForm.controls.country2.value;
+      this.relation.relationType = this.createRelationForm.controls.relationType.value;
+      this.relationService.createRelation(this.relation);
+      this.relationService.displayCountryName(this.countryService.country.id);
+      this.relationService.currentView = this.viewEnum.RELATIONDETAIL;
     }
   }
 }
