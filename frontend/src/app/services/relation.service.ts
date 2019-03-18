@@ -17,6 +17,7 @@ export class RelationService {
 
   country1Name = '';
   relationArray: Array<Relation> = [];
+  relationNamedArray: Array<RelationNamed> = [];
   countryRelationsArray: Array<Relation> = [];
   countryRelationsArray1: Array<Relation> = [];
   countryRelationsArray2: Array<Relation> = [];
@@ -29,18 +30,24 @@ export class RelationService {
     });
   }
 
+  getRelationsNamed(id: number): void {
+    this.apiService.getRelationsNamed(id).subscribe(value => {
+      this.relationNamedArray = value;
+    });
+  }
+
   displayCountryName(countryId: number): String {
     return this.countryService.countryArray.find(c => c.id === countryId).name;
   }
 
-  displayRelationType(relation: Relation): String {
-    if (relation.relationType === 1) {
+  displayRelationType(relation: number): String {
+    if (relation === 1) {
       return 'Alliance';
-    } else if (relation.relationType === 2) {
+    } else if (relation === 2) {
       return 'War';
-    } else if (relation.relationType === 3) {
+    } else if (relation === 3) {
       return 'Non-Aggression-Pact';
-    } else if (relation.relationType === 4) {
+    } else if (relation === 4) {
       return 'Trading';
     }
   }
@@ -72,6 +79,20 @@ export class Relation {
     this.id = id;
     this.countryId1 = countryId1;
     this.countryId2 = countryId2;
+    this.relationType = relationType;
+  }
+}
+
+export class RelationNamed {
+  relationId: number;
+  countryName1: String;
+  countryName2: String;
+  relationType: number;
+
+  constructor(id: number, countryName1: String, countryName2: String, relationType: number) {
+    this.relationId = id;
+    this.countryName1 = countryName1;
+    this.countryName2 = countryName2;
     this.relationType = relationType;
   }
 }

@@ -63,7 +63,7 @@ extends TableImpl[CountryRecord](
 
   val COUNTRYNAME : TableField[CountryRecord, String] = createField("countryName", org.jooq.impl.SQLDataType.VARCHAR(45).nullable(false), "")
 
-  val COUNTRYDETAILS : TableField[CountryRecord, String] = createField("countryDetails", org.jooq.impl.SQLDataType.VARCHAR(45).defaultValue(org.jooq.impl.DSL.field("NULL", org.jooq.impl.SQLDataType.VARCHAR)), "")
+  val COUNTRYDETAILS : TableField[CountryRecord, String] = createField("countryDetails", org.jooq.impl.SQLDataType.VARCHAR(45), "")
 
   val COUNTRYCODE : TableField[CountryRecord, String] = createField("countryCode", org.jooq.impl.SQLDataType.VARCHAR(2).nullable(false), "")
 

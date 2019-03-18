@@ -20,6 +20,7 @@ export class RelationInfoComponent implements OnInit {
   country: Country = new Country(0, '', '', '');
   viewEnum: any = CurrentReleationViewEnum;
 
+
   ngOnInit() {
     this.relationService.getRelations();
   }

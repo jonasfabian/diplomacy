@@ -60,9 +60,9 @@ extends TableImpl[RelationtypesRecord](
 
   val RELATIONTYPEID : TableField[RelationtypesRecord, Integer] = createField("relationTypeId", org.jooq.impl.SQLDataType.INTEGER.nullable(false), "")
 
-  val RELATIONTYPE : TableField[RelationtypesRecord, String] = createField("relationType", org.jooq.impl.SQLDataType.VARCHAR(45).defaultValue(org.jooq.impl.DSL.field("NULL", org.jooq.impl.SQLDataType.VARCHAR)), "")
+  val RELATIONTYPE : TableField[RelationtypesRecord, String] = createField("relationType", org.jooq.impl.SQLDataType.VARCHAR(45), "")
 
-  val RELATIONTYPEDESCRIPTION : TableField[RelationtypesRecord, String] = createField("relationTypeDescription", org.jooq.impl.SQLDataType.VARCHAR(45).defaultValue(org.jooq.impl.DSL.field("NULL", org.jooq.impl.SQLDataType.VARCHAR)), "")
+  val RELATIONTYPEDESCRIPTION : TableField[RelationtypesRecord, String] = createField("relationTypeDescription", org.jooq.impl.SQLDataType.VARCHAR(45), "")
 
   def this() = {
     this(DSL.name("relationtypes"), null, null, null, null)

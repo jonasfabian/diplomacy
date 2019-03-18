@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {Observable} from 'rxjs';
 import {HttpClient} from '@angular/common/http';
-import {Relation} from './relation.service';
+import {Relation, RelationNamed} from './relation.service';
 
 @Injectable({
   providedIn: 'root'
@@ -19,6 +19,10 @@ export class ApiService {
 
   getRelations(): Observable<Array<Relation>> {
     return this.http.get<Array<Relation>>('http://localhost:8080/api/country/getRelation');
+  }
+
+  getRelationsNamed(id: number): Observable<Array<RelationNamed>> {
+    return this.http.get<Array<RelationNamed>>(`http://localhost:8080/api/country/getRelationByName?id=${id}`);
   }
 
   createCountry(country: Country): Observable<any> {

@@ -36,6 +36,18 @@ class CountryService(config: Config) {
     dslContext.selectFrom(RELATIONS).fetchArray().map(r => Relation(r.getRelationid, r.getCountryid1, r.getCountryid2, r.getRelationtype))
   })
 
+  def relationsForCountry(countryId: Int): Array[RelationNamed] = withDslContext(dslContext => {
+    val country1 = COUNTRY.as("country1")
+    val country2 = COUNTRY.as("country2")
+    dslContext.select().from(RELATIONS
+      .join(country1)
+      .on(country1.COUNTRYID.eq(RELATIONS.COUNTRYID1))
+      .join(country2)
+      .on(country2.COUNTRYID.eq(RELATIONS.COUNTRYID2)))
+      .where(RELATIONS.COUNTRYID1.eq(countryId).or(RELATIONS.COUNTRYID2.eq(countryId)))
+      .fetchArray().map(r => RelationNamed(r.get(RELATIONS.RELATIONID).toInt, r.get(country1.COUNTRYNAME), r.get(country2.COUNTRYNAME), r.get(RELATIONS.RELATIONTYPE).toInt))
+  })
+
   def newCountry(country: Country): Unit = withDslContext(dslContext => {
     val rec = countryToRecord(country)
     dslContext.executeInsert(rec)
