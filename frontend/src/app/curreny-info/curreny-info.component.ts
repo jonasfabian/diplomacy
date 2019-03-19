@@ -11,15 +11,10 @@ export class CurrenyInfoComponent implements OnInit {
 
   constructor(
     public countryService: CountryService,
-    private apiService: ApiService
   ) {
   }
 
-  currArray: Array<Currency> = [];
-
   ngOnInit(): void {
-    this.apiService.getCurrencies().subscribe(c => {
-      this.currArray = c;
-    });
+   this.countryService.showCurrencyUsers();
   }
 }

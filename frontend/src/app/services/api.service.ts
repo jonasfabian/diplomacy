@@ -17,7 +17,7 @@ export class ApiService {
     return this.http.get<Array<Country>>('http://localhost:8080/api/country/getCountry');
   }
 
-  getCurrency(id: number): Observable<Array<Currency>> {
+  getCountryByCurrency(id: number): Observable<Array<Currency>> {
     return this.http.get<Array<Currency>>(`http://localhost:8080/api/country/getCurrency?id=${id}`);
   }
 

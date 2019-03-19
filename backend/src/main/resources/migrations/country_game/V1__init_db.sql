@@ -53,3 +53,9 @@ CREATE TABLE IF NOT EXISTS `relations`
 SET SQL_MODE = @OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS = @OLD_FOREIGN_KEY_CHECKS;
 SET UNIQUE_CHECKS = @OLD_UNIQUE_CHECKS;
+
+USE `country_game`;
+INSERT INTO `currency` (currencyName) VALUES ('Franken');
+INSERT INTO `currency` (currencyName) VALUES ('Euro');
+INSERT INTO `currency` (currencyName) VALUES ('Dollar');
+INSERT INTO `currency` (currencyName) VALUES ('Yen');

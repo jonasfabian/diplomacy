@@ -15,6 +15,9 @@ export class CountryService {
   currentView: any = CurrentCountryViewEnum.COUNTRYDETAIL;
   countryArray: Array<Country> = [];
   currencyArray: Array<Currency> = [];
+  currArray: Array<Currency> = [];
+  numberOfCurrencyUser = 0;
+  currency = '';
 
   getCountries(): void {
     this.apiService.getCountries().subscribe(value => {
@@ -42,6 +45,17 @@ export class CountryService {
 
   getFlag(s: String): String {
     return (s) ? 'flag-icon-' + s.toLowerCase() : '';
+  }
+
+  showCurrencyUsers() {
+    this.apiService.getCountryByCurrency(this.country.id).subscribe(val => {
+      console.log(this.country.id);
+      this.currArray = val;
+      this.numberOfCurrencyUser = val.length;
+      val.map(res => {
+        this.currency = res.currencyName;
+      });
+    });
   }
 }
 

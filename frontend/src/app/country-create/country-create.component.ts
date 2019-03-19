@@ -39,9 +39,9 @@ export class CountryCreateComponent implements OnInit {
   initForm() {
     console.log(this.selectedCountry);
     this.createCountryForm = this.fb.group({
-      'name': [this.selectedCountry.Name, [Validators.required]],
+      'name': [this.selectedCountry.name, [Validators.required]],
       'details': ['', [Validators.maxLength(100)]],
-      'countryCode': [this.selectedCountry.Code, [Validators.required, Validators.minLength(2)]]
+      'countryCode': [this.selectedCountry.countryCode, [Validators.required, Validators.minLength(2)]]
     });
   }
 
@@ -68,7 +68,7 @@ export class CountryCreateComponent implements OnInit {
   filterCountries(filteringText: string) {
     if (filteringText !== '') {
       this.filteredCountries = this.countryCodes.countries.filter(
-        item => item.Name.toLowerCase().indexOf(filteringText.toLowerCase()) > -1
+        item => item.name.toLowerCase().indexOf(filteringText.toLowerCase()) > -1
       );
     } else {
       this.filteredCountries = [];
