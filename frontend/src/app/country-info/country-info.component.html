@@ -42,7 +42,7 @@
     <div *ngIf="countryService.country.id !== -1">
       <app-country-details *ngIf="countryService.currentView === viewCountryEnum.COUNTRYDETAIL"></app-country-details>
     </div>
-    <div *ngIf="countryService.country.id === -1">
+    <div *ngIf="(countryService.country.id === -1) && (countryService.currentView !== viewCountryEnum.COUNTRYCREATE)">
       <h5>No Country selected</h5>
     </div>
     <app-country-details-edit [country]="countryService.country"

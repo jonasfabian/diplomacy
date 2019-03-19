@@ -38,7 +38,8 @@
             </ul>
           </div>
           <div class="col-md-8" *ngIf="selectedCountry.id !== -1">
-            <span style="background-color: white; border: 1px solid #dddddd; border-radius: 4px; padding: 6px; float: right;">{{selectedCountry.Name}}</span>
+            <span
+              style="background-color: white; border: 1px solid #dddddd; border-radius: 4px; padding: 6px; float: right;">{{selectedCountry.Name}}</span>
           </div>
         </div>
       </fieldset>
@@ -62,13 +63,19 @@
             </ul>
           </div>
           <div class="col-md-8" *ngIf="selectedCurrency.currencyName !== ''">
-            <span style="background-color: white; border: 1px solid #dddddd; border-radius: 4px; padding: 6px; float: right;">{{selectedCurrency.currencyName}}</span>
+            <div *ngIf="!showErrorNoCurrency">
+              <span style="background-color: white; border: 1px solid #dddddd; border-radius: 4px; padding: 6px; float: right;">{{selectedCurrency.currencyName}}</span>
+            </div>
+            <div style="margin-bottom: 0; padding: 6px;" class="alert alert-danger" *ngIf="showErrorNoCurrency">
+              <span>Please select a currency</span>
+            </div>
           </div>
         </div>
       </fieldset>
       <fieldset class="form-group">
         <div>
-          <input #searchCountry class="form-control" (input)="filterCountries($event.target.value)" placeholder="Search country">
+          <input #searchCountry class="form-control" (input)="filterCountries($event.target.value)"
+                 placeholder="Search country">
           <div class="row" *ngFor="let count of filteredCountries">
             <div
               style="margin-left: 15px; margin-right: 15px; background-color: white; border: 1px solid black; border-radius: 4px; margin-top: 5px; cursor: pointer; width: 100%; padding-left: 10px; padding-right: 15px;"
@@ -80,7 +87,8 @@
         </div>
       </fieldset>
       <button type="submit" class="btn btn-primary">Save</button>
-      <button style="margin-left: 5px;" type="button" class="btn btn btn-secondary" (click)="countryService.currentView = viewEnum.COUNTRYDETAIL">
+      <button style="margin-left: 5px;" type="button" class="btn btn btn-secondary"
+              (click)="countryService.currentView = viewEnum.COUNTRYDETAIL">
         Cancel
       </button>
     </div>
