@@ -44,7 +44,7 @@ object Keys {
   // FOREIGN KEY definitions
   // -------------------------------------------------------------------------
 
-  val CURRENCYCOUNTRYID = ForeignKeys0.CURRENCYCOUNTRYID
+  val CURRENCYID = ForeignKeys0.CURRENCYID
   val COUNTRYID1 = ForeignKeys0.COUNTRYID1
   val COUNTRYID2 = ForeignKeys0.COUNTRYID2
 
@@ -66,7 +66,7 @@ object Keys {
   }
 
   private object ForeignKeys0 {
-    val CURRENCYCOUNTRYID : ForeignKey[CurrencyRecord, CountryRecord] = Internal.createForeignKey(ch.countryname.countrygame.db.Keys.KEY_COUNTRY_PRIMARY, Currency.CURRENCY, "currencyCountryId", Currency.CURRENCY.CURRENCYCOUNTRYID)
+    val CURRENCYID : ForeignKey[CountryRecord, CurrencyRecord] = Internal.createForeignKey(ch.countryname.countrygame.db.Keys.KEY_CURRENCY_PRIMARY, Country.COUNTRY, "currencyId", Country.COUNTRY.CURRENCYID)
     val COUNTRYID1 : ForeignKey[RelationsRecord, CountryRecord] = Internal.createForeignKey(ch.countryname.countrygame.db.Keys.KEY_COUNTRY_PRIMARY, Relations.RELATIONS, "countryId1", Relations.RELATIONS.COUNTRYID1)
     val COUNTRYID2 : ForeignKey[RelationsRecord, CountryRecord] = Internal.createForeignKey(ch.countryname.countrygame.db.Keys.KEY_COUNTRY_PRIMARY, Relations.RELATIONS, "countryId2", Relations.RELATIONS.COUNTRYID2)
   }

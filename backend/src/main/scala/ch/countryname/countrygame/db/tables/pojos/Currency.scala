@@ -13,16 +13,12 @@ import java.lang.StringBuilder
 case class Currency(
     currencyid : Integer
   , currencyname : String
-  , currencycountryid : Integer
-  , currencycountryname : Integer
 ) extends Serializable {
 
   def this (value : Currency) = {
     this(
         value.currencyid
       , value.currencyname
-      , value.currencycountryid
-      , value.currencycountryname
     )
   }
 
@@ -34,21 +30,11 @@ case class Currency(
     this.currencyname
   }
 
-  def getCurrencycountryid : Integer = {
-    this.currencycountryid
-  }
-
-  def getCurrencycountryname : Integer = {
-    this.currencycountryname
-  }
-
   override def toString : String = {
     val sb = new StringBuilder("Currency (")
 
     sb.append(currencyid)
     sb.append(", ").append(currencyname)
-    sb.append(", ").append(currencycountryid)
-    sb.append(", ").append(currencycountryname)
 
     sb.append(")")
     return sb.toString

@@ -29,7 +29,7 @@ class CountryService(config: Config) {
   }
 
   def countries: Array[Country] = withDslContext(dslContext => {
-    dslContext.selectFrom(COUNTRY).fetchArray().map(r => Country(r.getCountryid, r.getCountryname, r.getCountrydetails, r.getCountrycode))
+    dslContext.selectFrom(COUNTRY).fetchArray().map(r => Country(r.getCountryid, r.getCountryname, r.getCountrydetails, r.getCountrycode, r.getCountryid))
   })
 
   def relations: Array[Relation] = withDslContext(dslContext => {
@@ -48,13 +48,14 @@ class CountryService(config: Config) {
       .fetchArray().map(r => RelationNamed(r.get(RELATIONS.RELATIONID).toInt, r.get(country1.COUNTRYNAME), r.get(country2.COUNTRYNAME), r.get(RELATIONS.RELATIONTYPE).toInt))
   })
 
-  def currencyForCountry(countryId: Int): Array[Currency] = withDslContext(dslContext => {
+  def currencyForCountry(countryId: Int): Array[CountryCurrency] = withDslContext(dslContext => {
     val country = COUNTRY.as("country")
-    dslContext.select().from(CURRENCY
+    val currency = CURRENCY.as("currency")
+    dslContext.select().from(currency
       .join(country)
-      .on(country.COUNTRYID.eq(CURRENCY.CURRENCYCOUNTRYID)))
-      .where(CURRENCY.CURRENCYCOUNTRYID.eq(countryId))
-      .fetchArray().map(r => Currency(r.get(CURRENCY.CURRENCYID).toInt, r.get(CURRENCY.CURRENCYNAME), r.get(country.COUNTRYID).toInt, r.get(country.COUNTRYNAME)))
+      .on(country.CURRENCYID.eq(currency.CURRENCYID)))
+      .where(currency.CURRENCYID.eq(country.CURRENCYID))
+      .fetchArray().map(r => CountryCurrency(r.get(currency.CURRENCYID).toInt, r.get(currency.CURRENCYNAME), r.get(country.COUNTRYID).toInt, r.get(country.COUNTRYNAME)))
   })
 
   def newCountry(country: Country): Unit = withDslContext(dslContext => {

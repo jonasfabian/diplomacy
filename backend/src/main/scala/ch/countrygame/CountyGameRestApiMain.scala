@@ -70,7 +70,7 @@ class CountryGameRestApi(service: CountryService) extends Directives with ErrorA
   @ApiOperation(value = "", httpMethod = "GET", notes = "returns getRelationByName")
   @ApiImplicitParams(Array(new ApiImplicitParam(name = "id", required = true, example = "100", value = "id", paramType = "query")))
   @ApiResponses(Array(new ApiResponse(code = 200, response = classOf[Array[RelationNamed]], message = "OK")))
-  @Path("getRelationByName")
+  @Path("country")
   def getRelationByName = path("getRelationByName") {
     get {
       parameters("id".as[Int] ? 0) { id =>

@@ -15,6 +15,7 @@ case class Country(
   , countryname : String
   , countrydetails : String
   , countrycode : String
+  , currencyid : Integer
 ) extends Serializable {
 
   def this (value : Country) = {
@@ -23,6 +24,7 @@ case class Country(
       , value.countryname
       , value.countrydetails
       , value.countrycode
+      , value.currencyid
     )
   }
 
@@ -42,6 +44,10 @@ case class Country(
     this.countrycode
   }
 
+  def getCurrencyid : Integer = {
+    this.currencyid
+  }
+
   override def toString : String = {
     val sb = new StringBuilder("Country (")
 
@@ -49,6 +55,7 @@ case class Country(
     sb.append(", ").append(countryname)
     sb.append(", ").append(countrydetails)
     sb.append(", ").append(countrycode)
+    sb.append(", ").append(currencyid)
 
     sb.append(")")
     return sb.toString

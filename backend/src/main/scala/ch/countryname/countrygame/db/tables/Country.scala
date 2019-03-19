@@ -67,6 +67,8 @@ extends TableImpl[CountryRecord](
 
   val COUNTRYCODE : TableField[CountryRecord, String] = createField("countryCode", org.jooq.impl.SQLDataType.VARCHAR(2).nullable(false), "")
 
+  val CURRENCYID : TableField[CountryRecord, Integer] = createField("currencyId", org.jooq.impl.SQLDataType.INTEGER.nullable(false), "")
+
   def this() = {
     this(DSL.name("country"), null, null, null, null)
   }
@@ -90,7 +92,7 @@ extends TableImpl[CountryRecord](
   override def getSchema : Schema = CountryGame.COUNTRY_GAME
 
   override def getIndexes : List[ Index ] = {
-    return Arrays.asList[ Index ](Indexes.COUNTRY_PRIMARY)
+    return Arrays.asList[ Index ](Indexes.COUNTRY_CURRENCYID, Indexes.COUNTRY_PRIMARY)
   }
 
   override def getIdentity : Identity[CountryRecord, Integer] = {
@@ -103,6 +105,14 @@ extends TableImpl[CountryRecord](
 
   override def getKeys : List[ UniqueKey[CountryRecord] ] = {
     return Arrays.asList[ UniqueKey[CountryRecord] ](Keys.KEY_COUNTRY_PRIMARY)
+  }
+
+  override def getReferences : List[ ForeignKey[CountryRecord, _] ] = {
+    return Arrays.asList[ ForeignKey[CountryRecord, _] ](Keys.CURRENCYID)
+  }
+
+  def currency : Currency = {
+    return new Currency(this, Keys.CURRENCYID)
   }
 
   override def as(alias : String) : Country = {

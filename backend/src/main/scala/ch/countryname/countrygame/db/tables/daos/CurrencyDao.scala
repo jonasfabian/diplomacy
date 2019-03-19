@@ -36,12 +36,4 @@ class CurrencyDao(configuration : Configuration) extends DAOImpl[CurrencyRecord,
   def fetchByCurrencyname(values : String*) : List[ch.countryname.countrygame.db.tables.pojos.Currency] = {
     fetch(Currency.CURRENCY.CURRENCYNAME, values:_*)
   }
-
-  def fetchByCurrencycountryid(values : Integer*) : List[ch.countryname.countrygame.db.tables.pojos.Currency] = {
-    fetch(Currency.CURRENCY.CURRENCYCOUNTRYID, values:_*)
-  }
-
-  def fetchByCurrencycountryname(values : Integer*) : List[ch.countryname.countrygame.db.tables.pojos.Currency] = {
-    fetch(Currency.CURRENCY.CURRENCYCOUNTRYNAME, values:_*)
-  }
 }

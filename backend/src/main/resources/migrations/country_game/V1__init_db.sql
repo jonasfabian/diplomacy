@@ -9,22 +9,21 @@ CREATE TABLE IF NOT EXISTS `country`
   `countryName`    VARCHAR(45) NOT NULL,
   `countryDetails` VARCHAR(45) NULL,
   `countryCode`    VARCHAR(2)  NOT NULL,
-  PRIMARY KEY (`countryId`)
+  `currencyId`     INT         NOT NULL,
+  PRIMARY KEY (`countryId`),
+  CONSTRAINT `currencyId`
+    FOREIGN KEY (`currencyId`)
+      REFERENCES `currency` (`currencyId`)
+      ON DELETE NO ACTION
+      ON UPDATE NO ACTION
 )
   ENGINE = InnoDB;
 
 CREATE TABLE IF NOT EXISTS `currency`
 (
-  `currencyId`          INT         NOT NULL AUTO_INCREMENT,
-  `currencyName`        VARCHAR(45) NOT NULL,
-  `currencyCountryId`   INT         NOT NULL,
-  `currencyCountryName` INT         NOT NULL,
-  PRIMARY KEY (`currencyId`),
-  CONSTRAINT `currencyCountryId`
-    FOREIGN KEY (`currencyCountryId`)
-      REFERENCES `country` (`countryId`)
-      ON DELETE NO ACTION
-      ON UPDATE NO ACTION
+  `currencyId`   INT         NOT NULL AUTO_INCREMENT,
+  `currencyName` VARCHAR(45) NOT NULL,
+  PRIMARY KEY (`currencyId`)
 )
   ENGINE = InnoDB;
 

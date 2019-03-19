@@ -11,12 +11,12 @@ import java.lang.String
 
 import org.jooq.Field
 import org.jooq.Record1
-import org.jooq.Record4
-import org.jooq.Row4
+import org.jooq.Record2
+import org.jooq.Row2
 import org.jooq.impl.UpdatableRecordImpl
 
 
-class CurrencyRecord extends UpdatableRecordImpl[CurrencyRecord](Currency.CURRENCY) with Record4[Integer, String, Integer, Integer] {
+class CurrencyRecord extends UpdatableRecordImpl[CurrencyRecord](Currency.CURRENCY) with Record2[Integer, String] {
 
   def setCurrencyid(value : Integer) : Unit = {
     set(0, value)
@@ -36,24 +36,6 @@ class CurrencyRecord extends UpdatableRecordImpl[CurrencyRecord](Currency.CURREN
     if (r == null) null else r.asInstanceOf[String]
   }
 
-  def setCurrencycountryid(value : Integer) : Unit = {
-    set(2, value)
-  }
-
-  def getCurrencycountryid : Integer = {
-    val r = get(2)
-    if (r == null) null else r.asInstanceOf[Integer]
-  }
-
-  def setCurrencycountryname(value : Integer) : Unit = {
-    set(3, value)
-  }
-
-  def getCurrencycountryname : Integer = {
-    val r = get(3)
-    if (r == null) null else r.asInstanceOf[Integer]
-  }
-
   // -------------------------------------------------------------------------
   // Primary key information
   // -------------------------------------------------------------------------
@@ -62,28 +44,22 @@ class CurrencyRecord extends UpdatableRecordImpl[CurrencyRecord](Currency.CURREN
   }
 
   // -------------------------------------------------------------------------
-  // Record4 type implementation
+  // Record2 type implementation
   // -------------------------------------------------------------------------
 
-  override def fieldsRow : Row4[Integer, String, Integer, Integer] = {
-    super.fieldsRow.asInstanceOf[ Row4[Integer, String, Integer, Integer] ]
+  override def fieldsRow : Row2[Integer, String] = {
+    super.fieldsRow.asInstanceOf[ Row2[Integer, String] ]
   }
 
-  override def valuesRow : Row4[Integer, String, Integer, Integer] = {
-    super.valuesRow.asInstanceOf[ Row4[Integer, String, Integer, Integer] ]
+  override def valuesRow : Row2[Integer, String] = {
+    super.valuesRow.asInstanceOf[ Row2[Integer, String] ]
   }
   override def field1 : Field[Integer] = Currency.CURRENCY.CURRENCYID
   override def field2 : Field[String] = Currency.CURRENCY.CURRENCYNAME
-  override def field3 : Field[Integer] = Currency.CURRENCY.CURRENCYCOUNTRYID
-  override def field4 : Field[Integer] = Currency.CURRENCY.CURRENCYCOUNTRYNAME
   override def component1 : Integer = getCurrencyid
   override def component2 : String = getCurrencyname
-  override def component3 : Integer = getCurrencycountryid
-  override def component4 : Integer = getCurrencycountryname
   override def value1 : Integer = getCurrencyid
   override def value2 : String = getCurrencyname
-  override def value3 : Integer = getCurrencycountryid
-  override def value4 : Integer = getCurrencycountryname
 
   override def value1(value : Integer) : CurrencyRecord = {
     setCurrencyid(value)
@@ -95,30 +71,16 @@ class CurrencyRecord extends UpdatableRecordImpl[CurrencyRecord](Currency.CURREN
     this
   }
 
-  override def value3(value : Integer) : CurrencyRecord = {
-    setCurrencycountryid(value)
-    this
-  }
-
-  override def value4(value : Integer) : CurrencyRecord = {
-    setCurrencycountryname(value)
-    this
-  }
-
-  override def values(value1 : Integer, value2 : String, value3 : Integer, value4 : Integer) : CurrencyRecord = {
+  override def values(value1 : Integer, value2 : String) : CurrencyRecord = {
     this.value1(value1)
     this.value2(value2)
-    this.value3(value3)
-    this.value4(value4)
     this
   }
 
-  def this(currencyid : Integer, currencyname : String, currencycountryid : Integer, currencycountryname : Integer) = {
+  def this(currencyid : Integer, currencyname : String) = {
     this()
 
     set(0, currencyid)
     set(1, currencyname)
-    set(2, currencycountryid)
-    set(3, currencycountryname)
   }
 }
