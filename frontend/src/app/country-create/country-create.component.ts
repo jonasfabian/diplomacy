@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import {CountryService, CurrentCountryViewEnum} from '../services/country.service';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {ApiService, Country, Currency} from '../services/api.service';
@@ -27,6 +27,7 @@ export class CountryCreateComponent implements OnInit {
   selectedCurrency: Currency = new Currency(-1, '');
   filteredCountries = [];
   currArray: Array<Currency> = [];
+  @ViewChild('searchCountry') searchCountry: ElementRef;
 
   ngOnInit() {
     this.initForm();
@@ -58,6 +59,8 @@ export class CountryCreateComponent implements OnInit {
   selectCountry(country: any): void {
     this.selectedCountry = country;
     this.initForm();
+    this.searchCountry.nativeElement.value = '';
+    this.filteredCountries = [];
   }
 
   filterCountries(filteringText: string) {

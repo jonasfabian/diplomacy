@@ -68,7 +68,7 @@
       </fieldset>
       <fieldset class="form-group">
         <div>
-          <input class="form-control" (input)="filterCountries($event.target.value)">
+          <input #searchCountry class="form-control" (input)="filterCountries($event.target.value)" placeholder="Search country">
           <div class="row" *ngFor="let count of filteredCountries">
             <div
               style="margin-left: 15px; margin-right: 15px; background-color: white; border: 1px solid black; border-radius: 4px; margin-top: 5px; cursor: pointer; width: 100%; padding-left: 10px; padding-right: 15px;"
@@ -80,7 +80,7 @@
         </div>
       </fieldset>
       <button type="submit" class="btn btn-primary">Save</button>
-      <button type="button" class="btn btn btn-secondary" (click)="countryService.currentView = viewEnum.COUNTRYDETAIL">
+      <button style="margin-left: 5px;" type="button" class="btn btn btn-secondary" (click)="countryService.currentView = viewEnum.COUNTRYDETAIL">
         Cancel
       </button>
     </div>
