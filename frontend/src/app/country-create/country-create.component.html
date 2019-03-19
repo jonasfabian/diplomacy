@@ -37,9 +37,8 @@
               </li>
             </ul>
           </div>
-          <div class="col-md-8">
-            <span style="font-size: 100px; float: right; margin-right: -15px;"
-                  class="flag-icon {{countryService.getFlag(selectedCountryCode)}}"></span>
+          <div class="col-md-8" *ngIf="selectedCountry.id !== -1">
+            <span style="background-color: white; border: 1px solid #dddddd; border-radius: 4px; padding: 6px; float: right;">{{selectedCountry.Name}}</span>
           </div>
         </div>
       </fieldset>
@@ -54,16 +53,16 @@
             <ul class="dropdown-menu scrollable-menu" aria-labelledby="dropdownMenuButton">
               <li>
                 <a style="margin: 0; padding-left: 5px; padding-right: 0;" *ngFor="let c of currArray"
-                   class="dropdown-item" (click)="selectedCurrency = c.currencyName">
+                   class="dropdown-item" (click)="selectedCurrency = c">
                   <div>
-                    <span style="background-color: red;">{{c.currencyName}}</span>
+                    <span>{{c.currencyName}}</span>
                   </div>
                 </a>
               </li>
             </ul>
           </div>
-          <div class="col-md-8" *ngIf="selectedCurrency !== ''">
-            <span style="background-color: white; border: 1px solid #dddddd; border-radius: 4px; padding: 6px; float: right;">{{selectedCurrency}}</span>
+          <div class="col-md-8" *ngIf="selectedCurrency.currencyName !== ''">
+            <span style="background-color: white; border: 1px solid #dddddd; border-radius: 4px; padding: 6px; float: right;">{{selectedCurrency.currencyName}}</span>
           </div>
         </div>
       </fieldset>

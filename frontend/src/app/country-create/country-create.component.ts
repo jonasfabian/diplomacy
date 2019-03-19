@@ -20,22 +20,27 @@ export class CountryCreateComponent implements OnInit {
 
   currentView: CurrentCountryViewEnum;
   createCountryForm: FormGroup;
-  country: Country = new Country(-1, '', '', '');
+  country: Country = new Country(-1, '', '', '', -1);
   viewEnum: any = CurrentCountryViewEnum;
   countryCodes = new countryCodes.CountryCodes();
-  selectedCountryCode = '';
-  selectedCurrency = '';
+  selectedCountry: Country = new Country(-1, '', '', '', -1);
+  selectedCurrency: Currency = new Currency(-1, '');
   filteredCountries = [];
   currArray: Array<Currency> = [];
 
   ngOnInit() {
-    this.createCountryForm = this.fb.group({
-      'name': ['', [Validators.required]],
-      'details': ['', [Validators.maxLength(100)]],
-      'countryCode': ['', [Validators.required, Validators.minLength(2)]]
-    });
+    this.initForm();
     this.apiService.getCurrencies().subscribe(c => {
       this.currArray = c;
+    });
+  }
+
+  initForm() {
+    console.log(this.selectedCountry);
+    this.createCountryForm = this.fb.group({
+      'name': [this.selectedCountry.Name, [Validators.required]],
+      'details': ['', [Validators.maxLength(100)]],
+      'countryCode': [this.selectedCountry.Code, [Validators.required, Validators.minLength(2)]]
     });
   }
 
@@ -44,13 +49,15 @@ export class CountryCreateComponent implements OnInit {
       this.country.name = this.createCountryForm.controls.name.value;
       this.country.details = this.createCountryForm.controls.details.value;
       this.country.countryCode = this.createCountryForm.controls.countryCode.value;
-      this.countryService.createCountry(new Country(this.country.id, this.country.name, this.country.details, this.country.countryCode));
+      this.country.currencyId = this.selectedCurrency.currencyId;
+      this.countryService.createCountry(new Country(this.country.id, this.country.name, this.country.details, this.country.countryCode, this.country.currencyId));
       this.countryService.currentView = this.viewEnum.COUNTRYDETAIL;
     }
   }
 
   selectCountry(country: any): void {
-    this.selectedCountryCode = country.Code;
+    this.selectedCountry = country;
+    this.initForm();
   }
 
   filterCountries(filteringText: string) {

@@ -51,12 +51,14 @@ export class Country {
   name: string;
   details: string;
   countryCode: string;
+  currencyId: number;
 
-  constructor(id: number, name: string, details: string, countryCode: string) {
+  constructor(id: number, name: string, details: string, countryCode: string, currencyId: number) {
     this.id = id;
     this.name = name;
     this.details = details;
     this.countryCode = countryCode;
+    this.currencyId = currencyId;
   }
 }
 
