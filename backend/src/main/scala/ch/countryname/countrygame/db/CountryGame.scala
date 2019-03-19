@@ -5,9 +5,9 @@ package ch.countryname.countrygame.db
 
 
 import ch.countryname.countrygame.db.tables.Country
+import ch.countryname.countrygame.db.tables.Currency
 import ch.countryname.countrygame.db.tables.FlywaySchemaHistory
 import ch.countryname.countrygame.db.tables.Relations
-import ch.countryname.countrygame.db.tables.Relationtypes
 
 import java.util.ArrayList
 import java.util.Arrays
@@ -36,8 +36,8 @@ class CountryGame extends SchemaImpl("country_game", DefaultCatalog.DEFAULT_CATA
   private def getTables0(): List[Table[_]] = {
     return Arrays.asList[Table[_]](
       Country.COUNTRY,
+      Currency.CURRENCY,
       FlywaySchemaHistory.FLYWAY_SCHEMA_HISTORY,
-      Relations.RELATIONS,
-      Relationtypes.RELATIONTYPES)
+      Relations.RELATIONS)
   }
 }

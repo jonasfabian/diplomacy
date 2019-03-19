@@ -11,6 +11,7 @@ import { CountryDetailsEditComponent } from './country-details-edit/country-deta
 import {ReactiveFormsModule} from '@angular/forms';
 import { CountryCreateComponent } from './country-create/country-create.component';
 import { RelationCreateComponent } from './relation-create/relation-create.component';
+import { CurrenyInfoComponent } from './curreny-info/curreny-info.component';
 
 @NgModule({
   declarations: [
@@ -21,6 +22,7 @@ import { RelationCreateComponent } from './relation-create/relation-create.compo
     CountryDetailsEditComponent,
     CountryCreateComponent,
     RelationCreateComponent,
+    CurrenyInfoComponent,
   ],
   imports: [
     BrowserModule,

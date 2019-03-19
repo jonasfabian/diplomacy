@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {ApiService, Country} from './api.service';
+import {ApiService, Country, Currency} from './api.service';
 
 @Injectable({
   providedIn: 'root'
@@ -14,6 +14,7 @@ export class CountryService {
   country: Country = new Country(-1, 'No Country Name yet', 'No details yet', 'None');
   currentView: any = CurrentCountryViewEnum.COUNTRYDETAIL;
   countryArray: Array<Country> = [];
+  currencyArray: Array<Currency> = [];
 
   getCountries(): void {
     this.apiService.getCountries().subscribe(value => {

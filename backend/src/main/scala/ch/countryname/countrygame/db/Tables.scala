@@ -9,9 +9,9 @@ object Tables {
 
   val COUNTRY = ch.countryname.countrygame.db.tables.Country.COUNTRY
 
+  val CURRENCY = ch.countryname.countrygame.db.tables.Currency.CURRENCY
+
   val FLYWAY_SCHEMA_HISTORY = ch.countryname.countrygame.db.tables.FlywaySchemaHistory.FLYWAY_SCHEMA_HISTORY
 
   val RELATIONS = ch.countryname.countrygame.db.tables.Relations.RELATIONS
-
-  val RELATIONTYPES = ch.countryname.countrygame.db.tables.Relationtypes.RELATIONTYPES
 }

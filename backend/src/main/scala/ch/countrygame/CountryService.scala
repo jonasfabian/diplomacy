@@ -48,6 +48,15 @@ class CountryService(config: Config) {
       .fetchArray().map(r => RelationNamed(r.get(RELATIONS.RELATIONID).toInt, r.get(country1.COUNTRYNAME), r.get(country2.COUNTRYNAME), r.get(RELATIONS.RELATIONTYPE).toInt))
   })
 
+  def currencyForCountry(countryId: Int): Array[Currency] = withDslContext(dslContext => {
+    val country = COUNTRY.as("country")
+    dslContext.select().from(CURRENCY
+      .join(country)
+      .on(country.COUNTRYID.eq(CURRENCY.CURRENCYCOUNTRYID)))
+      .where(CURRENCY.CURRENCYCOUNTRYID.eq(countryId))
+      .fetchArray().map(r => Currency(r.get(CURRENCY.CURRENCYID).toInt, r.get(CURRENCY.CURRENCYNAME), r.get(country.COUNTRYID).toInt, r.get(country.COUNTRYNAME)))
+  })
+
   def newCountry(country: Country): Unit = withDslContext(dslContext => {
     val rec = countryToRecord(country)
     dslContext.executeInsert(rec)

@@ -17,6 +17,10 @@ export class ApiService {
     return this.http.get<Array<Country>>('http://localhost:8080/api/country/getCountry');
   }
 
+  getCurrency(id: number): Observable<Array<Currency>> {
+    return this.http.get<Array<Currency>>(`http://localhost:8080/api/country/getCurrency?id=${id}`);
+  }
+
   getRelations(): Observable<Array<Relation>> {
     return this.http.get<Array<Relation>>('http://localhost:8080/api/country/getRelation');
   }
@@ -32,7 +36,8 @@ export class ApiService {
   createRelation(relation: Relation): Observable<any> {
     return this.http.post('http://localhost:8080/api/country/createRelation', relation);
   }
-    updateCountry(country: Country): Observable<any> {
+
+  updateCountry(country: Country): Observable<any> {
     return this.http.post('http://localhost:8080/api/country/updateCountry', country);
   }
 }
@@ -48,5 +53,19 @@ export class Country {
     this.name = name;
     this.details = details;
     this.countryCode = countryCode;
+  }
+}
+
+export class Currency {
+  currencyId: number;
+  currencyName: string;
+  currencyCountryId: number;
+  currencyCountryName: string;
+
+  constructor(currencyId: number, currencyName: string, currencyCountryId: number, currencyCountryName: string) {
+    this.currencyId = currencyId;
+    this.currencyName = currencyName;
+    this.currencyCountryId = currencyCountryId;
+    this.currencyCountryName = currencyCountryName;
   }
 }

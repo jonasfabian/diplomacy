@@ -8,18 +8,23 @@ CREATE TABLE IF NOT EXISTS `country`
   `countryId`      INT         NOT NULL AUTO_INCREMENT,
   `countryName`    VARCHAR(45) NOT NULL,
   `countryDetails` VARCHAR(45) NULL,
-  `countryCode` VARCHAR(2) NOT NULL,
+  `countryCode`    VARCHAR(2)  NOT NULL,
   PRIMARY KEY (`countryId`)
-  /*UNIQUE INDEX `countryName_UNIQUE` (`countryName` ASC)*/
 )
   ENGINE = InnoDB;
 
-CREATE TABLE IF NOT EXISTS `relationTypes`
+CREATE TABLE IF NOT EXISTS `currency`
 (
-  `relationTypeId`          INT         NOT NULL,
-  `relationType`            VARCHAR(45) NULL,
-  `relationTypeDescription` VARCHAR(45) NULL,
-  PRIMARY KEY (`relationTypeId`)
+  `currencyId`          INT         NOT NULL AUTO_INCREMENT,
+  `currencyName`        VARCHAR(45) NOT NULL,
+  `currencyCountryId`   INT         NOT NULL,
+  `currencyCountryName` INT         NOT NULL,
+  PRIMARY KEY (`currencyId`),
+  CONSTRAINT `currencyCountryId`
+    FOREIGN KEY (`currencyCountryId`)
+      REFERENCES `country` (`countryId`)
+      ON DELETE NO ACTION
+      ON UPDATE NO ACTION
 )
   ENGINE = InnoDB;
 
