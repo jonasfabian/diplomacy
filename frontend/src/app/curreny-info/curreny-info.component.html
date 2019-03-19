@@ -1,8 +1,5 @@
 <div class="panel">
-  <div>
-    <button (click)="showCurrency()">Click</button>
-  </div>
-  <div *ngFor="let currency of currencyArray">
-    <span>{{currency.currencyName}}</span>
+  <div *ngFor="let c of currArray">
+    <span>{{c.currencyName}}</span>
   </div>
 </div>

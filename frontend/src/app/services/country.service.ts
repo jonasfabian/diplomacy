@@ -22,6 +22,12 @@ export class CountryService {
     });
   }
 
+  getCurrencies(): void {
+    this.apiService.getCurrencies().subscribe(val => {
+      this.currencyArray = val;
+    });
+  }
+
   createCountry(country: Country): void {
     this.apiService.createCountry(country).subscribe(val => {
       this.getCountries();

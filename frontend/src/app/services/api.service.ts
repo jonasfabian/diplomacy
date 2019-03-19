@@ -21,6 +21,10 @@ export class ApiService {
     return this.http.get<Array<Currency>>(`http://localhost:8080/api/country/getCurrency?id=${id}`);
   }
 
+  getCurrencies(): Observable<Array<Currency>> {
+    return this.http.get<Array<Currency>>('http://localhost:8080/api/country/getCurrencies');
+  }
+
   getRelations(): Observable<Array<Relation>> {
     return this.http.get<Array<Relation>>('http://localhost:8080/api/country/getRelation');
   }
@@ -59,13 +63,9 @@ export class Country {
 export class Currency {
   currencyId: number;
   currencyName: string;
-  currencyCountryId: number;
-  currencyCountryName: string;
 
-  constructor(currencyId: number, currencyName: string, currencyCountryId: number, currencyCountryName: string) {
+  constructor(currencyId: number, currencyName: string) {
     this.currencyId = currencyId;
     this.currencyName = currencyName;
-    this.currencyCountryId = currencyCountryId;
-    this.currencyCountryName = currencyCountryName;
   }
 }

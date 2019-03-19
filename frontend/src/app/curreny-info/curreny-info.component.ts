@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {CountryService} from '../services/country.service';
 import {ApiService, Currency} from '../services/api.service';
 
@@ -10,20 +10,16 @@ import {ApiService, Currency} from '../services/api.service';
 export class CurrenyInfoComponent implements OnInit {
 
   constructor(
-    private apiService: ApiService,
-    private countryService: CountryService
-  ) { }
-
-  currencyArray: Array<Currency> = [];
-  ngOnInit() {
+    public countryService: CountryService,
+    private apiService: ApiService
+  ) {
   }
 
-  showCurrency() {
-    this.apiService.getCurrency(this.countryService.country.id).subscribe(val => {
-      this.currencyArray = val;
-      console.log(this.countryService.country.id);
-      console.log(val);
+  currArray: Array<Currency> = [];
+
+  ngOnInit(): void {
+    this.apiService.getCurrencies().subscribe(c => {
+      this.currArray = c;
     });
   }
-
 }

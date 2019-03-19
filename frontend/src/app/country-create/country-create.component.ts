@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {CountryService, CurrentCountryViewEnum} from '../services/country.service';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
-import {ApiService, Country} from '../services/api.service';
+import {ApiService, Country, Currency} from '../services/api.service';
 import * as countryCodes from '../country-codes';
 
 @Component({
@@ -24,13 +24,18 @@ export class CountryCreateComponent implements OnInit {
   viewEnum: any = CurrentCountryViewEnum;
   countryCodes = new countryCodes.CountryCodes();
   selectedCountryCode = '';
+  selectedCurrency = '';
   filteredCountries = [];
+  currArray: Array<Currency> = [];
 
   ngOnInit() {
     this.createCountryForm = this.fb.group({
       'name': ['', [Validators.required]],
       'details': ['', [Validators.maxLength(100)]],
       'countryCode': ['', [Validators.required, Validators.minLength(2)]]
+    });
+    this.apiService.getCurrencies().subscribe(c => {
+      this.currArray = c;
     });
   }
 

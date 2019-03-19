@@ -61,4 +61,4 @@
   </div>
 </div>
 
-<app-curreny-info></app-curreny-info>
+<app-curreny-info *ngIf="countryService.country.id !== -1"></app-curreny-info>
