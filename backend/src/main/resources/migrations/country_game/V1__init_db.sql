@@ -55,7 +55,14 @@ SET FOREIGN_KEY_CHECKS = @OLD_FOREIGN_KEY_CHECKS;
 SET UNIQUE_CHECKS = @OLD_UNIQUE_CHECKS;
 
 USE `country_game`;
+
 INSERT INTO `currency` (currencyName) VALUES ('Franken');
 INSERT INTO `currency` (currencyName) VALUES ('Euro');
 INSERT INTO `currency` (currencyName) VALUES ('Dollar');
 INSERT INTO `currency` (currencyName) VALUES ('Yen');
+
+INSERT INTO `country` (countryName, countryDetails, countryCode, currencyId) VALUES ('Switzerland', 'Cheese', 'CH', 1);
+INSERT INTO `country` (countryName, countryDetails, countryCode, currencyId) VALUES ('Germany', 'Bratwurst', 'DE', 2);
+INSERT INTO `country` (countryName, countryDetails, countryCode, currencyId) VALUES ('France', 'Baguette', 'FR', 2);
+INSERT INTO `country` (countryName, countryDetails, countryCode, currencyId) VALUES ('USA', 'Guns', 'US', 3);
+INSERT INTO `country` (countryName, countryDetails, countryCode, currencyId) VALUES ('Italy', 'Pizza', 'IT', 2);
