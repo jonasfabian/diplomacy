@@ -62,13 +62,8 @@
               </li>
             </ul>
           </div>
-          <div class="col-md-8" *ngIf="selectedCurrency.currencyName !== ''">
-            <div *ngIf="!showErrorNoCurrency">
-              <span style="background-color: white; border: 1px solid #dddddd; border-radius: 4px; padding: 6px; float: right;">{{selectedCurrency.currencyName}}</span>
-            </div>
-            <div style="margin-bottom: 0; padding: 6px;" class="alert alert-danger" *ngIf="showErrorNoCurrency">
-              <span>Please select a currency</span>
-            </div>
+          <div class="col-md-8" *ngIf="selectedCurrency.currencyId !== -1">
+            <span style="background-color: white; border: 1px solid #dddddd; border-radius: 4px; padding: 6px; float: right;">{{selectedCurrency.currencyName}}</span>
           </div>
         </div>
       </fieldset>

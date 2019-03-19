@@ -23,7 +23,10 @@
       <tr *ngFor="let country of countryService.countryArray">
         <td><span>{{country.id}}</span></td>
         <td><span>{{country.name}}</span></td>
-        <td><span>{{country.details}}</span></td>
+        <td>
+          <span *ngIf="country.details !== ''">{{country.details}}</span>
+          <span *ngIf="country.details === ''">-</span>
+        </td>
         <td><span class="flag-icon {{countryService.getFlag(country.countryCode)}}"></span></td>
         <td>
           <button class="btn btn-secondary" (click)="editCountryDetails(country)" style="width: 100%; padding: 0;">

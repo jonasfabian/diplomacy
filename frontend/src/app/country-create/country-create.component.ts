@@ -27,7 +27,6 @@ export class CountryCreateComponent implements OnInit {
   selectedCurrency: Currency = new Currency(-1, '');
   filteredCountries = [];
   currArray: Array<Currency> = [];
-  showErrorNoCurrency = false;
   @ViewChild('searchCountry') searchCountry: ElementRef;
 
   ngOnInit() {
@@ -47,18 +46,15 @@ export class CountryCreateComponent implements OnInit {
   }
 
   save(): void {
-    if (this.selectedCurrency.currencyId !== -1) {
-      if (this.createCountryForm.valid) {
-        this.country.name = this.createCountryForm.controls.name.value;
-        this.country.details = this.createCountryForm.controls.details.value;
-        this.country.countryCode = this.createCountryForm.controls.countryCode.value;
-        this.country.currencyId = this.selectedCurrency.currencyId;
-        this.countryService.createCountry(new Country(this.country.id, this.country.name, this.country.details, this.country.countryCode, this.country.currencyId));
-        this.countryService.currentView = this.viewEnum.COUNTRYDETAIL;
-        this.showErrorNoCurrency = false;
-      }
-    } else {
-      this.showErrorNoCurrency = true;
+    if (this.createCountryForm.valid) {
+      this.country.name = this.createCountryForm.controls.name.value;
+      this.country.details = this.createCountryForm.controls.details.value;
+      this.country.countryCode = this.createCountryForm.controls.countryCode.value;
+      this.country.currencyId = this.selectedCurrency.currencyId;
+      this.countryService.createCountry(
+        new Country(this.country.id, this.country.name, this.country.details, this.country.countryCode, this.country.currencyId
+        ));
+      this.countryService.currentView = this.viewEnum.COUNTRYDETAIL;
     }
   }
 

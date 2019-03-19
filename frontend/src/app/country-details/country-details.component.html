@@ -8,12 +8,17 @@
       <th><span>Id</span></th>
       <th><span>Name</span></th>
       <th><span>Details</span></th>
+      <th><span>Currency</span></th>
       <th><span>Flag</span></th>
     </tr>
     <tr>
       <td><span>{{countryService.country.id}}</span></td>
       <td><span>{{countryService.country.name}}</span></td>
-      <td><span>{{countryService.country.details}}</span></td>
+      <td>
+        <span *ngIf="countryService.country.details !== ''">{{countryService.country.details}}</span>
+        <span *ngIf="countryService.country.details === ''">-</span>
+      </td>
+      <td><span>{{currency.currencyName}}</span></td>
       <td><span class="flag-icon {{countryService.getFlag(countryService.country.countryCode)}}"></span></td>
     </tr>
     </tbody>
