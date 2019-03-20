@@ -44,6 +44,7 @@ export class CountryInfoComponent implements OnInit {
     this.countryService.calculateNumberOfCurrencyUsers();
     this.countryService.getManpower(country.id);
     this.combatService.getModifiersForCountry();
+    this.combatService.getModifiers();
     this.countryService.currentView = this.viewCountryEnum.COUNTRYDETAIL;
   }
 

@@ -1,23 +1,46 @@
-<div class="panel">
-  <div>
-    <h5>Combat Stats</h5>
+<div>
+  <div class="panel" style="width: 49%; float: left;">
+    <div>
+      <h5>Combat Stats</h5>
+    </div>
+    <div>
+      <table>
+        <tbody>
+        <tr>
+          <th>Country Name</th>
+          <th>Manpower</th>
+          <th>Morale</th>
+          <th>Modifier Value</th>
+        </tr>
+        <tr *ngFor="let stats of combatService.countryStatsArray">
+          <td><span>{{stats.countryName}}</span></td>
+          <td><span>{{stats.manpowerNumber}}</span></td>
+          <td><span>{{stats.modifierName}}</span></td>
+          <td><span>{{stats.modifierValue}}</span></td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
   </div>
-  <div *ngFor="let stats of combatService.countryStatsArray">
-    <table>
-      <tbody>
-      <tr>
-        <th>Country Name</th>
-        <th>Manpower</th>
-        <th>Morale</th>
-        <th>Modifier Value</th>
-      </tr>
-      <tr>
-        <td><span>{{stats.countryName}}</span></td>
-        <td><span>{{stats.manpowerNumber}}</span></td>
-        <td><span>{{stats.modifierName}}</span></td>
-        <td><span>{{stats.modifierValue}}</span></td>
-      </tr>
-      </tbody>
-    </table>
+  <div class="panel" style="width: 49%; float: right;">
+    <div>
+      <h5>Modifiers</h5>
+    </div>
+    <div>
+      <table>
+        <tbody>
+        <tr>
+          <th>Modifier ID</th>
+          <th>Modifier Name</th>
+          <th>Modifier Value</th>
+        </tr>
+        <tr *ngFor="let modifier of combatService.modifierArray">
+          <td><span>{{modifier.modifierId}}</span></td>
+          <td><span>{{modifier.modifierName}}</span></td>
+          <td><span>{{modifier.modifierValue}}</span></td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
   </div>
 </div>

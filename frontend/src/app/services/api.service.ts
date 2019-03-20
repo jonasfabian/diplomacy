@@ -7,6 +7,7 @@ import {Manpower} from '../models/manpower';
 import {Relation} from '../models/relation';
 import {RelationNamed} from '../models/relation-named';
 import {ModifiersForCountry} from '../models/modifiers-for-country';
+import {Modifier} from '../models/modifier';
 
 @Injectable({
   providedIn: 'root'
@@ -20,6 +21,10 @@ export class ApiService {
 
   getCountries(): Observable<Array<Country>> {
     return this.http.get<Array<Country>>('http://localhost:8080/api/country/getCountry');
+  }
+
+  getModifier(): Observable<Array<Modifier>> {
+    return this.http.get<Array<Modifier>>('http://localhost:8080/api/country/getModifier');
   }
 
   getModifiersForCountry(id: number): Observable<Array<any>> {
