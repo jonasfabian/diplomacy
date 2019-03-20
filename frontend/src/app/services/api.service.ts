@@ -1,10 +1,12 @@
 import {Injectable} from '@angular/core';
 import {Observable} from 'rxjs';
 import {HttpClient} from '@angular/common/http';
-import {Relation, RelationNamed} from './relation.service';
 import {Currency} from '../models/currency';
 import {Country} from '../models/country';
 import {Manpower} from '../models/manpower';
+import {Relation} from '../models/relation';
+import {RelationNamed} from '../models/relation-named';
+import {ModifiersForCountry} from '../models/modifiers-for-country';
 
 @Injectable({
   providedIn: 'root'
@@ -20,7 +22,7 @@ export class ApiService {
     return this.http.get<Array<Country>>('http://localhost:8080/api/country/getCountry');
   }
 
-  getModifiersForCountry(id: number): Observable<Array<any>> {
+  getModifiersForCountry(id: number): Observable<Array<ModifiersForCountry>> {
     return this.http.get<Array<any>>(`http://localhost8080/api/country/getModifiersForCountry?id=${id}`);
   }
 

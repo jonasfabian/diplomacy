@@ -1,9 +1,11 @@
 import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import {CountryService, CurrentCountryViewEnum} from '../services/country.service';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
-import {ApiService, Country, Currency} from '../services/api.service';
+import {ApiService} from '../services/api.service';
 import * as countryCodes from '../country-codes';
 import {RelationService} from '../services/relation.service';
+import {Country} from '../models/country';
+import {Currency} from '../models/currency';
 
 @Component({
   selector: 'app-country-create',

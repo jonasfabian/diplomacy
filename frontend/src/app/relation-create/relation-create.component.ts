@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import {ApiService} from '../services/api.service';
-import {CountryService, CurrentCountryViewEnum} from '../services/country.service';
-import {CurrentReleationViewEnum, Relation, RelationService} from '../services/relation.service';
+import {CountryService} from '../services/country.service';
+import {CurrentReleationViewEnum, RelationService} from '../services/relation.service';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {Relation} from '../models/relation';
 
 @Component({
   selector: 'app-relation-create',

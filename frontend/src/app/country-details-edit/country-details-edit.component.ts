@@ -1,7 +1,7 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
-import {ApiService, Country} from '../services/api.service';
 import {CountryService, CurrentCountryViewEnum} from '../services/country.service';
+import {Country} from '../models/country';
 
 @Component({
   selector: 'app-country-details-edit',
@@ -13,7 +13,6 @@ export class CountryDetailsEditComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private countryService: CountryService,
-    private apiService: ApiService
   ) {
   }
 
