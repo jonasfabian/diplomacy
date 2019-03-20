@@ -13,6 +13,7 @@ import { CountryCreateComponent } from './country/country-create/country-create.
 import { RelationCreateComponent } from './relation/relation-create/relation-create.component';
 import { CurrencyInfoComponent } from './currency/currency-info/currency-info.component';
 import { CombatComponent } from './combat/combat-info/combat.component';
+import { ModifiersComponent } from './combat/modifiers/modifiers.component';
 
 @NgModule({
   declarations: [
@@ -25,6 +26,7 @@ import { CombatComponent } from './combat/combat-info/combat.component';
     RelationCreateComponent,
     CurrencyInfoComponent,
     CombatComponent,
+    ModifiersComponent,
   ],
   imports: [
     BrowserModule,

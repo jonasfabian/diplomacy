@@ -39,7 +39,8 @@
           </button>
         </td>
         <td>
-          <button class="btn btn-secondary" style="padding: 0; width: 100%" (click)="deleteCountry(country.id)">Delete</button>
+          <button class="btn btn-secondary" style="padding: 0; width: 100%" (click)="deleteCountry(country.id)">Delete
+          </button>
         </td>
       </tr>
       </tbody>
@@ -70,4 +71,13 @@
 
 <app-curreny-info *ngIf="countryService.country.id !== -1"></app-curreny-info>
 
-<app-combat *ngIf="countryService.country.id !== -1"></app-combat>
+<div *ngIf="countryService.country.id !== -1">
+  <div class="row" style="margin-left: 5px; margin-right: 5px;">
+    <div class="panel col-md-6" style="margin: 0;">
+      <app-combat></app-combat>
+    </div>
+    <div class="panel col-md-6" style="margin: 0;">
+      <app-modifiers></app-modifiers>
+    </div>
+  </div>
+</div>
