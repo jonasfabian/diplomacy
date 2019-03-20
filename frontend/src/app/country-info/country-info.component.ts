@@ -3,6 +3,7 @@ import {ApiService} from '../services/api.service';
 import {CountryService, CurrentCountryViewEnum} from '../services/country.service';
 import {CurrentReleationViewEnum, RelationService} from '../services/relation.service';
 import {Country} from '../models/country';
+import {CombatService} from '../services/combat.service';
 
 @Component({
   selector: 'app-country-info',
@@ -14,7 +15,8 @@ export class CountryInfoComponent implements OnInit {
   constructor(
     private apiService: ApiService,
     private countryService: CountryService,
-    private relationService: RelationService
+    private relationService: RelationService,
+    private combatService: CombatService
   ) {
   }
 
@@ -41,6 +43,7 @@ export class CountryInfoComponent implements OnInit {
     this.relationService.getRelationsNamed(this.countryService.country.id);
     this.countryService.calculateNumberOfCurrencyUsers();
     this.countryService.getManpower(country.id);
+    this.combatService.getModifiersForCountry();
     this.countryService.currentView = this.viewCountryEnum.COUNTRYDETAIL;
   }
 

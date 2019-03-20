@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+import {CombatService} from '../services/combat.service';
 
 @Component({
   selector: 'app-combat',
@@ -7,7 +8,10 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CombatComponent implements OnInit {
 
-  constructor() { }
+  constructor(
+    private combatService: CombatService
+  ) {
+  }
 
   ngOnInit() {
   }

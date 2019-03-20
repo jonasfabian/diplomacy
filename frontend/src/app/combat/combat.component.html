@@ -1,3 +1,23 @@
-<p>
-  combat works!
-</p>
+<div class="panel">
+  <div>
+    <h5>Combat Stats</h5>
+  </div>
+  <div *ngFor="let stats of combatService.countryStatsArray">
+    <table>
+      <tbody>
+      <tr>
+        <th>Country Name</th>
+        <th>Manpower</th>
+        <th>Morale</th>
+        <th>Modifier Value</th>
+      </tr>
+      <tr>
+        <td><span>{{stats.countryName}}</span></td>
+        <td><span>{{stats.manpowerNumber}}</span></td>
+        <td><span>{{stats.modifierName}}</span></td>
+        <td><span>{{stats.modifierValue}}</span></td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
