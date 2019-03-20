@@ -48,8 +48,7 @@ export class CountryService {
   }
 
   showCurrencyUsers() {
-    this.apiService.getCountryByCurrency(this.country.id).subscribe(val => {
-      console.log(this.country.id);
+    this.apiService.getCountryByCurrency(this.country.currencyId).subscribe(val => {
       this.currArray = val;
       this.numberOfCurrencyUser = val.length;
       val.map(res => {
