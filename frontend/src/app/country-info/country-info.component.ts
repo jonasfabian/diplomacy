@@ -28,11 +28,16 @@ export class CountryInfoComponent implements OnInit {
     this.countryService.currentView = this.viewCountryEnum.COUNTRYCREATE;
   }
 
+  deleteCountry(id: number): void {
+    this.apiService.deleteCountry(id).subscribe(val => {
+    });
+  }
+
   showCountryDetails(country: Country): void {
     this.relationService.displayCountryRelations(country);
     this.countryService.country = country;
     this.relationService.getRelationsNamed(this.countryService.country.id);
-    this.countryService.showCurrencyUsers();
+    this.countryService.calculateNumberOfCurrencyUsers();
     this.countryService.currentView = this.viewCountryEnum.COUNTRYDETAIL;
   }
 

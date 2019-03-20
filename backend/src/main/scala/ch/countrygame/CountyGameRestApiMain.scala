@@ -45,7 +45,7 @@ class CountryGameRestApi(service: CountryService) extends Directives with ErrorA
 
   val route = pathPrefix("api") {
     pathPrefix("country") {
-      getCountry ~ createCountry ~ updateCountry ~ createRelation ~ getRelation ~ getRelationByName ~ getCurrency ~ getCurrencies
+      getCountry ~ createCountry ~ updateCountry ~ createRelation ~ getRelation ~ getRelationByName ~ getCurrency ~ getCurrencies ~ deleteCountry
     }
   }
 
@@ -87,6 +87,18 @@ class CountryGameRestApi(service: CountryService) extends Directives with ErrorA
     get {
       parameters("id".as[Int] ? 0) { id =>
         complete(service.currencyForCountry(id))
+      }
+    }
+  }
+
+  @ApiOperation(value = "deleteCountry", httpMethod = "DELETE", notes = "deletes country")
+  @ApiImplicitParams(Array(new ApiImplicitParam(name = "id", required = true, example = "100", value = "id", paramType = "query")))
+  @ApiResponses(Array(new ApiResponse(code = 200, response = classOf[Array[Country]], message = "OK")))
+  @Path("country")
+  def deleteCountry = path("deleteCountry") {
+    delete {
+      parameters("id".as[Int] ? 0) { id =>
+        complete(service.deleteCountry(id))
       }
     }
   }

@@ -84,6 +84,12 @@ class CountryService(config: Config) {
     ()
   })
 
+  def deleteCountry(countryId: Int): Boolean = withDslContext(dslContext => {
+    dslContext.delete(COUNTRY)
+      .where(COUNTRY.COUNTRYID.eq(countryId))
+      .execute() == 1
+  })
+
   def countryToRecord(country: Country): CountryRecord = {
     val rec = new CountryRecord()
     rec.setCountryname(country.name)

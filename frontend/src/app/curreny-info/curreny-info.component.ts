@@ -15,6 +15,6 @@ export class CurrenyInfoComponent implements OnInit {
   }
 
   ngOnInit(): void {
-   this.countryService.showCurrencyUsers();
+   this.countryService.calculateNumberOfCurrencyUsers();
   }
 }

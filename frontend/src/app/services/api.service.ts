@@ -17,6 +17,10 @@ export class ApiService {
     return this.http.get<Array<Country>>('http://localhost:8080/api/country/getCountry');
   }
 
+  deleteCountry(id: number): Observable<Object> {
+    return this.http.delete(`http://localhost:8080/api/country/deleteCountry?id=${id}`);
+  }
+
   getCountryByCurrency(id: number): Observable<Array<Currency>> {
     return this.http.get<Array<Currency>>(`http://localhost:8080/api/country/getCurrency?id=${id}`);
   }

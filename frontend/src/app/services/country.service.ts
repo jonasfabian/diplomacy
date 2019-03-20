@@ -47,7 +47,7 @@ export class CountryService {
     return (s) ? 'flag-icon-' + s.toLowerCase() : '';
   }
 
-  showCurrencyUsers() {
+  calculateNumberOfCurrencyUsers() {
     this.apiService.getCountryByCurrency(this.country.currencyId).subscribe(val => {
       this.currArray = val;
       this.numberOfCurrencyUser = val.length;
