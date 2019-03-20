@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {CombatService} from '../services/combat.service';
+import {CombatService} from '../../services/combat.service';
 
 @Component({
   selector: 'app-combat',

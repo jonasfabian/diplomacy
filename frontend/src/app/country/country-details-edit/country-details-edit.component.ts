@@ -1,7 +1,7 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
-import {CountryService, CurrentCountryViewEnum} from '../services/country.service';
-import {Country} from '../models/country';
+import {CountryService, CurrentCountryViewEnum} from '../../services/country.service';
+import {Country} from '../../models/country';
 
 @Component({
   selector: 'app-country-details-edit',

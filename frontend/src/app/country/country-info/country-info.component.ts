@@ -1,9 +1,9 @@
 import {Component, OnInit} from '@angular/core';
-import {ApiService} from '../services/api.service';
-import {CountryService, CurrentCountryViewEnum} from '../services/country.service';
-import {CurrentReleationViewEnum, RelationService} from '../services/relation.service';
-import {Country} from '../models/country';
-import {CombatService} from '../services/combat.service';
+import {ApiService} from '../../services/api.service';
+import {CountryService, CurrentCountryViewEnum} from '../../services/country.service';
+import {CurrentReleationViewEnum, RelationService} from '../../services/relation.service';
+import {Country} from '../../models/country';
+import {CombatService} from '../../services/combat.service';
 
 @Component({
   selector: 'app-country-info',

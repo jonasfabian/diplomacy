@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
-import {CountryService} from '../services/country.service';
-import {ApiService} from '../services/api.service';
-import {Currency} from '../models/currency';
+import {CountryService} from '../../services/country.service';
+import {ApiService} from '../../services/api.service';
+import {Currency} from '../../models/currency';
 
 @Component({
   selector: 'app-country-details',
