@@ -31,3 +31,12 @@ td {
   max-height: 200px;
   overflow-x: hidden;
 }
+
+.grow {
+  transition: all .2s ease-in-out;
+}
+
+.grow:hover {
+  cursor: pointer;
+  transform: scale(1.4);
+}
