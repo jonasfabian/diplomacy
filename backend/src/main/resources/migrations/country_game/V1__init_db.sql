@@ -14,8 +14,8 @@ CREATE TABLE IF NOT EXISTS `country`
   CONSTRAINT `currencyId`
     FOREIGN KEY (`currencyId`)
       REFERENCES `currency` (`currencyId`)
-      ON DELETE NO ACTION
-      ON UPDATE NO ACTION
+      ON DELETE CASCADE
+      ON UPDATE CASCADE
 )
   ENGINE = InnoDB;
 
@@ -39,13 +39,13 @@ CREATE TABLE IF NOT EXISTS `relations`
   CONSTRAINT `countryId1`
     FOREIGN KEY (`countryId1`)
       REFERENCES `country` (`countryId`)
-      ON DELETE NO ACTION
-      ON UPDATE NO ACTION,
+      ON DELETE CASCADE
+      ON UPDATE CASCADE,
   CONSTRAINT `countryId2`
     FOREIGN KEY (`countryId2`)
       REFERENCES `country` (`countryId`)
-      ON DELETE NO ACTION
-      ON UPDATE NO ACTION
+      ON DELETE CASCADE
+      ON UPDATE CASCADE
 )
   ENGINE = InnoDB;
 

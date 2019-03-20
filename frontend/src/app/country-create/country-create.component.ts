@@ -3,6 +3,7 @@ import {CountryService, CurrentCountryViewEnum} from '../services/country.servic
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {ApiService, Country, Currency} from '../services/api.service';
 import * as countryCodes from '../country-codes';
+import {RelationService} from '../services/relation.service';
 
 @Component({
   selector: 'app-country-create',
@@ -14,7 +15,8 @@ export class CountryCreateComponent implements OnInit {
   constructor(
     private countryService: CountryService,
     private apiService: ApiService,
-    private fb: FormBuilder,
+    private relationService: RelationService,
+    private fb: FormBuilder
   ) {
   }
 
@@ -56,6 +58,7 @@ export class CountryCreateComponent implements OnInit {
         ));
       this.countryService.currentView = this.viewEnum.COUNTRYDETAIL;
     }
+    this.relationService.getRelations();
   }
 
   selectCountry(country: any): void {

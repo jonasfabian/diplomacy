@@ -30,6 +30,7 @@ export class CountryInfoComponent implements OnInit {
 
   deleteCountry(id: number): void {
     this.apiService.deleteCountry(id).subscribe(val => {
+      this.countryService.getCountries();
     });
   }
 
