@@ -1,4 +1,4 @@
-package ch.countrygame
+package ch.countrygame.Classes
 
 import io.circe.generic.semiauto.{deriveDecoder, deriveEncoder}
 

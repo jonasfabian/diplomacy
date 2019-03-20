@@ -1,5 +1,8 @@
 import {Injectable} from '@angular/core';
-import {ApiService, Country, Currency, Manpower} from './api.service';
+import {ApiService} from './api.service';
+import {Country} from '../models/country';
+import {Currency} from '../models/currency';
+import {Manpower} from '../models/manpower';
 
 @Injectable({
   providedIn: 'root'

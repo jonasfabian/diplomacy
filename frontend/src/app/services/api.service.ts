@@ -2,6 +2,9 @@ import {Injectable} from '@angular/core';
 import {Observable} from 'rxjs';
 import {HttpClient} from '@angular/common/http';
 import {Relation, RelationNamed} from './relation.service';
+import {Currency} from '../models/currency';
+import {Country} from '../models/country';
+import {Manpower} from '../models/manpower';
 
 @Injectable({
   providedIn: 'root'
@@ -15,6 +18,10 @@ export class ApiService {
 
   getCountries(): Observable<Array<Country>> {
     return this.http.get<Array<Country>>('http://localhost:8080/api/country/getCountry');
+  }
+
+  getModifiersForCountry(id: number): Observable<Array<any>> {
+    return this.http.get<Array<any>>(`http://localhost8080/api/country/getModifiersForCountry?id=${id}`);
   }
 
   getManpower(id: number): Observable<Array<Manpower>> {
@@ -51,43 +58,5 @@ export class ApiService {
 
   updateCountry(country: Country): Observable<any> {
     return this.http.post('http://localhost:8080/api/country/updateCountry', country);
-  }
-}
-
-export class Country {
-  id: number;
-  name: string;
-  details: string;
-  countryCode: string;
-  currencyId: number;
-  manpowerId: number;
-
-  constructor(id: number, name: string, details: string, countryCode: string, currencyId: number, manpowerId: number) {
-    this.id = id;
-    this.name = name;
-    this.details = details;
-    this.countryCode = countryCode;
-    this.currencyId = currencyId;
-    this.manpowerId = manpowerId;
-  }
-}
-
-export class Currency {
-  currencyId: number;
-  currencyName: string;
-
-  constructor(currencyId: number, currencyName: string) {
-    this.currencyId = currencyId;
-    this.currencyName = currencyName;
-  }
-}
-
-export class Manpower {
-  manpowerId: number;
-  manpowerNumber: number;
-
-  constructor(manpowerId: number, manpowerNumber: number) {
-    this.manpowerId = manpowerId;
-    this.manpowerNumber = manpowerNumber;
   }
 }

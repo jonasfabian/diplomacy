@@ -1,7 +1,10 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
-import {ApiService, Country} from './api.service';
-import {CountryService, CurrentCountryViewEnum} from './country.service';
+import {ApiService} from './api.service';
+import {CountryService} from './country.service';
+import {Relation} from '../models/relation';
+import {Country} from '../models/country';
+import {RelationNamed} from '../models/relation-named';
 
 @Injectable({
   providedIn: 'root'
@@ -66,34 +69,6 @@ export class RelationService {
     this.apiService.createRelation(relation).subscribe(val => {
       this.getRelations();
     });
-  }
-}
-
-export class Relation {
-  id: number;
-  countryId1: number;
-  countryId2: number;
-  relationType: number;
-
-  constructor(id: number, countryId1: number, countryId2: number, relationType: number) {
-    this.id = id;
-    this.countryId1 = countryId1;
-    this.countryId2 = countryId2;
-    this.relationType = relationType;
-  }
-}
-
-export class RelationNamed {
-  relationId: number;
-  countryName1: String;
-  countryName2: String;
-  relationType: number;
-
-  constructor(id: number, countryName1: String, countryName2: String, relationType: number) {
-    this.relationId = id;
-    this.countryName1 = countryName1;
-    this.countryName2 = countryName2;
-    this.relationType = relationType;
   }
 }
 

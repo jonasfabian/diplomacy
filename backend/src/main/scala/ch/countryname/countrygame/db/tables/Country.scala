@@ -71,6 +71,8 @@ extends TableImpl[CountryRecord](
 
   val MANPOWERID : TableField[CountryRecord, Integer] = createField("manpowerId", org.jooq.impl.SQLDataType.INTEGER.nullable(false), "")
 
+  val MODIFIERID : TableField[CountryRecord, Integer] = createField("modifierId", org.jooq.impl.SQLDataType.INTEGER.nullable(false), "")
+
   def this() = {
     this(DSL.name("country"), null, null, null, null)
   }
@@ -94,7 +96,7 @@ extends TableImpl[CountryRecord](
   override def getSchema : Schema = CountryGame.COUNTRY_GAME
 
   override def getIndexes : List[ Index ] = {
-    return Arrays.asList[ Index ](Indexes.COUNTRY_CURRENCYID, Indexes.COUNTRY_MANPOWERID, Indexes.COUNTRY_PRIMARY)
+    return Arrays.asList[ Index ](Indexes.COUNTRY_CURRENCYID, Indexes.COUNTRY_MANPOWERID, Indexes.COUNTRY_MODIFIERID, Indexes.COUNTRY_PRIMARY)
   }
 
   override def getIdentity : Identity[CountryRecord, Integer] = {
@@ -110,7 +112,7 @@ extends TableImpl[CountryRecord](
   }
 
   override def getReferences : List[ ForeignKey[CountryRecord, _] ] = {
-    return Arrays.asList[ ForeignKey[CountryRecord, _] ](Keys.CURRENCYID, Keys.MANPOWERID)
+    return Arrays.asList[ ForeignKey[CountryRecord, _] ](Keys.CURRENCYID, Keys.MANPOWERID, Keys.MODIFIERID)
   }
 
   def currency : Currency = {
@@ -119,6 +121,10 @@ extends TableImpl[CountryRecord](
 
   def manpower : Manpower = {
     return new Manpower(this, Keys.MANPOWERID)
+  }
+
+  def modifier : Modifier = {
+    return new Modifier(this, Keys.MODIFIERID)
   }
 
   override def as(alias : String) : Country = {

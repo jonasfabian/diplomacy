@@ -2,19 +2,15 @@ package ch.countrygame
 
 import akka.actor.ActorSystem
 import akka.http.scaladsl.Http
-import akka.http.scaladsl.model.{ContentTypes, HttpEntity, StatusCodes}
 import akka.http.scaladsl.server.{Directives, Route}
-import akka.http.scaladsl.server.Directives._
 import akka.stream.ActorMaterializer
-import akka.stream.scaladsl._
-import akka.util.ByteString
+import ch.countrygame.Classes._
 import com.typesafe.config.{ConfigFactory, ConfigValueFactory}
 import de.heikoseeberger.akkahttpcirce.ErrorAccumulatingCirceSupport
 import io.swagger.annotations._
 import javax.ws.rs.Path
 
 import scala.io.StdIn
-import scala.util.Random
 
 object WebServer extends App with CorsSupport with SwaggerSite with ErrorAccumulatingCirceSupport {
 
@@ -45,7 +41,7 @@ class CountryGameRestApi(service: CountryService) extends Directives with ErrorA
 
   val route = pathPrefix("api") {
     pathPrefix("country") {
-      getCountry ~ createCountry ~ updateCountry ~ createRelation ~ getRelation ~ getRelationByName ~ getCurrency ~ getCurrencies ~ deleteCountry ~ getManpower
+      getCountry ~ createCountry ~ updateCountry ~ createRelation ~ getRelation ~ getRelationByName ~ getCurrency ~ getCurrencies ~ deleteCountry ~ getManpower ~ getModifiersForCountry
     }
   }
 
@@ -75,6 +71,18 @@ class CountryGameRestApi(service: CountryService) extends Directives with ErrorA
     get {
       parameters("id".as[Int] ? 0) { id =>
         complete(service.relationsForCountry(id))
+      }
+    }
+  }
+
+  @ApiOperation(value = "", httpMethod = "GET", notes = "returns getModifiersForCountry")
+  @ApiImplicitParams(Array(new ApiImplicitParam(name = "id", required = true, example = "100", value = "id", paramType = "query")))
+  @ApiResponses(Array(new ApiResponse(code = 200, response = classOf[Array[ModifierForCountry]], message = "OK")))
+  @Path("country")
+  def getModifiersForCountry = path("getModifiersForCountry") {
+    get {
+      parameters("id".as[Int] ? 0) { id =>
+        complete(service.modifiersForCountry(id))
       }
     }
   }

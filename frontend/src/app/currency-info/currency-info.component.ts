@@ -3,10 +3,10 @@ import {CountryService} from '../services/country.service';
 
 @Component({
   selector: 'app-curreny-info',
-  templateUrl: './curreny-info.component.html',
-  styleUrls: ['./curreny-info.component.scss']
+  templateUrl: './currency-info.component.html',
+  styleUrls: ['./currency-info.component.scss']
 })
-export class CurrenyInfoComponent implements OnInit {
+export class CurrencyInfoComponent implements OnInit {
 
   constructor(
     public countryService: CountryService,

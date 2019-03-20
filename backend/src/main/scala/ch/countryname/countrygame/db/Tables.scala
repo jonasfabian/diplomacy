@@ -15,5 +15,7 @@ object Tables {
 
   val MANPOWER = ch.countryname.countrygame.db.tables.Manpower.MANPOWER
 
+  val MODIFIER = ch.countryname.countrygame.db.tables.Modifier.MODIFIER
+
   val RELATIONS = ch.countryname.countrygame.db.tables.Relations.RELATIONS
 }

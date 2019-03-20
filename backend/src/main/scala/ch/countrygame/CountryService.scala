@@ -1,13 +1,11 @@
 package ch.countrygame
 
-import java.sql.Timestamp
-
+import ch.countrygame.Classes._
 import ch.countryname.countrygame.db.Tables._
-import ch.countryname.countrygame.db.tables.daos.CountryDao
 import ch.countryname.countrygame.db.tables.records.{CountryRecord, RelationsRecord}
 import com.typesafe.config.Config
 import org.jooq.impl.DSL
-import org.jooq.{Condition, DSLContext}
+import org.jooq.DSLContext
 
 class CountryService(config: Config) {
 
@@ -29,7 +27,7 @@ class CountryService(config: Config) {
   }
 
   def countries: Array[Country] = withDslContext(dslContext => {
-    dslContext.selectFrom(COUNTRY).fetchArray().map(r => Country(r.getCountryid, r.getCountryname, r.getCountrydetails, r.getCountrycode, r.getCurrencyid, r.getManpowerid))
+    dslContext.selectFrom(COUNTRY).fetchArray().map(r => Country(r.getCountryid, r.getCountryname, r.getCountrydetails, r.getCountrycode, r.getCurrencyid, r.getManpowerid, r.getModifierid))
   })
 
   def relations: Array[Relation] = withDslContext(dslContext => {
@@ -44,6 +42,10 @@ class CountryService(config: Config) {
     dslContext.selectFrom(MANPOWER).fetchArray().map(r => Manpower(r.getManpowerid, r.getManpowernumber))
   })
 
+  def modifier: Array[Modifier] = withDslContext(dslContext => {
+    dslContext.selectFrom(MODIFIER).fetchArray().map(r => Modifier(r.getModifierid, r.getModifiername, r.getModifiervalue))
+  })
+
   def relationsForCountry(countryId: Int): Array[RelationNamed] = withDslContext(dslContext => {
     val country1 = COUNTRY.as("country1")
     val country2 = COUNTRY.as("country2")
@@ -54,6 +56,19 @@ class CountryService(config: Config) {
       .on(country2.COUNTRYID.eq(RELATIONS.COUNTRYID2)))
       .where(RELATIONS.COUNTRYID1.eq(countryId).or(RELATIONS.COUNTRYID2.eq(countryId)))
       .fetchArray().map(r => RelationNamed(r.get(RELATIONS.RELATIONID).toInt, r.get(country1.COUNTRYNAME), r.get(country2.COUNTRYNAME), r.get(RELATIONS.RELATIONTYPE).toInt))
+  })
+
+  def modifiersForCountry(countryId: Int): Array[ModifierForCountry] = withDslContext(dslContext => {
+    val country = COUNTRY.as("country")
+    val manpower = MANPOWER.as("manpower")
+    val modifier = MODIFIER.as("modifier")
+    dslContext.select().from(country
+      .join(manpower)
+      .on(country.MANPOWERID.eq(manpower.MANPOWERID))
+      .join(modifier)
+      .on(country.MODIFIERID.eq(modifier.MODIFIERID)))
+      .where(country.COUNTRYID.eq(countryId))
+      .fetchArray().map(r => ModifierForCountry(r.get(country.COUNTRYID).toInt, r.get(country.COUNTRYNAME), r.get(manpower.MANPOWERID).toInt, r.get(manpower.MANPOWERNUMBER).toInt, r.get(modifier.MODIFIERID).toInt, r.get(modifier.MODIFIERNAME), r.get(modifier.MODIFIERVALUE).toDouble))
   })
 
   def currencyForCountry(countryId: Int): Array[CountryCurrency] = withDslContext(dslContext => {
@@ -111,6 +126,7 @@ class CountryService(config: Config) {
     rec.setCountrycode(country.countryCode)
     rec.setCurrencyid(country.currencyId)
     rec.setManpowerid(country.manpowerId)
+    rec.setModifierid(country.modifierId)
     rec
   }
 
