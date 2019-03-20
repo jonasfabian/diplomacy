@@ -10,12 +10,16 @@ CREATE TABLE IF NOT EXISTS `country`
   `countryDetails` VARCHAR(45) NULL,
   `countryCode`    VARCHAR(2)  NOT NULL,
   `currencyId`     INT         NOT NULL,
+  `manpowerId`  INT NOT NULL,
   PRIMARY KEY (`countryId`),
   CONSTRAINT `currencyId`
     FOREIGN KEY (`currencyId`)
       REFERENCES `currency` (`currencyId`)
+      ON DELETE CASCADE,
+  CONSTRAINT `manpowerId`
+    FOREIGN KEY (`manpowerId`)
+      REFERENCES `manpower` (`manpowerId`)
       ON DELETE CASCADE
-      ON UPDATE CASCADE
 )
   ENGINE = InnoDB;
 
@@ -24,6 +28,14 @@ CREATE TABLE IF NOT EXISTS `currency`
   `currencyId`   INT         NOT NULL AUTO_INCREMENT,
   `currencyName` VARCHAR(45) NOT NULL,
   PRIMARY KEY (`currencyId`)
+)
+  ENGINE = InnoDB;
+
+CREATE TABLE IF NOT EXISTS `manpower`
+(
+  `manpowerId`     INT NOT NULL AUTO_INCREMENT,
+  `manpowerNumber` INT,
+  PRIMARY KEY (`manpowerId`)
 )
   ENGINE = InnoDB;
 
@@ -39,13 +51,11 @@ CREATE TABLE IF NOT EXISTS `relations`
   CONSTRAINT `countryId1`
     FOREIGN KEY (`countryId1`)
       REFERENCES `country` (`countryId`)
-      ON DELETE CASCADE
-      ON UPDATE CASCADE,
+      ON DELETE CASCADE,
   CONSTRAINT `countryId2`
     FOREIGN KEY (`countryId2`)
       REFERENCES `country` (`countryId`)
       ON DELETE CASCADE
-      ON UPDATE CASCADE
 )
   ENGINE = InnoDB;
 
@@ -56,13 +66,34 @@ SET UNIQUE_CHECKS = @OLD_UNIQUE_CHECKS;
 
 USE `country_game`;
 
-INSERT INTO `currency` (currencyName) VALUES ('Franken');
-INSERT INTO `currency` (currencyName) VALUES ('Euro');
-INSERT INTO `currency` (currencyName) VALUES ('Dollar');
-INSERT INTO `currency` (currencyName) VALUES ('Yen');
+INSERT INTO `currency` (currencyName)
+VALUES ('Franken');
+INSERT INTO `currency` (currencyName)
+VALUES ('Euro');
+INSERT INTO `currency` (currencyName)
+VALUES ('Dollar');
+INSERT INTO `currency` (currencyName)
+VALUES ('Yen');
 
-INSERT INTO `country` (countryName, countryDetails, countryCode, currencyId) VALUES ('Switzerland', 'Cheese', 'CH', 1);
-INSERT INTO `country` (countryName, countryDetails, countryCode, currencyId) VALUES ('Germany', 'Bratwurst', 'DE', 2);
-INSERT INTO `country` (countryName, countryDetails, countryCode, currencyId) VALUES ('France', 'Baguette', 'FR', 2);
-INSERT INTO `country` (countryName, countryDetails, countryCode, currencyId) VALUES ('USA', 'Guns', 'US', 3);
-INSERT INTO `country` (countryName, countryDetails, countryCode, currencyId) VALUES ('Italy', 'Pizza', 'IT', 2);
+INSERT INTO `manpower` (manpowerNumber)
+VALUES (1000);
+INSERT INTO `manpower` (manpowerNumber)
+VALUES (1000);
+INSERT INTO `manpower` (manpowerNumber)
+VALUES (1000);
+INSERT INTO `manpower` (manpowerNumber)
+VALUES (1000);
+INSERT INTO `manpower` (manpowerNumber)
+VALUES (1000);
+
+INSERT INTO `country` (countryName, countryDetails, countryCode, currencyId, manpowerId)
+VALUES ('Switzerland', 'Cheese', 'CH', 1, 1);
+INSERT INTO `country` (countryName, countryDetails, countryCode, currencyId, manpowerId)
+VALUES ('Germany', 'Bratwurst', 'DE', 2, 2);
+INSERT INTO `country` (countryName, countryDetails, countryCode, currencyId, manpowerId)
+VALUES ('France', 'Baguette', 'FR', 2, 3);
+INSERT INTO `country` (countryName, countryDetails, countryCode, currencyId, manpowerId)
+VALUES ('USA', 'Guns', 'US', 3, 4);
+INSERT INTO `country` (countryName, countryDetails, countryCode, currencyId, manpowerId)
+VALUES ('Italy', 'Pizza', 'IT', 2, 5);
+

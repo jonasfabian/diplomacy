@@ -9,6 +9,7 @@
       <th><span>Name</span></th>
       <th><span>Details</span></th>
       <th><span>Currency</span></th>
+      <th><span>Manpower</span></th>
       <th><span>Flag</span></th>
     </tr>
     <tr>
@@ -19,6 +20,7 @@
         <span *ngIf="countryService.country.details === ''">-</span>
       </td>
       <td><span>{{currency.currencyName}}</span></td>
+      <td><span>{{manpowerNumber}}</span></td>
       <td><span class="flag-icon {{countryService.getFlag(countryService.country.countryCode)}}"></span></td>
     </tr>
     </tbody>

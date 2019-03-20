@@ -17,6 +17,10 @@ export class ApiService {
     return this.http.get<Array<Country>>('http://localhost:8080/api/country/getCountry');
   }
 
+  getManpower(id: number): Observable<Array<Manpower>> {
+    return this.http.get<Array<Manpower>>(`http://localhost:8080/api/country/getManpower?id=${id}`);
+  }
+
   deleteCountry(id: number): Observable<Object> {
     return this.http.delete(`http://localhost:8080/api/country/deleteCountry?id=${id}`);
   }
@@ -56,13 +60,15 @@ export class Country {
   details: string;
   countryCode: string;
   currencyId: number;
+  manpowerId: number;
 
-  constructor(id: number, name: string, details: string, countryCode: string, currencyId: number) {
+  constructor(id: number, name: string, details: string, countryCode: string, currencyId: number, manpowerId: number) {
     this.id = id;
     this.name = name;
     this.details = details;
     this.countryCode = countryCode;
     this.currencyId = currencyId;
+    this.manpowerId = manpowerId;
   }
 }
 
@@ -73,5 +79,15 @@ export class Currency {
   constructor(currencyId: number, currencyName: string) {
     this.currencyId = currencyId;
     this.currencyName = currencyName;
+  }
+}
+
+export class Manpower {
+  manpowerId: number;
+  manpowerNumber: number;
+
+  constructor(manpowerId: number, manpowerNumber: number) {
+    this.manpowerId = manpowerId;
+    this.manpowerNumber = manpowerNumber;
   }
 }

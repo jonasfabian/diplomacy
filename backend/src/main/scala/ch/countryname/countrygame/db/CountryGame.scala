@@ -7,6 +7,7 @@ package ch.countryname.countrygame.db
 import ch.countryname.countrygame.db.tables.Country
 import ch.countryname.countrygame.db.tables.Currency
 import ch.countryname.countrygame.db.tables.FlywaySchemaHistory
+import ch.countryname.countrygame.db.tables.Manpower
 import ch.countryname.countrygame.db.tables.Relations
 
 import java.util.ArrayList
@@ -38,6 +39,7 @@ class CountryGame extends SchemaImpl("country_game", DefaultCatalog.DEFAULT_CATA
       Country.COUNTRY,
       Currency.CURRENCY,
       FlywaySchemaHistory.FLYWAY_SCHEMA_HISTORY,
+      Manpower.MANPOWER,
       Relations.RELATIONS)
   }
 }

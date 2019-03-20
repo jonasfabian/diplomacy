@@ -29,7 +29,7 @@ class CountryService(config: Config) {
   }
 
   def countries: Array[Country] = withDslContext(dslContext => {
-    dslContext.selectFrom(COUNTRY).fetchArray().map(r => Country(r.getCountryid, r.getCountryname, r.getCountrydetails, r.getCountrycode, r.getCurrencyid))
+    dslContext.selectFrom(COUNTRY).fetchArray().map(r => Country(r.getCountryid, r.getCountryname, r.getCountrydetails, r.getCountrycode, r.getCurrencyid, r.getManpowerid))
   })
 
   def relations: Array[Relation] = withDslContext(dslContext => {
@@ -38,6 +38,10 @@ class CountryService(config: Config) {
 
   def currencies: Array[Currency] = withDslContext(dslContext => {
     dslContext.selectFrom(CURRENCY).fetchArray().map(r => Currency(r.getCurrencyid, r.getCurrencyname))
+  })
+
+  def manpower: Array[Manpower] = withDslContext(dslContext => {
+    dslContext.selectFrom(MANPOWER).fetchArray().map(r => Manpower(r.getManpowerid, r.getManpowernumber))
   })
 
   def relationsForCountry(countryId: Int): Array[RelationNamed] = withDslContext(dslContext => {
@@ -60,6 +64,16 @@ class CountryService(config: Config) {
       .on(country.CURRENCYID.eq(currency.CURRENCYID)))
       .where(currency.CURRENCYID.eq(countryId))
       .fetchArray().map(r => CountryCurrency(r.get(currency.CURRENCYID).toInt, r.get(currency.CURRENCYNAME), r.get(country.COUNTRYID).toInt, r.get(country.COUNTRYNAME)))
+  })
+
+  def manpowerOfCountry(countryId: Int): Array[ManpowerOfCountry] = withDslContext(dslContext => {
+    val country = COUNTRY.as("country")
+    val manpower = MANPOWER.as("manpower")
+    dslContext.select().from(manpower
+      .join(country)
+      .on(country.MANPOWERID.eq(manpower.MANPOWERID)))
+      .where(country.COUNTRYID.eq(countryId))
+      .fetchArray().map(r => ManpowerOfCountry(r.get(country.COUNTRYID).toInt, r.get(country.COUNTRYNAME), r.get(manpower.MANPOWERID).toInt, r.get(manpower.MANPOWERNUMBER).toInt))
   })
 
   def newCountry(country: Country): Unit = withDslContext(dslContext => {
@@ -96,6 +110,7 @@ class CountryService(config: Config) {
     rec.setCountrydetails(country.details)
     rec.setCountrycode(country.countryCode)
     rec.setCurrencyid(country.currencyId)
+    rec.setManpowerid(country.manpowerId)
     rec
   }
 

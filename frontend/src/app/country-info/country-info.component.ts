@@ -39,6 +39,7 @@ export class CountryInfoComponent implements OnInit {
     this.countryService.country = country;
     this.relationService.getRelationsNamed(this.countryService.country.id);
     this.countryService.calculateNumberOfCurrencyUsers();
+    this.countryService.getManpower(country.id);
     this.countryService.currentView = this.viewCountryEnum.COUNTRYDETAIL;
   }
 

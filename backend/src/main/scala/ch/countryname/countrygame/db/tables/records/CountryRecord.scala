@@ -11,12 +11,12 @@ import java.lang.String
 
 import org.jooq.Field
 import org.jooq.Record1
-import org.jooq.Record5
-import org.jooq.Row5
+import org.jooq.Record6
+import org.jooq.Row6
 import org.jooq.impl.UpdatableRecordImpl
 
 
-class CountryRecord extends UpdatableRecordImpl[CountryRecord](Country.COUNTRY) with Record5[Integer, String, String, String, Integer] {
+class CountryRecord extends UpdatableRecordImpl[CountryRecord](Country.COUNTRY) with Record6[Integer, String, String, String, Integer, Integer] {
 
   def setCountryid(value : Integer) : Unit = {
     set(0, value)
@@ -63,6 +63,15 @@ class CountryRecord extends UpdatableRecordImpl[CountryRecord](Country.COUNTRY) 
     if (r == null) null else r.asInstanceOf[Integer]
   }
 
+  def setManpowerid(value : Integer) : Unit = {
+    set(5, value)
+  }
+
+  def getManpowerid : Integer = {
+    val r = get(5)
+    if (r == null) null else r.asInstanceOf[Integer]
+  }
+
   // -------------------------------------------------------------------------
   // Primary key information
   // -------------------------------------------------------------------------
@@ -71,31 +80,34 @@ class CountryRecord extends UpdatableRecordImpl[CountryRecord](Country.COUNTRY) 
   }
 
   // -------------------------------------------------------------------------
-  // Record5 type implementation
+  // Record6 type implementation
   // -------------------------------------------------------------------------
 
-  override def fieldsRow : Row5[Integer, String, String, String, Integer] = {
-    super.fieldsRow.asInstanceOf[ Row5[Integer, String, String, String, Integer] ]
+  override def fieldsRow : Row6[Integer, String, String, String, Integer, Integer] = {
+    super.fieldsRow.asInstanceOf[ Row6[Integer, String, String, String, Integer, Integer] ]
   }
 
-  override def valuesRow : Row5[Integer, String, String, String, Integer] = {
-    super.valuesRow.asInstanceOf[ Row5[Integer, String, String, String, Integer] ]
+  override def valuesRow : Row6[Integer, String, String, String, Integer, Integer] = {
+    super.valuesRow.asInstanceOf[ Row6[Integer, String, String, String, Integer, Integer] ]
   }
   override def field1 : Field[Integer] = Country.COUNTRY.COUNTRYID
   override def field2 : Field[String] = Country.COUNTRY.COUNTRYNAME
   override def field3 : Field[String] = Country.COUNTRY.COUNTRYDETAILS
   override def field4 : Field[String] = Country.COUNTRY.COUNTRYCODE
   override def field5 : Field[Integer] = Country.COUNTRY.CURRENCYID
+  override def field6 : Field[Integer] = Country.COUNTRY.MANPOWERID
   override def component1 : Integer = getCountryid
   override def component2 : String = getCountryname
   override def component3 : String = getCountrydetails
   override def component4 : String = getCountrycode
   override def component5 : Integer = getCurrencyid
+  override def component6 : Integer = getManpowerid
   override def value1 : Integer = getCountryid
   override def value2 : String = getCountryname
   override def value3 : String = getCountrydetails
   override def value4 : String = getCountrycode
   override def value5 : Integer = getCurrencyid
+  override def value6 : Integer = getManpowerid
 
   override def value1(value : Integer) : CountryRecord = {
     setCountryid(value)
@@ -122,16 +134,22 @@ class CountryRecord extends UpdatableRecordImpl[CountryRecord](Country.COUNTRY) 
     this
   }
 
-  override def values(value1 : Integer, value2 : String, value3 : String, value4 : String, value5 : Integer) : CountryRecord = {
+  override def value6(value : Integer) : CountryRecord = {
+    setManpowerid(value)
+    this
+  }
+
+  override def values(value1 : Integer, value2 : String, value3 : String, value4 : String, value5 : Integer, value6 : Integer) : CountryRecord = {
     this.value1(value1)
     this.value2(value2)
     this.value3(value3)
     this.value4(value4)
     this.value5(value5)
+    this.value6(value6)
     this
   }
 
-  def this(countryid : Integer, countryname : String, countrydetails : String, countrycode : String, currencyid : Integer) = {
+  def this(countryid : Integer, countryname : String, countrydetails : String, countrycode : String, currencyid : Integer, manpowerid : Integer) = {
     this()
 
     set(0, countryid)
@@ -139,5 +157,6 @@ class CountryRecord extends UpdatableRecordImpl[CountryRecord](Country.COUNTRY) 
     set(2, countrydetails)
     set(3, countrycode)
     set(4, currencyid)
+    set(5, manpowerid)
   }
 }

@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {ApiService, Country, Currency} from './api.service';
+import {ApiService, Country, Currency, Manpower} from './api.service';
 
 @Injectable({
   providedIn: 'root'
@@ -11,10 +11,11 @@ export class CountryService {
   ) {
   }
 
-  country: Country = new Country(-1, 'No Country Name yet', 'No details yet', 'None', 0);
+  country: Country = new Country(-1, 'No Country Name yet', 'No details yet', 'None', 0, 0);
   currentView: any = CurrentCountryViewEnum.COUNTRYDETAIL;
   countryArray: Array<Country> = [];
   currencyArray: Array<Currency> = [];
+  manpowerArray: Array<Manpower> = [];
   currArray: Array<Currency> = [];
   numberOfCurrencyUser = 0;
   currency = '';
@@ -22,6 +23,12 @@ export class CountryService {
   getCountries(): void {
     this.apiService.getCountries().subscribe(value => {
       this.countryArray = value;
+    });
+  }
+
+  getManpower(id: number): void {
+    this.apiService.getManpower(id).subscribe(value => {
+      this.manpowerArray = value;
     });
   }
 

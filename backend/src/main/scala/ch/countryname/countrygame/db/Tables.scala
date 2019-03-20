@@ -13,5 +13,7 @@ object Tables {
 
   val FLYWAY_SCHEMA_HISTORY = ch.countryname.countrygame.db.tables.FlywaySchemaHistory.FLYWAY_SCHEMA_HISTORY
 
+  val MANPOWER = ch.countryname.countrygame.db.tables.Manpower.MANPOWER
+
   val RELATIONS = ch.countryname.countrygame.db.tables.Relations.RELATIONS
 }
