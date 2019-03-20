@@ -1,6 +1,5 @@
 import {Component, OnInit} from '@angular/core';
 import {CountryService} from '../services/country.service';
-import {ApiService, Currency} from '../services/api.service';
 
 @Component({
   selector: 'app-curreny-info',

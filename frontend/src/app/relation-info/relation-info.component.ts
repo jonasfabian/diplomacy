@@ -17,7 +17,7 @@ export class RelationInfoComponent implements OnInit {
   ) {
   }
 
-  country: Country = new Country(0, '', '', '', 0);
+  country: Country = new Country(0, '', '', '', 0, 0);
   viewEnum: any = CurrentReleationViewEnum;
 
 

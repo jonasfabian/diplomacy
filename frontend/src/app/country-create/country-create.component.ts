@@ -22,10 +22,10 @@ export class CountryCreateComponent implements OnInit {
 
   currentView: CurrentCountryViewEnum;
   createCountryForm: FormGroup;
-  country: Country = new Country(-1, '', '', '', -1);
+  country: Country = new Country(-1, '', '', '', -1, 0);
   viewEnum: any = CurrentCountryViewEnum;
   countryCodes = new countryCodes.CountryCodes();
-  selectedCountry: Country = new Country(-1, '', '', '', -1);
+  selectedCountry: Country = new Country(-1, '', '', '', -1, 0);
   selectedCurrency: Currency = new Currency(-1, '');
   filteredCountries = [];
   currArray: Array<Currency> = [];
@@ -54,7 +54,8 @@ export class CountryCreateComponent implements OnInit {
       this.country.countryCode = this.createCountryForm.controls.countryCode.value;
       this.country.currencyId = this.selectedCurrency.currencyId;
       this.countryService.createCountry(
-        new Country(this.country.id, this.country.name, this.country.details, this.country.countryCode, this.country.currencyId
+        new Country(this.country.id, this.country.name, this.country.details,
+          this.country.countryCode, this.country.currencyId, this.country.manpowerId
         ));
       this.countryService.currentView = this.viewEnum.COUNTRYDETAIL;
     }

@@ -34,7 +34,8 @@ export class CountryDetailsEditComponent implements OnInit {
       this.country.name = this.editCountryForm.controls.name.value;
       this.country.details = this.editCountryForm.controls.details.value;
       this.country.countryCode = this.editCountryForm.controls.countryCode.value;
-      this.countryService.updateCountry(new Country(this.country.id, this.country.name, this.country.details, this.country.countryCode));
+      this.countryService.updateCountry(new Country(this.country.id, this.country.name,
+        this.country.details, this.country.countryCode, this.country.currencyId, this.country.manpowerId));
       this.countryService.currentView = this.viewEnum.COUNTRYDETAIL;
     }
   }
