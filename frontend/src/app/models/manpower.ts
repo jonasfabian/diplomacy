@@ -1,9 +1,13 @@
 export class Manpower {
   manpowerId: number;
-  manpowerNumber: number;
+  manpowerInfantryNumber: number;
+  manpowerCavalryNumber: number;
+  manpowerArtilleryNumber: number;
 
-  constructor(manpowerId: number, manpowerNumber: number) {
+  constructor(manpowerId: number, manpowerInfantryNumber: number, manpowerCavalryNumber: number, manpowerArtilleryNumber: number) {
     this.manpowerId = manpowerId;
-    this.manpowerNumber = manpowerNumber;
+    this.manpowerInfantryNumber = manpowerInfantryNumber;
+    this.manpowerCavalryNumber = manpowerCavalryNumber;
+    this.manpowerArtilleryNumber = manpowerArtilleryNumber;
   }
 }

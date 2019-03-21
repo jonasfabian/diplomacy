@@ -33,7 +33,15 @@ class ManpowerDao(configuration : Configuration) extends DAOImpl[ManpowerRecord,
     fetchOne(Manpower.MANPOWER.MANPOWERID, value)
   }
 
-  def fetchByManpowernumber(values : Double*) : List[ch.countryname.countrygame.db.tables.pojos.Manpower] = {
-    fetch(Manpower.MANPOWER.MANPOWERNUMBER, values:_*)
+  def fetchByManpowerinfantrynumber(values : Double*) : List[ch.countryname.countrygame.db.tables.pojos.Manpower] = {
+    fetch(Manpower.MANPOWER.MANPOWERINFANTRYNUMBER, values:_*)
+  }
+
+  def fetchByManpowercavalrynumber(values : Double*) : List[ch.countryname.countrygame.db.tables.pojos.Manpower] = {
+    fetch(Manpower.MANPOWER.MANPOWERCAVALRYNUMBER, values:_*)
+  }
+
+  def fetchByManpowerartillerynumber(values : Double*) : List[ch.countryname.countrygame.db.tables.pojos.Manpower] = {
+    fetch(Manpower.MANPOWER.MANPOWERARTILLERYNUMBER, values:_*)
   }
 }

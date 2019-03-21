@@ -48,7 +48,9 @@ CREATE TABLE IF NOT EXISTS `modifier`
 CREATE TABLE IF NOT EXISTS `manpower`
 (
   `manpowerId`     INT NOT NULL AUTO_INCREMENT,
-  `manpowerNumber` DOUBLE,
+  `manpowerInfantryNumber` DOUBLE,
+  `manpowerCavalryNumber` DOUBLE,
+  `manpowerArtilleryNumber` DOUBLE,
   PRIMARY KEY (`manpowerId`)
 )
   ENGINE = InnoDB;
@@ -100,16 +102,16 @@ VALUES ('Dollar');
 INSERT INTO `currency` (currencyName)
 VALUES ('Yen');
 
-INSERT INTO `manpower` (manpowerNumber)
-VALUES (1000);
-INSERT INTO `manpower` (manpowerNumber)
-VALUES (1000);
-INSERT INTO `manpower` (manpowerNumber)
-VALUES (1000);
-INSERT INTO `manpower` (manpowerNumber)
-VALUES (1000);
-INSERT INTO `manpower` (manpowerNumber)
-VALUES (1000);
+INSERT INTO `manpower` (manpowerInfantryNumber, manpowerCavalryNumber, manpowerArtilleryNumber)
+VALUES (1000, 400, 100);
+INSERT INTO `manpower` (manpowerInfantryNumber, manpowerCavalryNumber, manpowerArtilleryNumber)
+VALUES (1000, 400, 100);
+INSERT INTO `manpower` (manpowerInfantryNumber, manpowerCavalryNumber, manpowerArtilleryNumber)
+VALUES (1000, 400, 100);
+INSERT INTO `manpower` (manpowerInfantryNumber, manpowerCavalryNumber, manpowerArtilleryNumber)
+VALUES (1000, 400, 100);
+INSERT INTO `manpower` (manpowerInfantryNumber, manpowerCavalryNumber, manpowerArtilleryNumber)
+VALUES (1000, 400, 100);
 
 INSERT INTO `country` (countryName, countryDetails, countryCode, currencyId, manpowerId, modifierId)
 VALUES ('Switzerland', 'Cheese', 'CH', 1, 1, 3);

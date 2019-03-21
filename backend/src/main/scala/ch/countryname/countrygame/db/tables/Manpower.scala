@@ -62,7 +62,11 @@ extends TableImpl[ManpowerRecord](
 
   val MANPOWERID : TableField[ManpowerRecord, Integer] = createField("manpowerId", org.jooq.impl.SQLDataType.INTEGER.nullable(false).identity(true), "")
 
-  val MANPOWERNUMBER : TableField[ManpowerRecord, Double] = createField("manpowerNumber", org.jooq.impl.SQLDataType.DOUBLE, "")
+  val MANPOWERINFANTRYNUMBER : TableField[ManpowerRecord, Double] = createField("manpowerInfantryNumber", org.jooq.impl.SQLDataType.DOUBLE, "")
+
+  val MANPOWERCAVALRYNUMBER : TableField[ManpowerRecord, Double] = createField("manpowerCavalryNumber", org.jooq.impl.SQLDataType.DOUBLE, "")
+
+  val MANPOWERARTILLERYNUMBER : TableField[ManpowerRecord, Double] = createField("manpowerArtilleryNumber", org.jooq.impl.SQLDataType.DOUBLE, "")
 
   def this() = {
     this(DSL.name("manpower"), null, null, null, null)

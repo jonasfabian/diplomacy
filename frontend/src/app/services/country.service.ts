@@ -16,12 +16,20 @@ export class CountryService {
 
   country: Country = new Country(-1, 'No Country Name yet', 'No details yet', 'None', 0, 0);
   currentView: any = CurrentCountryViewEnum.COUNTRYDETAIL;
+
   countryArray: Array<Country> = [];
-  currencyArray: Array<Currency> = [];
   manpowerArray: Array<Manpower> = [];
   currArray: Array<Currency> = [];
+
+  manpowerInfantryNumber = 0;
+  manpowerCavalryNumber = 0;
+  manpowerArtilleryNumber = 0;
+  selectedManpowerInfantryNumber = 0;
+  selectedManpowerCavalryNumber = 0;
+  selectedManpowerArtilleryNumber = 0;
   numberOfCurrencyUser = 0;
-  currency = '';
+
+  currencyName = '';
 
   getCountries(): void {
     this.apiService.getCountries().subscribe(value => {
@@ -33,11 +41,20 @@ export class CountryService {
     this.apiService.getManpower(id).subscribe(value => {
       this.manpowerArray = value;
     });
+    this.manpowerArray.map(val => {
+      this.manpowerInfantryNumber = val.manpowerInfantryNumber;
+      this.manpowerCavalryNumber = val.manpowerCavalryNumber;
+      this.manpowerArtilleryNumber = val.manpowerArtilleryNumber;
+    });
   }
 
-  getCurrencies(): void {
-    this.apiService.getCurrencies().subscribe(val => {
-      this.currencyArray = val;
+  getSelectedCountryDetails() {
+    this.apiService.getManpower(this.country.id).subscribe(res => {
+      res.map(val => {
+        this.selectedManpowerInfantryNumber = val.manpowerInfantryNumber;
+        this.selectedManpowerCavalryNumber = val.manpowerCavalryNumber;
+        this.selectedManpowerArtilleryNumber = val.manpowerArtilleryNumber;
+      });
     });
   }
 
@@ -62,7 +79,7 @@ export class CountryService {
       this.currArray = val;
       this.numberOfCurrencyUser = val.length;
       val.map(res => {
-        this.currency = res.currencyName;
+        this.currencyName = res.currencyName;
       });
     });
   }

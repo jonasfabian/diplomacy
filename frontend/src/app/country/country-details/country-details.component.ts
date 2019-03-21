@@ -11,22 +11,17 @@ import {Currency} from '../../models/currency';
 export class CountryDetailsComponent implements OnInit {
 
   constructor(
-    private countryService: CountryService,
+    public countryService: CountryService,
     private apiService: ApiService
   ) { }
 
   currency: Currency = new Currency(-1 , '');
-  manpowerNumber = 0;
 
   ngOnInit(): void {
     this.apiService.getCurrencies().subscribe(c => {
       this.currency = c.find(v => v.currencyId === this.countryService.country.currencyId);
     });
-    this.apiService.getManpower(this.countryService.country.id).subscribe(res => {
-      res.map(val => {
-        this.manpowerNumber = val.manpowerNumber;
-      });
-    });
+    this.countryService.getSelectedCountryDetails();
     this.apiService.getModifiersForCountry(this.countryService.country.id).subscribe(val => {
     });
   }
