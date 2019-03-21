@@ -41,7 +41,7 @@ class CountryGameRestApi(service: CountryService) extends Directives with ErrorA
 
   val route = pathPrefix("api") {
     pathPrefix("country") {
-      getCountry ~ createCountry ~ updateCountry ~ createRelation ~ getRelation ~ getRelationByName ~ getCurrency ~ getCurrencies ~ deleteCountry ~ getManpower ~ getModifiersForCountry ~ getModifier
+      getCountry ~ createCountry ~ updateCountry ~ createRelation ~ getRelation ~ getRelationByName ~ getCurrency ~ getCurrencies ~ deleteCountry ~ getManpower ~ getModifiersForCountry ~ getModifier ~ updateManpower
     }
   }
 
@@ -176,6 +176,19 @@ class CountryGameRestApi(service: CountryService) extends Directives with ErrorA
     post {
       entity(as[Country]) { country =>
         service.updateCountry(country)
+        complete("OK")
+      }
+    }
+  }
+
+  @ApiOperation(value = "updateManpower", httpMethod = "POST")
+  @ApiImplicitParams(Array(new ApiImplicitParam(name = "body", required = true, dataTypeClass = classOf[Country], value = "the updated manpower", paramType = "body")))
+  @ApiResponses(Array(new ApiResponse(code = 200, message = "OK")))
+  @Path("country")
+  def updateManpower: Route = path("updateManpower") {
+    post {
+      entity(as[Country]) { country =>
+        service.updateManpower(country)
         complete("OK")
       }
     }

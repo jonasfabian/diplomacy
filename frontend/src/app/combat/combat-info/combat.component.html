@@ -61,3 +61,7 @@
     </div>
   </div>
 </div>
+<div *ngIf="showCombatPanel">
+  <button class="btn btn-secondary" (click)="combatService.updateManpower(combatService.selectedCountryToAttack)">Battle {{combatService.selectedCountryToAttack.name}}</button>
+  <button class="btn btn-secondary" (click)="combatService.updateManpower(countryService.country)">Battle {{countryService.country.name}}</button>
+</div>

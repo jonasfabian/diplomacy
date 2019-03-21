@@ -46,6 +46,14 @@ class CountryService(config: Config) {
     dslContext.selectFrom(MODIFIER).fetchArray().map(r => Modifier(r.getModifierid, r.getModifiername, r.getModifiervalue))
   })
 
+  def modifierById(modifierId: Integer): Modifier = withDslContext(dslContext => {
+    dslContext.selectFrom(MODIFIER).where(MODIFIER.MODIFIERID.eq(modifierId)).fetchOne().map(r => Modifier(r.get(MODIFIER.MODIFIERID).toInt, r.get(MODIFIER.MODIFIERNAME), r.get(MODIFIER.MODIFIERVALUE).toDouble))
+  })
+
+  def manpowerById(manpowerId: Integer): Manpower = withDslContext(dslContext => {
+    dslContext.selectFrom(MANPOWER).where(MANPOWER.MANPOWERID.eq(manpowerId)).fetchOne().map(r => Manpower(r.get(MANPOWER.MANPOWERID).toInt, r.get(MANPOWER.MANPOWERNUMBER).toInt))
+  })
+
   def relationsForCountry(countryId: Int): Array[RelationNamed] = withDslContext(dslContext => {
     val country1 = COUNTRY.as("country1")
     val country2 = COUNTRY.as("country2")
@@ -108,7 +116,24 @@ class CountryService(config: Config) {
       .set(COUNTRY.COUNTRYNAME, country.name)
       .set(COUNTRY.COUNTRYDETAILS, country.details)
       .set(COUNTRY.COUNTRYCODE, country.countryCode)
+      .set(COUNTRY.CURRENCYID, Integer.valueOf(country.currencyId))
+      .set(COUNTRY.MANPOWERID, Integer.valueOf(country.manpowerId))
+      .set(COUNTRY.MODIFIERID, Integer.valueOf(country.modifierId))
       .where(COUNTRY.COUNTRYID.eq(country.id))
+      .execute()
+    ()
+  })
+
+  def updateManpower(attackingCountry: Country): Unit = withDslContext(dslContext => {
+    // calculate remaining manpower after attack
+    val mp = this.manpowerById(attackingCountry.manpowerId)
+    val md = this.modifierById(attackingCountry.modifierId)
+    val attackValue = mp.manpowerNumber * md.modifierValue
+    val newManpowerNumber = mp.manpowerNumber - attackValue
+    // update table
+    dslContext.update(MANPOWER)
+      .set(MANPOWER.MANPOWERNUMBER, java.lang.Double.valueOf(newManpowerNumber))
+      .where(MANPOWER.MANPOWERID.eq(mp.manpowerId))
       .execute()
     ()
   })

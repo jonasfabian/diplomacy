@@ -5,13 +5,14 @@ package ch.countryname.countrygame.db.tables.pojos
 
 
 import java.io.Serializable
+import java.lang.Double
 import java.lang.Integer
 import java.lang.StringBuilder
 
 
 case class Manpower(
     manpowerid : Integer
-  , manpowernumber : Integer
+  , manpowernumber : Double
 ) extends Serializable {
 
   def this (value : Manpower) = {
@@ -25,7 +26,7 @@ case class Manpower(
     this.manpowerid
   }
 
-  def getManpowernumber : Integer = {
+  def getManpowernumber : Double = {
     this.manpowernumber
   }
 

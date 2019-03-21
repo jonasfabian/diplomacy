@@ -42,4 +42,9 @@ export class CombatService {
       }
     });
   }
+
+  updateManpower(country: Country): void {
+    this.apiService.updateManpower(country).subscribe(val => {
+    });
+  }
 }

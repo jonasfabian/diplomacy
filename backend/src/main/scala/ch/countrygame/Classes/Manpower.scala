@@ -2,7 +2,7 @@ package ch.countrygame.Classes
 
 import io.circe.generic.semiauto.{deriveDecoder, deriveEncoder}
 
-case class Manpower(manpowerId: Int, manpowerNumber: Int) {
+case class Manpower(manpowerId: Int, manpowerNumber: Double) {
 }
 object Manpower {
   implicit val encoder = deriveEncoder[Manpower]

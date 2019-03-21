@@ -7,6 +7,7 @@ package ch.countryname.countrygame.db.tables.daos
 import ch.countryname.countrygame.db.tables.Manpower
 import ch.countryname.countrygame.db.tables.records.ManpowerRecord
 
+import java.lang.Double
 import java.lang.Integer
 import java.util.List
 
@@ -32,7 +33,7 @@ class ManpowerDao(configuration : Configuration) extends DAOImpl[ManpowerRecord,
     fetchOne(Manpower.MANPOWER.MANPOWERID, value)
   }
 
-  def fetchByManpowernumber(values : Integer*) : List[ch.countryname.countrygame.db.tables.pojos.Manpower] = {
+  def fetchByManpowernumber(values : Double*) : List[ch.countryname.countrygame.db.tables.pojos.Manpower] = {
     fetch(Manpower.MANPOWER.MANPOWERNUMBER, values:_*)
   }
 }

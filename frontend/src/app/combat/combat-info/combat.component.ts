@@ -20,6 +20,7 @@ export class CombatComponent implements OnInit {
 
   relation: Relation = new Relation(-1, 0, 0, 0);
   showRelationMessage = false;
+  showCombatPanel = false;
 
   ngOnInit() {
     this.combatService.fillAvailableCountriesArray();
@@ -31,6 +32,7 @@ export class CombatComponent implements OnInit {
     this.relation.relationType = 2;
     this.relationService.createRelation(this.relation);
     this.showRelationMessage = true;
+    this.showCombatPanel = true;
   }
 
 }

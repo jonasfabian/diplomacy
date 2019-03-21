@@ -6,6 +6,7 @@ package ch.countryname.countrygame.db.tables.records
 
 import ch.countryname.countrygame.db.tables.Manpower
 
+import java.lang.Double
 import java.lang.Integer
 
 import org.jooq.Field
@@ -15,7 +16,7 @@ import org.jooq.Row2
 import org.jooq.impl.UpdatableRecordImpl
 
 
-class ManpowerRecord extends UpdatableRecordImpl[ManpowerRecord](Manpower.MANPOWER) with Record2[Integer, Integer] {
+class ManpowerRecord extends UpdatableRecordImpl[ManpowerRecord](Manpower.MANPOWER) with Record2[Integer, Double] {
 
   def setManpowerid(value : Integer) : Unit = {
     set(0, value)
@@ -26,13 +27,13 @@ class ManpowerRecord extends UpdatableRecordImpl[ManpowerRecord](Manpower.MANPOW
     if (r == null) null else r.asInstanceOf[Integer]
   }
 
-  def setManpowernumber(value : Integer) : Unit = {
+  def setManpowernumber(value : Double) : Unit = {
     set(1, value)
   }
 
-  def getManpowernumber : Integer = {
+  def getManpowernumber : Double = {
     val r = get(1)
-    if (r == null) null else r.asInstanceOf[Integer]
+    if (r == null) null else r.asInstanceOf[Double]
   }
 
   // -------------------------------------------------------------------------
@@ -46,37 +47,37 @@ class ManpowerRecord extends UpdatableRecordImpl[ManpowerRecord](Manpower.MANPOW
   // Record2 type implementation
   // -------------------------------------------------------------------------
 
-  override def fieldsRow : Row2[Integer, Integer] = {
-    super.fieldsRow.asInstanceOf[ Row2[Integer, Integer] ]
+  override def fieldsRow : Row2[Integer, Double] = {
+    super.fieldsRow.asInstanceOf[ Row2[Integer, Double] ]
   }
 
-  override def valuesRow : Row2[Integer, Integer] = {
-    super.valuesRow.asInstanceOf[ Row2[Integer, Integer] ]
+  override def valuesRow : Row2[Integer, Double] = {
+    super.valuesRow.asInstanceOf[ Row2[Integer, Double] ]
   }
   override def field1 : Field[Integer] = Manpower.MANPOWER.MANPOWERID
-  override def field2 : Field[Integer] = Manpower.MANPOWER.MANPOWERNUMBER
+  override def field2 : Field[Double] = Manpower.MANPOWER.MANPOWERNUMBER
   override def component1 : Integer = getManpowerid
-  override def component2 : Integer = getManpowernumber
+  override def component2 : Double = getManpowernumber
   override def value1 : Integer = getManpowerid
-  override def value2 : Integer = getManpowernumber
+  override def value2 : Double = getManpowernumber
 
   override def value1(value : Integer) : ManpowerRecord = {
     setManpowerid(value)
     this
   }
 
-  override def value2(value : Integer) : ManpowerRecord = {
+  override def value2(value : Double) : ManpowerRecord = {
     setManpowernumber(value)
     this
   }
 
-  override def values(value1 : Integer, value2 : Integer) : ManpowerRecord = {
+  override def values(value1 : Integer, value2 : Double) : ManpowerRecord = {
     this.value1(value1)
     this.value2(value2)
     this
   }
 
-  def this(manpowerid : Integer, manpowernumber : Integer) = {
+  def this(manpowerid : Integer, manpowernumber : Double) = {
     this()
 
     set(0, manpowerid)

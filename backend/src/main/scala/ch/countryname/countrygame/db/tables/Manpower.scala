@@ -10,6 +10,7 @@ import ch.countryname.countrygame.db.Keys
 import ch.countryname.countrygame.db.tables.records.ManpowerRecord
 
 import java.lang.Class
+import java.lang.Double
 import java.lang.Integer
 import java.lang.String
 import java.util.Arrays
@@ -61,7 +62,7 @@ extends TableImpl[ManpowerRecord](
 
   val MANPOWERID : TableField[ManpowerRecord, Integer] = createField("manpowerId", org.jooq.impl.SQLDataType.INTEGER.nullable(false).identity(true), "")
 
-  val MANPOWERNUMBER : TableField[ManpowerRecord, Integer] = createField("manpowerNumber", org.jooq.impl.SQLDataType.INTEGER, "")
+  val MANPOWERNUMBER : TableField[ManpowerRecord, Double] = createField("manpowerNumber", org.jooq.impl.SQLDataType.DOUBLE, "")
 
   def this() = {
     this(DSL.name("manpower"), null, null, null, null)

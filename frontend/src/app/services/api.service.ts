@@ -66,4 +66,8 @@ export class ApiService {
   updateCountry(country: Country): Observable<any> {
     return this.http.post('http://localhost:8080/api/country/updateCountry', country);
   }
+
+  updateManpower(country: Country): Observable<any> {
+    return this.http.post('http://localhost:8080/api/country/updateManpower', country);
+  }
 }

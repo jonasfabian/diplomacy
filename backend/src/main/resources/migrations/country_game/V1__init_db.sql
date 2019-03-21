@@ -48,7 +48,7 @@ CREATE TABLE IF NOT EXISTS `modifier`
 CREATE TABLE IF NOT EXISTS `manpower`
 (
   `manpowerId`     INT NOT NULL AUTO_INCREMENT,
-  `manpowerNumber` INT,
+  `manpowerNumber` DOUBLE,
   PRIMARY KEY (`manpowerId`)
 )
   ENGINE = InnoDB;
@@ -79,17 +79,17 @@ SET FOREIGN_KEY_CHECKS = @OLD_FOREIGN_KEY_CHECKS;
 SET UNIQUE_CHECKS = @OLD_UNIQUE_CHECKS;
 
 INSERT INTO `modifier` (modifierName, modifierValue)
-VALUES ('Morale', 1.0);
+VALUES ('Morale', 0.0);
 INSERT INTO `modifier` (modifierName, modifierValue)
-VALUES ('+5% Morale', 1.05);
+VALUES ('+5% Morale', 0.05);
 INSERT INTO `modifier` (modifierName, modifierValue)
-VALUES ('+50% Morale', 1.5);
+VALUES ('+10% Morale', 0.1);
 INSERT INTO `modifier` (modifierName, modifierValue)
-VALUES ('+100% Morale', 2);
+VALUES ('+20% Morale', 0.2);
 INSERT INTO `modifier` (modifierName, modifierValue)
-VALUES ('+200% Morale', 4);
+VALUES ('+50% Morale', 0.5);
 INSERT INTO `modifier` (modifierName, modifierValue)
-VALUES ('+1000% Morale', 10);
+VALUES ('+100% Morale', 1);
 
 INSERT INTO `currency` (currencyName)
 VALUES ('Franken');
@@ -112,13 +112,13 @@ INSERT INTO `manpower` (manpowerNumber)
 VALUES (1000);
 
 INSERT INTO `country` (countryName, countryDetails, countryCode, currencyId, manpowerId, modifierId)
-VALUES ('Switzerland', 'Cheese', 'CH', 1, 1, 1);
+VALUES ('Switzerland', 'Cheese', 'CH', 1, 1, 3);
 INSERT INTO `country` (countryName, countryDetails, countryCode, currencyId, manpowerId, modifierId)
-VALUES ('Germany', 'Bratwurst', 'DE', 2, 2, 1);
+VALUES ('Germany', 'Bratwurst', 'DE', 2, 2, 3);
 INSERT INTO `country` (countryName, countryDetails, countryCode, currencyId, manpowerId, modifierId)
-VALUES ('France', 'Baguette', 'FR', 2, 3, 1);
+VALUES ('France', 'Baguette', 'FR', 2, 3, 3);
 INSERT INTO `country` (countryName, countryDetails, countryCode, currencyId, manpowerId, modifierId)
-VALUES ('USA', 'Guns', 'US', 3, 4, 1);
+VALUES ('USA', 'Guns', 'US', 3, 4, 3);
 INSERT INTO `country` (countryName, countryDetails, countryCode, currencyId, manpowerId, modifierId)
-VALUES ('Italy', 'Pizza', 'IT', 2, 5, 1);
+VALUES ('Italy', 'Pizza', 'IT', 2, 5, 3);
 
