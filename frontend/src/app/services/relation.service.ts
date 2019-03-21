@@ -43,6 +43,12 @@ export class RelationService {
     return this.countryService.countryArray.find(c => c.id === countryId).name;
   }
 
+  /*  1 == Alliance
+  *   2 == War
+  *   3 == Non-Aggression-Pact
+  *   4 == Trading
+  */
+
   displayRelationType(relation: number): String {
     if (relation === 1) {
       return 'Alliance';

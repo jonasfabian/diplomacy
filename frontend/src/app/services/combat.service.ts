@@ -19,6 +19,7 @@ export class CombatService {
   countryStatsArray: Array<ModifiersForCountry> = [];
   modifierArray: Array<Modifier> = [];
   availableCountriesArray: Array<Country> = [];
+  selectedCountryToAttack: Country = new Country(-1, '', '', '', 0, 0);
 
   getModifiersForCountry() {
     this.countryStatsArray = [];

@@ -2,7 +2,7 @@
   <h5>Combat Stats</h5>
 </div>
 <div>
-  <table>
+  <table style="width: 100%;">
     <tbody>
     <tr>
       <th>Country Name</th>
@@ -20,20 +20,44 @@
   </table>
 </div>
 <div>
-  <button>Select country to attack</button>
-  <div class="dropdown col-md-4">
+  <div class="dropdown" style="margin-top: 5px;">
     <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton"
             data-toggle="dropdown"
             aria-haspopup="true" aria-expanded="false">
-      <span>Select a country</span>
+      <span>Select a country to attack</span>
     </button>
     <ul class="dropdown-menu scrollable-menu" aria-labelledby="dropdownMenuButton">
       <li>
         <a style="margin: 0; padding-left: 5px; padding-right: 0;" class="dropdown-item row"
-           *ngFor="let c of combatService.availableCountriesArray">
+           *ngFor="let c of combatService.availableCountriesArray" (click)="combatService.selectedCountryToAttack = c">
           <span>{{c.name}}</span>
         </a>
       </li>
     </ul>
+  </div>
+  <div *ngIf="combatService.selectedCountryToAttack.id != -1" class="row">
+    <div class="col-md-6">
+      <div>
+        <span>Selected country to attack: {{combatService.selectedCountryToAttack.name}}</span>
+      </div>
+      <div>
+        <button class="btn btn-primary" (click)="declareWar()">Declare War</button>
+        <strong style="color: red;" *ngIf="showRelationMessage">{{countryService.country.name}} declared war on {{combatService.selectedCountryToAttack.name}}</strong>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <table style="width: 100%;">
+        <tbody>
+        <tr>
+          <th>Country attacking</th>
+          <th>Country defending</th>
+        </tr>
+        <tr>
+          <td>{{countryService.country.name}}</td>
+          <td>{{combatService.selectedCountryToAttack.name}}</td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
   </div>
 </div>
