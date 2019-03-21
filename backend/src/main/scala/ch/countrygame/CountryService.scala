@@ -124,6 +124,17 @@ class CountryService(config: Config) {
     ()
   })
 
+  def increaseManpower(country: Country): Unit = withDslContext(dslContext => {
+    val mp = this.manpowerById(country.manpowerId)
+    dslContext.update(MANPOWER)
+      .set(MANPOWER.MANPOWERINFANTRYNUMBER, java.lang.Double.valueOf(mp.manpowerInfantryNumber * 1.1))
+      .set(MANPOWER.MANPOWERCAVALRYNUMBER, java.lang.Double.valueOf(mp.manpowerCavalryNumber * 1.1))
+      .set(MANPOWER.MANPOWERARTILLERYNUMBER, java.lang.Double.valueOf(mp.manpowerArtilleryNumber * 1.1))
+      .where(MANPOWER.MANPOWERID.eq(mp.manpowerId))
+      .execute()
+    ()
+  })
+
   def updateManpower(attackedCountry: Country): Unit = withDslContext(dslContext => {
     val mp = this.manpowerById(attackedCountry.manpowerId)
     val md = this.modifierById(attackedCountry.modifierId)

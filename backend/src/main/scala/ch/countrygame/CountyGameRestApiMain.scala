@@ -9,6 +9,7 @@ import com.typesafe.config.{ConfigFactory, ConfigValueFactory}
 import de.heikoseeberger.akkahttpcirce.ErrorAccumulatingCirceSupport
 import io.swagger.annotations._
 import javax.ws.rs.Path
+import scala.concurrent.duration._
 
 import scala.io.StdIn
 
@@ -34,6 +35,10 @@ object WebServer extends App with CorsSupport with SwaggerSite with ErrorAccumul
     bindingFuture
       .flatMap(_.unbind()) // trigger unbinding from the port
       .onComplete(_ => system.terminate()) // and shutdown when done
+    system.scheduler.schedule(0.seconds, 10.seconds) {
+
+      countryService.increaseManpower()
+    }
   }
 }
 
