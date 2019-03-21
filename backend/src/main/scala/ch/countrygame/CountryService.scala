@@ -124,10 +124,10 @@ class CountryService(config: Config) {
     ()
   })
 
-  def updateManpower(attackingCountry: Country): Unit = withDslContext(dslContext => {
+  def updateManpower(attackedCountry: Country): Unit = withDslContext(dslContext => {
     // calculate remaining manpower after attack
-    val mp = this.manpowerById(attackingCountry.manpowerId)
-    val md = this.modifierById(attackingCountry.modifierId)
+    val mp = this.manpowerById(attackedCountry.manpowerId)
+    val md = this.modifierById(attackedCountry.modifierId)
     val attackValue = mp.manpowerNumber * md.modifierValue
     val newManpowerNumber = mp.manpowerNumber - attackValue
     // update table

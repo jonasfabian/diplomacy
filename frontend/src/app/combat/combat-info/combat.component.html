@@ -42,7 +42,7 @@
       </div>
       <div>
         <button class="btn btn-primary" (click)="declareWar()">Declare War</button>
-        <strong style="color: red;" *ngIf="showRelationMessage">{{countryService.country.name}} declared war on {{combatService.selectedCountryToAttack.name}}</strong>
+        <span class="alert alert-danger" *ngIf="showRelationMessage">{{countryService.country.name}} declared war on {{combatService.selectedCountryToAttack.name}}</span>
       </div>
     </div>
     <div class="col-md-6">
