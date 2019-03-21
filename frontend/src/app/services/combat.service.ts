@@ -3,6 +3,7 @@ import {ModifiersForCountry} from '../models/modifiers-for-country';
 import {CountryService} from './country.service';
 import {ApiService} from './api.service';
 import {Modifier} from '../models/modifier';
+import {Country} from '../models/country';
 
 @Injectable({
   providedIn: 'root'
@@ -17,6 +18,7 @@ export class CombatService {
 
   countryStatsArray: Array<ModifiersForCountry> = [];
   modifierArray: Array<Modifier> = [];
+  availableCountriesArray: Array<Country> = [];
 
   getModifiersForCountry() {
     this.countryStatsArray = [];
@@ -28,7 +30,15 @@ export class CombatService {
   getModifiers() {
     this.apiService.getModifier().subscribe(val => {
       this.modifierArray = val;
-      console.log(val);
+    });
+  }
+
+  fillAvailableCountriesArray() {
+    this.availableCountriesArray = [];
+    this.countryService.countryArray.map(c => {
+      if (this.countryService.country.id !== c.id) {
+        this.availableCountriesArray.push(c);
+      }
     });
   }
 }

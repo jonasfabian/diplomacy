@@ -41,7 +41,6 @@ export class CountryCreateComponent implements OnInit {
   }
 
   initForm() {
-    console.log(this.selectedCountry);
     this.createCountryForm = this.fb.group({
       'name': [this.selectedCountry.name, [Validators.required]],
       'details': ['', [Validators.maxLength(100)]],
