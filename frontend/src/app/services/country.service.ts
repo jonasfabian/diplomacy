@@ -21,8 +21,7 @@ export class CountryService {
   manpowerArray: Array<Manpower> = [];
   currArray: Array<Currency> = [];
 
-  manpowerNumber = 0;
-  manpowerType = 0;
+  totalManpowerNumber = 0;
   numberOfCurrencyUser = 0;
 
   currencyName = '';
@@ -34,12 +33,12 @@ export class CountryService {
   }
 
   getManpower(id: number): void {
+    this.totalManpowerNumber = 0;
     this.apiService.getManpower(id).subscribe(value => {
       this.manpowerArray = value;
     });
     this.manpowerArray.map(val => {
-      this.manpowerNumber = val.manpowerNumber;
-      this.manpowerType = val.manpowerType;
+      this.totalManpowerNumber += val.manpowerNumber;
     });
   }
 
