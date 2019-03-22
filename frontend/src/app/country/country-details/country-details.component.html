@@ -20,7 +20,7 @@
         <span *ngIf="countryService.country.details === ''">-</span>
       </td>
       <td><span>{{countryService.currencyName}}</span></td>
-      <td><span>{{countryService.totalManpowerNumber}}</span></td>
+      <td><span>{{countryService.country.manpowerNumber}}</span></td>
       <td><span class="flag-icon {{countryService.getFlag(countryService.country.countryCode)}}"></span></td>
     </tr>
     </tbody>

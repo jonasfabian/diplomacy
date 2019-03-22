@@ -6,7 +6,6 @@ import {Country} from '../models/country';
 import {Manpower} from '../models/manpower';
 import {Relation} from '../models/relation';
 import {RelationNamed} from '../models/relation-named';
-import {ModifiersForCountry} from '../models/modifiers-for-country';
 import {Modifier} from '../models/modifier';
 
 @Injectable({

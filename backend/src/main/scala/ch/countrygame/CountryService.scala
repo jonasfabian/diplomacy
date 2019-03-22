@@ -27,7 +27,16 @@ class CountryService(config: Config) {
   }
 
   def countries: Array[Country] = withDslContext(dslContext => {
-    dslContext.selectFrom(COUNTRY).fetchArray().map(r => Country(r.getCountryid, r.getCountryname, r.getCountrydetails, r.getCountrycode, r.getCurrencyid, r.getModifierid))
+    dslContext.select(
+      COUNTRY.asterisk(),
+      DSL.sum(MANPOWER.MANPOWERNUMBER).as("totalManpower")
+    )
+      .from(MANPOWER)
+      .join(COUNTRY)
+      .on(MANPOWER.COUNTRYID.eq(COUNTRY.COUNTRYID))
+      .groupBy(COUNTRY.COUNTRYID)
+      .fetchArray()
+      .map(r => Country(r.get(COUNTRY.COUNTRYID).toInt, r.get(COUNTRY.COUNTRYNAME), r.get(COUNTRY.COUNTRYDETAILS), r.get(COUNTRY.COUNTRYCODE), r.get(COUNTRY.CURRENCYID).toInt, r.get(COUNTRY.MODIFIERID).toInt, Some(java.lang.Double.valueOf(r.get("totalManpower", classOf[java.lang.Double])))))
   })
 
   def relations: Array[Relation] = withDslContext(dslContext => {
@@ -125,7 +134,7 @@ class CountryService(config: Config) {
 
   def increaseManpower(country: Country): Unit = withDslContext(dslContext => {
     val mpArray = this.manpowerById(country.id)
-    mpArray.map(manP => {
+    mpArray.foreach(manP => {
       dslContext.update(MANPOWER)
         .set(MANPOWER.MANPOWERNUMBER, java.lang.Double.valueOf(manP.manpowerNumber * 1.1))
         .where(MANPOWER.MANPOWERID.eq(manP.manpowerId))
@@ -137,7 +146,7 @@ class CountryService(config: Config) {
   def updateManpower(attackedCountry: Country): Unit = withDslContext(dslContext => {
     val mpArray = this.manpowerById(attackedCountry.id)
     val mv = this.modifierById(attackedCountry.modifierId)
-    mpArray.map(manP => {
+    mpArray.foreach(manP => {
       val attackValue = manP.manpowerNumber * mv.modifierValue
       val newManpower = manP.manpowerNumber - attackValue
       // update table

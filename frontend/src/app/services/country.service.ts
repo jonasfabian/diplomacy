@@ -14,7 +14,7 @@ export class CountryService {
   ) {
   }
 
-  country: Country = new Country(-1, 'No Country Name yet', 'No details yet', 'None', 0, 0);
+  country: Country = new Country(-1, 'No Country Name yet', 'No details yet', 'None', 0, 0, 0);
   currentView: any = CurrentCountryViewEnum.COUNTRYDETAIL;
 
   countryArray: Array<Country> = [];

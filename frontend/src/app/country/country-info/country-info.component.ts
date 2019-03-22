@@ -38,8 +38,9 @@ export class CountryInfoComponent implements OnInit {
   }
 
   showCountryDetails(country: Country): void {
-    this.relationService.displayCountryRelations(country);
+    this.countryService.getCountries();
     this.countryService.country = country;
+    this.relationService.displayCountryRelations(country);
     this.countryService.getManpower(country.id);
     this.relationService.getRelationsNamed(this.countryService.country.id);
     this.countryService.calculateNumberOfCurrencyUsers();
