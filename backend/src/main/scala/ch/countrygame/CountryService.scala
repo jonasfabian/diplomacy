@@ -39,6 +39,18 @@ class CountryService(config: Config) {
       .map(r => Country(r.get(COUNTRY.COUNTRYID).toInt, r.get(COUNTRY.COUNTRYNAME), r.get(COUNTRY.COUNTRYDETAILS), r.get(COUNTRY.COUNTRYCODE), r.get(COUNTRY.CURRENCYID).toInt, r.get(COUNTRY.MODIFIERID).toInt, Some(java.lang.Double.valueOf(r.get("totalManpower", classOf[java.lang.Double])))))
   })
 
+  def stats: Array[Array[Double]] = withDslContext(dslContext => {
+    dslContext.select(
+      MANPOWER.asterisk(),
+      DSL.avg(MANPOWER.MANPOWERNUMBER).as("averageManpower"),
+      DSL.min(MANPOWER.MANPOWERNUMBER).as("minimumManpower"),
+      DSL.max(MANPOWER.MANPOWERNUMBER).as("maximumManpower"),
+    )
+      .from(MANPOWER)
+      .fetchArray()
+      .map(r => Array(r.get("averageManpower", classOf[java.lang.Double]).toDouble, r.get("minimumManpower", classOf[java.lang.Double]).toDouble, r.get("maximumManpower", classOf[java.lang.Double]).toDouble))
+  })
+
   def relations: Array[Relation] = withDslContext(dslContext => {
     dslContext.selectFrom(RELATIONS).fetchArray().map(r => Relation(r.getRelationid, r.getCountryid1, r.getCountryid2, r.getRelationtype))
   })

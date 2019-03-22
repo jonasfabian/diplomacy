@@ -48,7 +48,7 @@ class CountryGameRestApi(service: CountryService) extends Directives with ErrorA
 
   val route = pathPrefix("api") {
     pathPrefix("country") {
-      getCountry ~ createCountry ~ updateCountry ~ createRelation ~ getRelation ~ getRelationByName ~ getCurrency ~ getCurrencies ~ deleteCountry ~ getManpower ~ getModifiersForCountry ~ getModifier ~ updateManpower
+      getCountry ~ createCountry ~ updateCountry ~ createRelation ~ getRelation ~ getRelationByName ~ getCurrency ~ getCurrencies ~ getStats ~ deleteCountry ~ getManpower ~ getModifiersForCountry ~ getModifier ~ updateManpower
     }
   }
 
@@ -58,6 +58,15 @@ class CountryGameRestApi(service: CountryService) extends Directives with ErrorA
   def getCountry = path("getCountry") {
     get {
       complete(service.countries)
+    }
+  }
+
+  @ApiOperation(value = "getStats", httpMethod = "GET", notes = "returns stats")
+  @ApiResponses(Array(new ApiResponse(code = 200, response = classOf[Array[Array[Double]]], message = "OK")))
+  @Path("country")
+  def getStats = path("getStats") {
+    get {
+      complete(service.stats)
     }
   }
 

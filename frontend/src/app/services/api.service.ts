@@ -22,6 +22,10 @@ export class ApiService {
     return this.http.get<Array<Country>>('http://localhost:8080/api/country/getCountry');
   }
 
+  getStats(): Observable<Array<number>> {
+    return this.http.get<Array<any>>('http://localhost:8080/api/country/getStats');
+  }
+
   getModifier(): Observable<Array<Modifier>> {
     return this.http.get<Array<Modifier>>('http://localhost:8080/api/country/getModifier');
   }

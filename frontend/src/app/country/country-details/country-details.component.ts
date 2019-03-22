@@ -23,6 +23,7 @@ export class CountryDetailsComponent implements OnInit {
     });
     this.apiService.getModifiersForCountry(this.countryService.country.id).subscribe(val => {
     });
+    this.countryService.getStats();
   }
 
 }

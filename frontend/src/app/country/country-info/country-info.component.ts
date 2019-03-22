@@ -40,6 +40,7 @@ export class CountryInfoComponent implements OnInit {
   showCountryDetails(country: Country): void {
     this.countryService.getCountries();
     this.countryService.country = country;
+    this.countryService.getStats();
     this.relationService.displayCountryRelations(country);
     this.countryService.getManpower(country.id);
     this.relationService.getRelationsNamed(this.countryService.country.id);

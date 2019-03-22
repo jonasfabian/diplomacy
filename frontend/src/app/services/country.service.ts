@@ -20,6 +20,7 @@ export class CountryService {
   countryArray: Array<Country> = [];
   manpowerArray: Array<Manpower> = [];
   currArray: Array<Currency> = [];
+  statsArray: Array<number> = [];
 
   totalManpowerNumber = 0;
   numberOfCurrencyUser = 0;
@@ -29,6 +30,14 @@ export class CountryService {
   getCountries(): void {
     this.apiService.getCountries().subscribe(value => {
       this.countryArray = value;
+    });
+  }
+
+  getStats(): void {
+    this.apiService.getStats().subscribe(val => {
+      val.map(v => {
+        this.statsArray.push(v);
+      });
     });
   }
 
