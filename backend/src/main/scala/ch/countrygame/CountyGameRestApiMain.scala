@@ -29,16 +29,18 @@ object WebServer extends App with CorsSupport with SwaggerSite with ErrorAccumul
     val countryGameRestApi = new CountryGameRestApi(countryService)
     val routes = corsHandler(countryGameRestApi.route) ~ swaggerDoc.routes ~ swaggerSiteRoute
 
+    system.scheduler.schedule(0.seconds, 10.seconds) {
+      countryService.countries.foreach(l => {
+        countryService.increaseManpower(l)
+      })
+    }
+
     val bindingFuture = Http().bindAndHandle(routes ~ swaggerDoc.routes ~ swaggerSiteRoute, "localhost", 8080)
     println(s"Server online at http://localhost:8080/\nPress RETURN to stop...")
     StdIn.readLine() // let it run until user presses return
     bindingFuture
       .flatMap(_.unbind()) // trigger unbinding from the port
       .onComplete(_ => system.terminate()) // and shutdown when done
-    system.scheduler.schedule(0.seconds, 10.seconds) {
-
-      countryService.increaseManpower()
-    }
   }
 }
 
