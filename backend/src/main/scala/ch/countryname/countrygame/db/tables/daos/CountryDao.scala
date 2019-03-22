@@ -49,10 +49,6 @@ class CountryDao(configuration : Configuration) extends DAOImpl[CountryRecord, c
     fetch(Country.COUNTRY.CURRENCYID, values:_*)
   }
 
-  def fetchByManpowerid(values : Integer*) : List[ch.countryname.countrygame.db.tables.pojos.Country] = {
-    fetch(Country.COUNTRY.MANPOWERID, values:_*)
-  }
-
   def fetchByModifierid(values : Integer*) : List[ch.countryname.countrygame.db.tables.pojos.Country] = {
     fetch(Country.COUNTRY.MODIFIERID, values:_*)
   }

@@ -27,7 +27,7 @@ class CountryService(config: Config) {
   }
 
   def countries: Array[Country] = withDslContext(dslContext => {
-    dslContext.selectFrom(COUNTRY).fetchArray().map(r => Country(r.getCountryid, r.getCountryname, r.getCountrydetails, r.getCountrycode, r.getCurrencyid, r.getManpowerid, r.getModifierid))
+    dslContext.selectFrom(COUNTRY).fetchArray().map(r => Country(r.getCountryid, r.getCountryname, r.getCountrydetails, r.getCountrycode, r.getCurrencyid, r.getModifierid))
   })
 
   def relations: Array[Relation] = withDslContext(dslContext => {
@@ -39,7 +39,7 @@ class CountryService(config: Config) {
   })
 
   def manpower: Array[Manpower] = withDslContext(dslContext => {
-    dslContext.selectFrom(MANPOWER).fetchArray().map(r => Manpower(r.getManpowerid, r.getManpowerinfantrynumber, r.getManpowercavalrynumber, r.getManpowerartillerynumber))
+    dslContext.selectFrom(MANPOWER).fetchArray().map(r => Manpower(r.getManpowerid, r.getManpowertype.toInt, r.getManpowernumber, r.getCountryid))
   })
 
   def modifier: Array[Modifier] = withDslContext(dslContext => {
@@ -50,8 +50,8 @@ class CountryService(config: Config) {
     dslContext.selectFrom(MODIFIER).where(MODIFIER.MODIFIERID.eq(modifierId)).fetchOne().map(r => Modifier(r.get(MODIFIER.MODIFIERID).toInt, r.get(MODIFIER.MODIFIERNAME), r.get(MODIFIER.MODIFIERVALUE).toDouble))
   })
 
-  def manpowerById(manpowerId: Integer): Manpower = withDslContext(dslContext => {
-    dslContext.selectFrom(MANPOWER).where(MANPOWER.MANPOWERID.eq(manpowerId)).fetchOne().map(r => Manpower(r.get(MANPOWER.MANPOWERID).toInt, r.get(MANPOWER.MANPOWERINFANTRYNUMBER).toDouble, r.get(MANPOWER.MANPOWERCAVALRYNUMBER).toDouble, r.get(MANPOWER.MANPOWERARTILLERYNUMBER).toDouble))
+  def manpowerById(countryId: Integer): Manpower = withDslContext(dslContext => {
+    dslContext.selectFrom(MANPOWER).where(MANPOWER.COUNTRYID.eq(countryId)).fetchOne().map(r => Manpower(r.get(MANPOWER.MANPOWERID).toInt, r.get(MANPOWER.MANPOWERTYPE).toInt, r.get(MANPOWER.MANPOWERNUMBER).toDouble, r.get(MANPOWER.COUNTRYID).toInt))
   })
 
   def relationsForCountry(countryId: Int): Array[RelationNamed] = withDslContext(dslContext => {
@@ -72,11 +72,11 @@ class CountryService(config: Config) {
     val modifier = MODIFIER.as("modifier")
     dslContext.select().from(country
       .join(manpower)
-      .on(country.MANPOWERID.eq(manpower.MANPOWERID))
+      .on(manpower.COUNTRYID.eq(country.COUNTRYID))
       .join(modifier)
       .on(country.MODIFIERID.eq(modifier.MODIFIERID)))
       .where(country.COUNTRYID.eq(countryId))
-      .fetchArray().map(r => ModifierForCountry(r.get(country.COUNTRYID).toInt, r.get(country.COUNTRYNAME), r.get(manpower.MANPOWERID).toInt, r.get(MANPOWER.MANPOWERINFANTRYNUMBER).toDouble, r.get(MANPOWER.MANPOWERCAVALRYNUMBER).toDouble, r.get(MANPOWER.MANPOWERARTILLERYNUMBER).toDouble, r.get(modifier.MODIFIERID).toInt, r.get(modifier.MODIFIERNAME), r.get(modifier.MODIFIERVALUE).toDouble))
+      .fetchArray().map(r => ModifierForCountry(r.get(country.COUNTRYID).toInt, r.get(country.COUNTRYNAME), r.get(manpower.MANPOWERID).toInt, r.get(MANPOWER.MANPOWERTYPE).toInt, r.get(MANPOWER.MANPOWERNUMBER).toDouble, r.get(modifier.MODIFIERID).toInt, r.get(modifier.MODIFIERNAME).toString, r.get(modifier.MODIFIERVALUE).toDouble))
   })
 
   def currencyForCountry(countryId: Int): Array[CountryCurrency] = withDslContext(dslContext => {
@@ -94,9 +94,9 @@ class CountryService(config: Config) {
     val manpower = MANPOWER.as("manpower")
     dslContext.select().from(manpower
       .join(country)
-      .on(country.MANPOWERID.eq(manpower.MANPOWERID)))
+      .on(manpower.COUNTRYID.eq(manpower.COUNTRYID)))
       .where(country.COUNTRYID.eq(countryId))
-      .fetchArray().map(r => ManpowerOfCountry(r.get(country.COUNTRYID).toInt, r.get(country.COUNTRYNAME), r.get(manpower.MANPOWERID).toInt, r.get(MANPOWER.MANPOWERINFANTRYNUMBER).toDouble, r.get(MANPOWER.MANPOWERCAVALRYNUMBER).toDouble, r.get(MANPOWER.MANPOWERARTILLERYNUMBER).toDouble))
+      .fetchArray().map(r => ManpowerOfCountry(r.get(country.COUNTRYID).toInt, r.get(country.COUNTRYNAME), r.get(manpower.MANPOWERID).toInt, r.get(MANPOWER.MANPOWERTYPE).toInt, r.get(MANPOWER.MANPOWERNUMBER).toDouble))
   })
 
   def newCountry(country: Country): Unit = withDslContext(dslContext => {
@@ -117,7 +117,6 @@ class CountryService(config: Config) {
       .set(COUNTRY.COUNTRYDETAILS, country.details)
       .set(COUNTRY.COUNTRYCODE, country.countryCode)
       .set(COUNTRY.CURRENCYID, Integer.valueOf(country.currencyId))
-      .set(COUNTRY.MANPOWERID, Integer.valueOf(country.manpowerId))
       .set(COUNTRY.MODIFIERID, Integer.valueOf(country.modifierId))
       .where(COUNTRY.COUNTRYID.eq(country.id))
       .execute()
@@ -125,37 +124,22 @@ class CountryService(config: Config) {
   })
 
   def increaseManpower(country: Country): Unit = withDslContext(dslContext => {
-    val mp = this.manpowerById(country.manpowerId)
+    val mp = this.manpowerById(country.id)
     dslContext.update(MANPOWER)
-      .set(MANPOWER.MANPOWERINFANTRYNUMBER, java.lang.Double.valueOf(mp.manpowerInfantryNumber * 1.1))
-      .set(MANPOWER.MANPOWERCAVALRYNUMBER, java.lang.Double.valueOf(mp.manpowerCavalryNumber * 1.1))
-      .set(MANPOWER.MANPOWERARTILLERYNUMBER, java.lang.Double.valueOf(mp.manpowerArtilleryNumber * 1.1))
+      .set(MANPOWER.MANPOWERNUMBER, java.lang.Double.valueOf(mp.manpowerNumber * 1.1))
       .where(MANPOWER.MANPOWERID.eq(mp.manpowerId))
       .execute()
     ()
   })
 
   def updateManpower(attackedCountry: Country): Unit = withDslContext(dslContext => {
-    val mp = this.manpowerById(attackedCountry.manpowerId)
-    val md = this.modifierById(attackedCountry.modifierId)
-    // calculate total manpower
-    val totalManpower = mp.manpowerInfantryNumber + mp.manpowerCavalryNumber + mp.manpowerArtilleryNumber
-    // calculate individual manpower
-    val infantryPercentage = mp.manpowerInfantryNumber / totalManpower
-    val cavalryPercentage = mp.manpowerCavalryNumber / totalManpower
-    val artilleryPercentage = mp.manpowerArtilleryNumber / totalManpower
-
-    val attackValue = totalManpower * md.modifierValue
-    // calculate new individual manpower
-    val newTotalManpower = totalManpower - attackValue
-    val newInfantryManpowerNumber = newTotalManpower * infantryPercentage
-    val newCavalryManpowerNumber = newTotalManpower * cavalryPercentage
-    val newArtilleryManpowerNumber = newTotalManpower * artilleryPercentage
+    val mp = this.manpowerById(attackedCountry.id)
+    val mv = this.modifierById(attackedCountry.modifierId)
+    val attackValue = mp.manpowerNumber * mv.modifierValue
+    val newManpower = mp.manpowerNumber - attackValue
     // update table
     dslContext.update(MANPOWER)
-      .set(MANPOWER.MANPOWERINFANTRYNUMBER, java.lang.Double.valueOf(newInfantryManpowerNumber))
-      .set(MANPOWER.MANPOWERCAVALRYNUMBER, java.lang.Double.valueOf(newCavalryManpowerNumber))
-      .set(MANPOWER.MANPOWERARTILLERYNUMBER, java.lang.Double.valueOf(newArtilleryManpowerNumber))
+      .set(MANPOWER.MANPOWERNUMBER, java.lang.Double.valueOf(newManpower))
       .where(MANPOWER.MANPOWERID.eq(mp.manpowerId))
       .execute()
     ()
@@ -173,7 +157,6 @@ class CountryService(config: Config) {
     rec.setCountrydetails(country.details)
     rec.setCountrycode(country.countryCode)
     rec.setCurrencyid(country.currencyId)
-    rec.setManpowerid(country.manpowerId)
     rec.setModifierid(country.modifierId)
     rec
   }

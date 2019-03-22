@@ -53,8 +53,8 @@ object Keys {
   // -------------------------------------------------------------------------
 
   val CURRENCYID = ForeignKeys0.CURRENCYID
-  val MANPOWERID = ForeignKeys0.MANPOWERID
   val MODIFIERID = ForeignKeys0.MODIFIERID
+  val COUNTRYID = ForeignKeys0.COUNTRYID
   val COUNTRYID1 = ForeignKeys0.COUNTRYID1
   val COUNTRYID2 = ForeignKeys0.COUNTRYID2
 
@@ -81,8 +81,8 @@ object Keys {
 
   private object ForeignKeys0 {
     val CURRENCYID : ForeignKey[CountryRecord, CurrencyRecord] = Internal.createForeignKey(ch.countryname.countrygame.db.Keys.KEY_CURRENCY_PRIMARY, Country.COUNTRY, "currencyId", Country.COUNTRY.CURRENCYID)
-    val MANPOWERID : ForeignKey[CountryRecord, ManpowerRecord] = Internal.createForeignKey(ch.countryname.countrygame.db.Keys.KEY_MANPOWER_PRIMARY, Country.COUNTRY, "manpowerId", Country.COUNTRY.MANPOWERID)
     val MODIFIERID : ForeignKey[CountryRecord, ModifierRecord] = Internal.createForeignKey(ch.countryname.countrygame.db.Keys.KEY_MODIFIER_PRIMARY, Country.COUNTRY, "modifierId", Country.COUNTRY.MODIFIERID)
+    val COUNTRYID : ForeignKey[ManpowerRecord, CountryRecord] = Internal.createForeignKey(ch.countryname.countrygame.db.Keys.KEY_COUNTRY_PRIMARY, Manpower.MANPOWER, "countryId", Manpower.MANPOWER.COUNTRYID)
     val COUNTRYID1 : ForeignKey[RelationsRecord, CountryRecord] = Internal.createForeignKey(ch.countryname.countrygame.db.Keys.KEY_COUNTRY_PRIMARY, Relations.RELATIONS, "countryId1", Relations.RELATIONS.COUNTRYID1)
     val COUNTRYID2 : ForeignKey[RelationsRecord, CountryRecord] = Internal.createForeignKey(ch.countryname.countrygame.db.Keys.KEY_COUNTRY_PRIMARY, Relations.RELATIONS, "countryId2", Relations.RELATIONS.COUNTRYID2)
   }

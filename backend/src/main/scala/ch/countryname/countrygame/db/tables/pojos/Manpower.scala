@@ -12,17 +12,17 @@ import java.lang.StringBuilder
 
 case class Manpower(
     manpowerid : Integer
-  , manpowerinfantrynumber : Double
-  , manpowercavalrynumber : Double
-  , manpowerartillerynumber : Double
+  , manpowertype : Double
+  , manpowernumber : Double
+  , countryid : Integer
 ) extends Serializable {
 
   def this (value : Manpower) = {
     this(
         value.manpowerid
-      , value.manpowerinfantrynumber
-      , value.manpowercavalrynumber
-      , value.manpowerartillerynumber
+      , value.manpowertype
+      , value.manpowernumber
+      , value.countryid
     )
   }
 
@@ -30,25 +30,25 @@ case class Manpower(
     this.manpowerid
   }
 
-  def getManpowerinfantrynumber : Double = {
-    this.manpowerinfantrynumber
+  def getManpowertype : Double = {
+    this.manpowertype
   }
 
-  def getManpowercavalrynumber : Double = {
-    this.manpowercavalrynumber
+  def getManpowernumber : Double = {
+    this.manpowernumber
   }
 
-  def getManpowerartillerynumber : Double = {
-    this.manpowerartillerynumber
+  def getCountryid : Integer = {
+    this.countryid
   }
 
   override def toString : String = {
     val sb = new StringBuilder("Manpower (")
 
     sb.append(manpowerid)
-    sb.append(", ").append(manpowerinfantrynumber)
-    sb.append(", ").append(manpowercavalrynumber)
-    sb.append(", ").append(manpowerartillerynumber)
+    sb.append(", ").append(manpowertype)
+    sb.append(", ").append(manpowernumber)
+    sb.append(", ").append(countryid)
 
     sb.append(")")
     return sb.toString

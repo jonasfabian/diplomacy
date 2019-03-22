@@ -16,7 +16,7 @@ import org.jooq.Row4
 import org.jooq.impl.UpdatableRecordImpl
 
 
-class ManpowerRecord extends UpdatableRecordImpl[ManpowerRecord](Manpower.MANPOWER) with Record4[Integer, Double, Double, Double] {
+class ManpowerRecord extends UpdatableRecordImpl[ManpowerRecord](Manpower.MANPOWER) with Record4[Integer, Double, Double, Integer] {
 
   def setManpowerid(value : Integer) : Unit = {
     set(0, value)
@@ -27,31 +27,31 @@ class ManpowerRecord extends UpdatableRecordImpl[ManpowerRecord](Manpower.MANPOW
     if (r == null) null else r.asInstanceOf[Integer]
   }
 
-  def setManpowerinfantrynumber(value : Double) : Unit = {
+  def setManpowertype(value : Double) : Unit = {
     set(1, value)
   }
 
-  def getManpowerinfantrynumber : Double = {
+  def getManpowertype : Double = {
     val r = get(1)
     if (r == null) null else r.asInstanceOf[Double]
   }
 
-  def setManpowercavalrynumber(value : Double) : Unit = {
+  def setManpowernumber(value : Double) : Unit = {
     set(2, value)
   }
 
-  def getManpowercavalrynumber : Double = {
+  def getManpowernumber : Double = {
     val r = get(2)
     if (r == null) null else r.asInstanceOf[Double]
   }
 
-  def setManpowerartillerynumber(value : Double) : Unit = {
+  def setCountryid(value : Integer) : Unit = {
     set(3, value)
   }
 
-  def getManpowerartillerynumber : Double = {
+  def getCountryid : Integer = {
     val r = get(3)
-    if (r == null) null else r.asInstanceOf[Double]
+    if (r == null) null else r.asInstanceOf[Integer]
   }
 
   // -------------------------------------------------------------------------
@@ -65,25 +65,25 @@ class ManpowerRecord extends UpdatableRecordImpl[ManpowerRecord](Manpower.MANPOW
   // Record4 type implementation
   // -------------------------------------------------------------------------
 
-  override def fieldsRow : Row4[Integer, Double, Double, Double] = {
-    super.fieldsRow.asInstanceOf[ Row4[Integer, Double, Double, Double] ]
+  override def fieldsRow : Row4[Integer, Double, Double, Integer] = {
+    super.fieldsRow.asInstanceOf[ Row4[Integer, Double, Double, Integer] ]
   }
 
-  override def valuesRow : Row4[Integer, Double, Double, Double] = {
-    super.valuesRow.asInstanceOf[ Row4[Integer, Double, Double, Double] ]
+  override def valuesRow : Row4[Integer, Double, Double, Integer] = {
+    super.valuesRow.asInstanceOf[ Row4[Integer, Double, Double, Integer] ]
   }
   override def field1 : Field[Integer] = Manpower.MANPOWER.MANPOWERID
-  override def field2 : Field[Double] = Manpower.MANPOWER.MANPOWERINFANTRYNUMBER
-  override def field3 : Field[Double] = Manpower.MANPOWER.MANPOWERCAVALRYNUMBER
-  override def field4 : Field[Double] = Manpower.MANPOWER.MANPOWERARTILLERYNUMBER
+  override def field2 : Field[Double] = Manpower.MANPOWER.MANPOWERTYPE
+  override def field3 : Field[Double] = Manpower.MANPOWER.MANPOWERNUMBER
+  override def field4 : Field[Integer] = Manpower.MANPOWER.COUNTRYID
   override def component1 : Integer = getManpowerid
-  override def component2 : Double = getManpowerinfantrynumber
-  override def component3 : Double = getManpowercavalrynumber
-  override def component4 : Double = getManpowerartillerynumber
+  override def component2 : Double = getManpowertype
+  override def component3 : Double = getManpowernumber
+  override def component4 : Integer = getCountryid
   override def value1 : Integer = getManpowerid
-  override def value2 : Double = getManpowerinfantrynumber
-  override def value3 : Double = getManpowercavalrynumber
-  override def value4 : Double = getManpowerartillerynumber
+  override def value2 : Double = getManpowertype
+  override def value3 : Double = getManpowernumber
+  override def value4 : Integer = getCountryid
 
   override def value1(value : Integer) : ManpowerRecord = {
     setManpowerid(value)
@@ -91,21 +91,21 @@ class ManpowerRecord extends UpdatableRecordImpl[ManpowerRecord](Manpower.MANPOW
   }
 
   override def value2(value : Double) : ManpowerRecord = {
-    setManpowerinfantrynumber(value)
+    setManpowertype(value)
     this
   }
 
   override def value3(value : Double) : ManpowerRecord = {
-    setManpowercavalrynumber(value)
+    setManpowernumber(value)
     this
   }
 
-  override def value4(value : Double) : ManpowerRecord = {
-    setManpowerartillerynumber(value)
+  override def value4(value : Integer) : ManpowerRecord = {
+    setCountryid(value)
     this
   }
 
-  override def values(value1 : Integer, value2 : Double, value3 : Double, value4 : Double) : ManpowerRecord = {
+  override def values(value1 : Integer, value2 : Double, value3 : Double, value4 : Integer) : ManpowerRecord = {
     this.value1(value1)
     this.value2(value2)
     this.value3(value3)
@@ -113,12 +113,12 @@ class ManpowerRecord extends UpdatableRecordImpl[ManpowerRecord](Manpower.MANPOW
     this
   }
 
-  def this(manpowerid : Integer, manpowerinfantrynumber : Double, manpowercavalrynumber : Double, manpowerartillerynumber : Double) = {
+  def this(manpowerid : Integer, manpowertype : Double, manpowernumber : Double, countryid : Integer) = {
     this()
 
     set(0, manpowerid)
-    set(1, manpowerinfantrynumber)
-    set(2, manpowercavalrynumber)
-    set(3, manpowerartillerynumber)
+    set(1, manpowertype)
+    set(2, manpowernumber)
+    set(3, countryid)
   }
 }

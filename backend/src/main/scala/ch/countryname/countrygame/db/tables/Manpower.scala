@@ -62,11 +62,11 @@ extends TableImpl[ManpowerRecord](
 
   val MANPOWERID : TableField[ManpowerRecord, Integer] = createField("manpowerId", org.jooq.impl.SQLDataType.INTEGER.nullable(false).identity(true), "")
 
-  val MANPOWERINFANTRYNUMBER : TableField[ManpowerRecord, Double] = createField("manpowerInfantryNumber", org.jooq.impl.SQLDataType.DOUBLE, "")
+  val MANPOWERTYPE : TableField[ManpowerRecord, Double] = createField("manpowerType", org.jooq.impl.SQLDataType.DOUBLE, "")
 
-  val MANPOWERCAVALRYNUMBER : TableField[ManpowerRecord, Double] = createField("manpowerCavalryNumber", org.jooq.impl.SQLDataType.DOUBLE, "")
+  val MANPOWERNUMBER : TableField[ManpowerRecord, Double] = createField("manpowerNumber", org.jooq.impl.SQLDataType.DOUBLE, "")
 
-  val MANPOWERARTILLERYNUMBER : TableField[ManpowerRecord, Double] = createField("manpowerArtilleryNumber", org.jooq.impl.SQLDataType.DOUBLE, "")
+  val COUNTRYID : TableField[ManpowerRecord, Integer] = createField("countryId", org.jooq.impl.SQLDataType.INTEGER.nullable(false), "")
 
   def this() = {
     this(DSL.name("manpower"), null, null, null, null)
@@ -91,7 +91,7 @@ extends TableImpl[ManpowerRecord](
   override def getSchema : Schema = CountryGame.COUNTRY_GAME
 
   override def getIndexes : List[ Index ] = {
-    return Arrays.asList[ Index ](Indexes.MANPOWER_PRIMARY)
+    return Arrays.asList[ Index ](Indexes.MANPOWER_COUNTRYID, Indexes.MANPOWER_PRIMARY)
   }
 
   override def getIdentity : Identity[ManpowerRecord, Integer] = {
@@ -104,6 +104,14 @@ extends TableImpl[ManpowerRecord](
 
   override def getKeys : List[ UniqueKey[ManpowerRecord] ] = {
     return Arrays.asList[ UniqueKey[ManpowerRecord] ](Keys.KEY_MANPOWER_PRIMARY)
+  }
+
+  override def getReferences : List[ ForeignKey[ManpowerRecord, _] ] = {
+    return Arrays.asList[ ForeignKey[ManpowerRecord, _] ](Keys.COUNTRYID)
+  }
+
+  def country : Country = {
+    return new Country(this, Keys.COUNTRYID)
   }
 
   override def as(alias : String) : Manpower = {

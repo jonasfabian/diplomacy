@@ -16,7 +16,6 @@ case class Country(
   , countrydetails : String
   , countrycode : String
   , currencyid : Integer
-  , manpowerid : Integer
   , modifierid : Integer
 ) extends Serializable {
 
@@ -27,7 +26,6 @@ case class Country(
       , value.countrydetails
       , value.countrycode
       , value.currencyid
-      , value.manpowerid
       , value.modifierid
     )
   }
@@ -52,10 +50,6 @@ case class Country(
     this.currencyid
   }
 
-  def getManpowerid : Integer = {
-    this.manpowerid
-  }
-
   def getModifierid : Integer = {
     this.modifierid
   }
@@ -68,7 +62,6 @@ case class Country(
     sb.append(", ").append(countrydetails)
     sb.append(", ").append(countrycode)
     sb.append(", ").append(currencyid)
-    sb.append(", ").append(manpowerid)
     sb.append(", ").append(modifierid)
 
     sb.append(")")

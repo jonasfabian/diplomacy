@@ -10,16 +10,11 @@ CREATE TABLE IF NOT EXISTS `country`
   `countryDetails` VARCHAR(45) NULL,
   `countryCode`    VARCHAR(2)  NOT NULL,
   `currencyId`     INT         NOT NULL,
-  `manpowerId`     INT         NOT NULL,
   `modifierId`     INT         NOT NULL,
   PRIMARY KEY (`countryId`),
   CONSTRAINT `currencyId`
     FOREIGN KEY (`currencyId`)
       REFERENCES `currency` (`currencyId`)
-      ON DELETE CASCADE,
-  CONSTRAINT `manpowerId`
-    FOREIGN KEY (`manpowerId`)
-      REFERENCES `manpower` (`manpowerId`)
       ON DELETE CASCADE,
   CONSTRAINT `modifierId`
     FOREIGN KEY (`modifierId`)
@@ -38,8 +33,8 @@ CREATE TABLE IF NOT EXISTS `currency`
 
 CREATE TABLE IF NOT EXISTS `modifier`
 (
-  `modifierId`        INT         NOT NULL AUTO_INCREMENT,
-  `modifierName`      VARCHAR(45) NOT NULL,
+  `modifierId`    INT         NOT NULL AUTO_INCREMENT,
+  `modifierName`  VARCHAR(45) NOT NULL,
   `modifierValue` DOUBLE      NOT NULL,
   PRIMARY KEY (`modifierId`)
 )
@@ -48,10 +43,15 @@ CREATE TABLE IF NOT EXISTS `modifier`
 CREATE TABLE IF NOT EXISTS `manpower`
 (
   `manpowerId`     INT NOT NULL AUTO_INCREMENT,
-  `manpowerInfantryNumber` DOUBLE,
-  `manpowerCavalryNumber` DOUBLE,
-  `manpowerArtilleryNumber` DOUBLE,
-  PRIMARY KEY (`manpowerId`)
+  `manpowerType`   DOUBLE,
+  `manpowerNumber` DOUBLE,
+  `countryId`      INT NOT NULL,
+  PRIMARY KEY (`manpowerId`),
+  CONSTRAINT `countryId`
+    FOREIGN KEY (`countryId`)
+      REFERENCES `country` (`countryId`)
+      ON DELETE CASCADE
+      ON UPDATE NO ACTION
 )
   ENGINE = InnoDB;
 
@@ -102,25 +102,24 @@ VALUES ('Dollar');
 INSERT INTO `currency` (currencyName)
 VALUES ('Yen');
 
-INSERT INTO `manpower` (manpowerInfantryNumber, manpowerCavalryNumber, manpowerArtilleryNumber)
-VALUES (1000, 400, 100);
-INSERT INTO `manpower` (manpowerInfantryNumber, manpowerCavalryNumber, manpowerArtilleryNumber)
-VALUES (1000, 400, 100);
-INSERT INTO `manpower` (manpowerInfantryNumber, manpowerCavalryNumber, manpowerArtilleryNumber)
-VALUES (1000, 400, 100);
-INSERT INTO `manpower` (manpowerInfantryNumber, manpowerCavalryNumber, manpowerArtilleryNumber)
-VALUES (1000, 400, 100);
-INSERT INTO `manpower` (manpowerInfantryNumber, manpowerCavalryNumber, manpowerArtilleryNumber)
-VALUES (1000, 400, 100);
+INSERT INTO `country` (countryName, countryDetails, countryCode, currencyId, modifierId)
+VALUES ('Switzerland', 'Cheese', 'CH', 1, 3);
+INSERT INTO `country` (countryName, countryDetails, countryCode, currencyId, modifierId)
+VALUES ('Germany', 'Bratwurst', 'DE', 2, 3);
+INSERT INTO `country` (countryName, countryDetails, countryCode, currencyId, modifierId)
+VALUES ('France', 'Baguette', 'FR', 2, 3);
+INSERT INTO `country` (countryName, countryDetails, countryCode, currencyId, modifierId)
+VALUES ('USA', 'Guns', 'US', 3, 3);
+INSERT INTO `country` (countryName, countryDetails, countryCode, currencyId, modifierId)
+VALUES ('Italy', 'Pizza', 'IT', 2, 3);
 
-INSERT INTO `country` (countryName, countryDetails, countryCode, currencyId, manpowerId, modifierId)
-VALUES ('Switzerland', 'Cheese', 'CH', 1, 1, 3);
-INSERT INTO `country` (countryName, countryDetails, countryCode, currencyId, manpowerId, modifierId)
-VALUES ('Germany', 'Bratwurst', 'DE', 2, 2, 3);
-INSERT INTO `country` (countryName, countryDetails, countryCode, currencyId, manpowerId, modifierId)
-VALUES ('France', 'Baguette', 'FR', 2, 3, 3);
-INSERT INTO `country` (countryName, countryDetails, countryCode, currencyId, manpowerId, modifierId)
-VALUES ('USA', 'Guns', 'US', 3, 4, 3);
-INSERT INTO `country` (countryName, countryDetails, countryCode, currencyId, manpowerId, modifierId)
-VALUES ('Italy', 'Pizza', 'IT', 2, 5, 3);
-
+INSERT INTO `manpower` (manpowerType, manpowerNumber, countryId)
+VALUES (1, 1000, 1);
+INSERT INTO `manpower` (manpowerType, manpowerNumber, countryId)
+VALUES (1, 1000, 2);
+INSERT INTO `manpower` (manpowerType, manpowerNumber, countryId)
+VALUES (1, 1000, 3);
+INSERT INTO `manpower` (manpowerType, manpowerNumber, countryId)
+VALUES (1, 1000, 4);
+INSERT INTO `manpower` (manpowerType, manpowerNumber, countryId)
+VALUES (1, 1000, 5);
