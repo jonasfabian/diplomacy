@@ -21,7 +21,6 @@ export class CountryDetailsComponent implements OnInit {
     this.apiService.getCurrencies().subscribe(c => {
       this.currency = c.find(v => v.currencyId === this.countryService.country.currencyId);
     });
-    this.countryService.getSelectedCountryDetails();
     this.apiService.getModifiersForCountry(this.countryService.country.id).subscribe(val => {
     });
   }

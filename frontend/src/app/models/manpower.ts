@@ -1,13 +1,13 @@
 export class Manpower {
   manpowerId: number;
-  manpowerInfantryNumber: number;
-  manpowerCavalryNumber: number;
-  manpowerArtilleryNumber: number;
+  manpowerType: number;
+  manpowerNumber: number;
+  countryId: number;
 
-  constructor(manpowerId: number, manpowerInfantryNumber: number, manpowerCavalryNumber: number, manpowerArtilleryNumber: number) {
+  constructor(manpowerId: number, manpowerType: number, manpowerNumber: number, countryId: number) {
     this.manpowerId = manpowerId;
-    this.manpowerInfantryNumber = manpowerInfantryNumber;
-    this.manpowerCavalryNumber = manpowerCavalryNumber;
-    this.manpowerArtilleryNumber = manpowerArtilleryNumber;
+    this.manpowerType = manpowerType;
+    this.manpowerNumber = manpowerNumber;
+    this.countryId = countryId;
   }
 }

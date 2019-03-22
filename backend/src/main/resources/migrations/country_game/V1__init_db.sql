@@ -116,10 +116,10 @@ VALUES ('Italy', 'Pizza', 'IT', 2, 3);
 INSERT INTO `manpower` (manpowerType, manpowerNumber, countryId)
 VALUES (1, 1000, 1);
 INSERT INTO `manpower` (manpowerType, manpowerNumber, countryId)
-VALUES (1, 1000, 2);
+VALUES (2, 800, 2);
 INSERT INTO `manpower` (manpowerType, manpowerNumber, countryId)
-VALUES (1, 1000, 3);
+VALUES (3, 700, 3);
 INSERT INTO `manpower` (manpowerType, manpowerNumber, countryId)
-VALUES (1, 1000, 4);
+VALUES (4, 200, 4);
 INSERT INTO `manpower` (manpowerType, manpowerNumber, countryId)
-VALUES (1, 1000, 5);
+VALUES (5, 50, 5);

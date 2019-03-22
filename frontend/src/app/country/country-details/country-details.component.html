@@ -9,9 +9,8 @@
       <th><span>Name</span></th>
       <th><span>Details</span></th>
       <th><span>Currency</span></th>
-      <th><span>Infantry</span></th>
-      <th><span>Cavalry</span></th>
-      <th><span>Artillery</span></th>
+      <th><span>Manpower Type</span></th>
+      <th><span>Manpower Number</span></th>
       <th><span>Flag</span></th>
     </tr>
     <tr>
@@ -22,9 +21,8 @@
         <span *ngIf="countryService.country.details === ''">-</span>
       </td>
       <td><span>{{countryService.currencyName}}</span></td>
-      <td><span>{{countryService.selectedManpowerInfantryNumber}}</span></td>
-      <td><span>{{countryService.selectedManpowerCavalryNumber}}</span></td>
-      <td><span>{{countryService.selectedManpowerArtilleryNumber}}</span></td>
+      <td><span>{{countryService.manpowerType}}</span></td>
+      <td><span>{{countryService.manpowerNumber}}</span></td>
       <td><span class="flag-icon {{countryService.getFlag(countryService.country.countryCode)}}"></span></td>
     </tr>
     </tbody>

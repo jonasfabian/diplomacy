@@ -21,12 +21,8 @@ export class CountryService {
   manpowerArray: Array<Manpower> = [];
   currArray: Array<Currency> = [];
 
-  manpowerInfantryNumber = 0;
-  manpowerCavalryNumber = 0;
-  manpowerArtilleryNumber = 0;
-  selectedManpowerInfantryNumber = 0;
-  selectedManpowerCavalryNumber = 0;
-  selectedManpowerArtilleryNumber = 0;
+  manpowerNumber = 0;
+  manpowerType = 0;
   numberOfCurrencyUser = 0;
 
   currencyName = '';
@@ -42,19 +38,8 @@ export class CountryService {
       this.manpowerArray = value;
     });
     this.manpowerArray.map(val => {
-      this.manpowerInfantryNumber = val.manpowerInfantryNumber;
-      this.manpowerCavalryNumber = val.manpowerCavalryNumber;
-      this.manpowerArtilleryNumber = val.manpowerArtilleryNumber;
-    });
-  }
-
-  getSelectedCountryDetails() {
-    this.apiService.getManpower(this.country.id).subscribe(res => {
-      res.map(val => {
-        this.selectedManpowerInfantryNumber = val.manpowerInfantryNumber;
-        this.selectedManpowerCavalryNumber = val.manpowerCavalryNumber;
-        this.selectedManpowerArtilleryNumber = val.manpowerArtilleryNumber;
-      });
+      this.manpowerNumber = val.manpowerNumber;
+      this.manpowerType = val.manpowerType;
     });
   }
 

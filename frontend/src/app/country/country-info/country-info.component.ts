@@ -46,7 +46,6 @@ export class CountryInfoComponent implements OnInit {
     this.combatService.getModifiersForCountry();
     this.combatService.getModifiers();
     this.combatService.fillAvailableCountriesArray();
-    this.countryService.getSelectedCountryDetails();
     this.countryService.currentView = this.viewCountryEnum.COUNTRYDETAIL;
   }
 
