@@ -34,6 +34,7 @@ export class CountryService {
   }
 
   getStats(): void {
+    this.statsArray = [];
     this.apiService.getStats().subscribe(val => {
       val.map(v => {
         this.statsArray.push(v);
