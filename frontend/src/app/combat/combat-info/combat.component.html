@@ -14,7 +14,7 @@
     <tr *ngFor="let stats of combatService.countryStatsArray">
       <td><span>{{stats.countryName}}</span></td>
       <td><span>{{stats.manpowerType}}</span></td>
-      <td><span>{{stats.manpowerNumber}}</span></td>
+      <td><span>{{stats.manpowerNumber | number:'1.0-0'}}</span></td>
       <td><span>{{stats.modifierName}}</span></td>
       <td><span>{{stats.modifierValue}}</span></td>
     </tr>
@@ -66,12 +66,14 @@
 </div>
 <div *ngIf="showCombatPanel">
   <div>
-    <button style="margin-top: 5px;" class="btn btn-secondary" (click)="combatService.updateManpower(combatService.selectedCountryToAttack)">
+    <button style="margin-top: 5px;" class="btn btn-secondary"
+            (click)="combatService.updateManpower(combatService.selectedCountryToAttack)">
       Battle {{combatService.selectedCountryToAttack.name}}</button>
-    <span class="alert alert-danger" *ngIf="combatService.showDamageDealt">Damage dealt</span>
+    <span class="alert alert-danger" *ngIf="combatService.showDamageDealt" style="float: right;">Damage dealt</span>
   </div>
   <div>
-    <button style="margin-top: 5px;" class="btn btn-secondary" (click)="combatService.updateManpower(countryService.country)">
+    <button style="margin-top: 5px;" class="btn btn-secondary"
+            (click)="combatService.updateManpower(countryService.country)">
       Battle {{countryService.country.name}}</button>
   </div>
 </div>
