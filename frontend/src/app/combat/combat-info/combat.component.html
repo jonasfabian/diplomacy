@@ -44,7 +44,8 @@
       </div>
       <div>
         <button class="btn btn-primary" (click)="declareWar()">Declare War</button>
-        <span class="alert alert-danger" *ngIf="showRelationMessage">{{countryService.country.name}} declared war on {{combatService.selectedCountryToAttack.name}}</span>
+        <span class="alert alert-danger" *ngIf="showRelationMessage">{{countryService.country.name}}
+          declared war on {{combatService.selectedCountryToAttack.name}}</span>
       </div>
     </div>
     <div class="col-md-6">
@@ -64,6 +65,13 @@
   </div>
 </div>
 <div *ngIf="showCombatPanel">
-  <button class="btn btn-secondary" (click)="combatService.updateManpower(combatService.selectedCountryToAttack)">Battle {{combatService.selectedCountryToAttack.name}}</button>
-  <button class="btn btn-secondary" (click)="combatService.updateManpower(countryService.country)">Battle {{countryService.country.name}}</button>
+  <div>
+    <button style="margin-top: 5px;" class="btn btn-secondary" (click)="combatService.updateManpower(combatService.selectedCountryToAttack)">
+      Battle {{combatService.selectedCountryToAttack.name}}</button>
+    <span class="alert alert-danger" *ngIf="combatService.showDamageDealt">Damage dealt</span>
+  </div>
+  <div>
+    <button style="margin-top: 5px;" class="btn btn-secondary" (click)="combatService.updateManpower(countryService.country)">
+      Battle {{countryService.country.name}}</button>
+  </div>
 </div>

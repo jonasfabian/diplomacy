@@ -14,6 +14,13 @@
     <fieldset class="form-group">
       <span>Relation Type</span>
       <input formControlName="relationType" type="text" class="form-control">
+      <div class="dropdown">
+        <button class="btn btn-secondary dropdown-toggle" type="button"
+                data-toggle="dropdown"
+                aria-haspopup="true" aria-expanded="false">
+          <span>Select a Relation</span>
+        </button>
+      </div>
     </fieldset>
     <button type="submit" class="btn btn-primary">Save</button>
     <button type="button" class="btn btn-secondary" (click)="relationService.currentView = viewEnum.RELATIONDETAIL">Cancel</button>

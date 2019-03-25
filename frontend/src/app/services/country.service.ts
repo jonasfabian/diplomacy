@@ -22,6 +22,7 @@ export class CountryService {
   currArray: Array<Currency> = [];
   statsArray: Array<number> = [];
 
+
   totalManpowerNumber = 0;
   numberOfCurrencyUser = 0;
 

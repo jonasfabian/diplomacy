@@ -26,20 +26,20 @@ export class CombatComponent implements OnInit {
     this.combatService.fillAvailableCountriesArray();
   }
 
-  showDeclaredWarAlert() {
+  showDeclaredWarAlert(): void {
     this.showRelationMessage = true;
     setTimeout(() => {
       this.showRelationMessage = false;
     }, 3000);
   }
 
-  declareWar() {
+  declareWar(): void {
     this.relation.countryId1 = this.countryService.country.id;
     this.relation.countryId2 = this.combatService.selectedCountryToAttack.id;
     this.relation.relationType = 2;
     this.relationService.createRelation(this.relation);
     this.showDeclaredWarAlert();
+    this.relationService.getRelations();
     this.showCombatPanel = true;
   }
-
 }

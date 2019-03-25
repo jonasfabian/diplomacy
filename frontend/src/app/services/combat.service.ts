@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {ModifiersForCountry} from '../models/modifiers-for-country';
 import {CountryService} from './country.service';
 import {ApiService} from './api.service';
@@ -13,13 +13,16 @@ export class CombatService {
   constructor(
     private countryService: CountryService,
     private apiService: ApiService
-  ) { }
+  ) {
+  }
 
 
   countryStatsArray: Array<ModifiersForCountry> = [];
   modifierArray: Array<Modifier> = [];
   availableCountriesArray: Array<Country> = [];
   selectedCountryToAttack: Country = new Country(-1, '', '', '', 0, 0);
+
+  showDamageDealt = false;
 
   getModifiersForCountry() {
     this.countryStatsArray = [];
@@ -46,5 +49,9 @@ export class CombatService {
   updateManpower(country: Country): void {
     this.apiService.updateManpower(country).subscribe(val => {
     });
+    this.showDamageDealt = true;
+    setTimeout(() => {
+      this.showDamageDealt = false;
+    }, 1000);
   }
 }
