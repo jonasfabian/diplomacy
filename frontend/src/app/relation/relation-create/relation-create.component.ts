@@ -15,7 +15,7 @@ export class RelationCreateComponent implements OnInit {
   constructor(
     private apiService: ApiService,
     private countryService: CountryService,
-    private relationService: RelationService,
+    public relationService: RelationService,
     private fb: FormBuilder
   ) { }
 

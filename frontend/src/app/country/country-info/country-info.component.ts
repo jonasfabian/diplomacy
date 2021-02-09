@@ -14,8 +14,8 @@ export class CountryInfoComponent implements OnInit {
 
   constructor(
     private apiService: ApiService,
-    private countryService: CountryService,
-    private relationService: RelationService,
+    public countryService: CountryService,
+    public relationService: RelationService,
     private combatService: CombatService
   ) {
   }

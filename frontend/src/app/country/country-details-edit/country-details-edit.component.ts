@@ -12,7 +12,7 @@ export class CountryDetailsEditComponent implements OnInit {
 
   constructor(
     private fb: FormBuilder,
-    private countryService: CountryService,
+    public countryService: CountryService,
   ) {
   }
 

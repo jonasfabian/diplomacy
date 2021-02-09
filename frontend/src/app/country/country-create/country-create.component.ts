@@ -15,7 +15,7 @@ import {Currency} from '../../models/currency';
 export class CountryCreateComponent implements OnInit {
 
   constructor(
-    private countryService: CountryService,
+    public countryService: CountryService,
     private apiService: ApiService,
     private relationService: RelationService,
     private fb: FormBuilder

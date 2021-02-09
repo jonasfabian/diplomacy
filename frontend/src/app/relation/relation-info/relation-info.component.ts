@@ -13,8 +13,8 @@ export class RelationInfoComponent implements OnInit {
 
   constructor(
     private apiService: ApiService,
-    private countryService: CountryService,
-    private relationService: RelationService
+    public countryService: CountryService,
+    public relationService: RelationService
   ) {
   }
 
@@ -26,7 +26,7 @@ export class RelationInfoComponent implements OnInit {
     this.relationService.getRelations();
   }
 
-  createRealtion(): void {
+  createRelation(): void {
     this.relationService.currentView = this.viewEnum.RELATIONCREATE;
   }
 }
