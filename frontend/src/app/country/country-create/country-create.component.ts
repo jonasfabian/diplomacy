@@ -31,7 +31,7 @@ export class CountryCreateComponent implements OnInit {
   selectedCurrency: Currency = new Currency(-1, '');
   filteredCountries = [];
   currArray: Array<Currency> = [];
-  @ViewChild('searchCountry') searchCountry: ElementRef;
+  @ViewChild('searchCountry', { static: true }) searchCountry: ElementRef;
 
   ngOnInit() {
     this.initForm();
